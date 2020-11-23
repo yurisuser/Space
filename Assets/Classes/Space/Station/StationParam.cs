@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
-
-public class StationParam 
+public partial struct Data
 {
-	public Vector3 currentPosition;
+	public struct StationParam 
+	{
+		public Vector3 currentPosition;
+		public int cargo;
+	}
 }

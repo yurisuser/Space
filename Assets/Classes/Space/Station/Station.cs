@@ -2,8 +2,8 @@
 
 public class Station : ISystemPosition
 {
-
-	public StationParam param;
+	public Data.StationParam param;
+	public GoodsStack[] cargohold;
 	public Vector3 position 
 	{
 		get

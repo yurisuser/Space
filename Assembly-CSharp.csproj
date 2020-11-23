@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{C1BF62FA-C5C9-41A2-2CDF-B0DCBC002D60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -87,9 +86,8 @@
     <Compile Include="Assets\Classes\AI\Ship\Order\Order.cs" />
     <Compile Include="Assets\Classes\AI\Ship\Order\OrderAttribute.cs" />
     <Compile Include="Assets\Classes\Core\Data.cs" />
-    <Compile Include="Assets\Classes\Core\Data\GoodsEnums.cs" />
-    <Compile Include="Assets\Classes\Core\Data\ShipRapam.cs" />
     <Compile Include="Assets\Classes\Core\Data\Goods.cs" />
+    <Compile Include="Assets\Classes\Core\Data\GoodsEnums.cs" />
     <Compile Include="Assets\Classes\Core\Gmgr.cs" />
     <Compile Include="Assets\Classes\Core\PrefabService.cs" />
     <Compile Include="Assets\Classes\Core\SceneState\SceneState.cs" />
@@ -106,10 +104,12 @@
     <Compile Include="Assets\Classes\Core\Settings\Time.cs" />
     <Compile Include="Assets\Classes\Core\Time\Turner.cs" />
     <Compile Include="Assets\Classes\Core\Utilities.cs" />
+    <Compile Include="Assets\Classes\Goods\GoodsStack.cs" />
     <Compile Include="Assets\Classes\Space\Galaxy.cs" />
     <Compile Include="Assets\Classes\Space\GalaxyCreator.cs" />
     <Compile Include="Assets\Classes\Space\ISystemPosition.cs" />
     <Compile Include="Assets\Classes\Space\Ship\Ship.cs" />
+    <Compile Include="Assets\Classes\Space\Ship\ShipRapam.cs" />
     <Compile Include="Assets\Classes\Space\Ship\ShipsCreator.cs" />
     <Compile Include="Assets\Classes\Space\StarSystem\EMoonTypes.cs" />
     <Compile Include="Assets\Classes\Space\StarSystem\EPlanetTypes.cs" />
@@ -337,7 +337,7 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.0f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Assets/JsonDotNet/Assemblies/Standalone/Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.0f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -694,35 +694,34 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.0f1/Editor/Data/MonoBleedingEdge/lib/mono/unityscript/Boo.Lang.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/!!WORK/space/Space/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-  </ItemGroup>
+  <ItemGroup></ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

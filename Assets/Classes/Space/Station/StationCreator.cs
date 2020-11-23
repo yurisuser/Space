@@ -9,7 +9,7 @@ public static class StationCreator
 		{
 			Station st = new Station
 			{
-				param = new StationParam
+				param = new Data.StationParam
 				{
 					currentPosition = getRNDPosition()
 				}

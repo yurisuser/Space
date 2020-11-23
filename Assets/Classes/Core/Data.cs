@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using Newtonsoft.Json;
 
-public static partial class Data
+public partial struct Data
 {
 	public static ShipRapam[] ships;
 	public static Goods[] goods;

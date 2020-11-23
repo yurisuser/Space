@@ -3,10 +3,10 @@ using AIShip;
 
 public class Ship : ISystemPosition
 {
-	public bool isCalculateAI = false;
-	public Data.ShipRapam param;
-	public string name;
 	public int Id;
+	public string name;
+	public Data.ShipRapam param;
+	public GoodsStack cargohold;
 	public Order order;
 	public Vector3 position {
 		get 
