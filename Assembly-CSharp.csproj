@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{C1BF62FA-C5C9-41A2-2CDF-B0DCBC002D60}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -85,8 +86,10 @@
     <Compile Include="Assets\Classes\AI\Ship\Order\EOrders.cs" />
     <Compile Include="Assets\Classes\AI\Ship\Order\Order.cs" />
     <Compile Include="Assets\Classes\AI\Ship\Order\OrderAttribute.cs" />
-    <Compile Include="Assets\Classes\Core\ExternData\Data.cs" />
-    <Compile Include="Assets\Classes\Core\ExternData\ShipRapam.cs" />
+    <Compile Include="Assets\Classes\Core\Data.cs" />
+    <Compile Include="Assets\Classes\Core\Data\GoodsEnums.cs" />
+    <Compile Include="Assets\Classes\Core\Data\ShipRapam.cs" />
+    <Compile Include="Assets\Classes\Core\Data\Goods.cs" />
     <Compile Include="Assets\Classes\Core\Gmgr.cs" />
     <Compile Include="Assets\Classes\Core\PrefabService.cs" />
     <Compile Include="Assets\Classes\Core\SceneState\SceneState.cs" />
@@ -718,7 +721,8 @@
       <HintPath>D:/!!!!!_____WORK/space/Space/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup></ItemGroup>
+  <ItemGroup>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

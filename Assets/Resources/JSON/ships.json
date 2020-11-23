@@ -1,1 +1,26 @@
-[{"id":0,"speed":0,"cargo":0},{"id":1,"speed":500,"cargo":100},{"id":2,"speed":600,"cargo":80},{"id":3,"speed":700,"cargo":110}]
+﻿[
+  {
+    "id": 0,
+    "name": "null",
+    "speed": 0,
+    "cargo": 0
+  },
+  {
+    "id": 1,
+    "name": "one",
+    "speed": 500,
+    "cargo": 100
+  },
+  {
+    "id": 2,
+    "name": "two",
+    "speed": 1000,
+    "cargo": 80
+  },
+  {
+    "id": 3,
+    "name": "three",
+    "speed": 1500,
+    "cargo": 110
+  }
+]

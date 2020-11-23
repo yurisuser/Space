@@ -9,7 +9,7 @@
 		public readonly static int EMPTY_MOON_ORBIT = 2;
 		public readonly static float PLANET_SCALE = 50f;
 		public readonly static float MOON_SCALE = 50f;
-		public readonly static int SYSTEM_SHIPS_LAYER = -150;
+		public readonly static int SYSTEM_SHIPS_LAYER = -500;
 		public readonly static int SYSTEM_STATIONS_LAYER = -50;
 	}
 }

@@ -1,0 +1,26 @@
+﻿[
+  {
+    "id": 0,
+    "name": "null",
+    "sized": 1,
+    "aggregation": 1
+  },
+  {
+    "id": 1,
+    "name": "one",
+    "sized": 1,
+    "aggregation": 2
+  },
+  {
+    "id": 2,
+    "name": "two",
+    "sized": 2,
+    "aggregation": 3
+  },
+  {
+    "id": 3,
+    "name": "three",
+    "sized": 3,
+    "aggregation": 4
+  }
+]
