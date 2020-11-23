@@ -1,0 +1,15 @@
+﻿namespace Settings
+{
+	public class StarSystem
+	{
+		public readonly static int MAX_RADIUS_STAR_SYSTEM = 5000;
+		public readonly static int RADIUS_PLANET_ORBIT = 500;
+		public readonly static int RADIUS_MOON_ORBIT = 30;
+		public readonly static int EMPTY_PLANET_ORBIT = 2;
+		public readonly static int EMPTY_MOON_ORBIT = 2;
+		public readonly static float PLANET_SCALE = 50f;
+		public readonly static float MOON_SCALE = 50f;
+		public readonly static int SYSTEM_SHIPS_LAYER = -150;
+		public readonly static int SYSTEM_STATIONS_LAYER = -50;
+	}
+}

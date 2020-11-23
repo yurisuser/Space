@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: backgroundGalaxy
+  m_Shader: {fileID: 4800000, guid: bb109beac9b02084398eef1ae62a9257, type: 3}
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _EMISSION
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Background:
+        m_Texture: {fileID: 2800000, guid: 7fe630c7a39990741af8365aa1ad5bf3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: -0.000009117682}
+    - _BigStars:
+        m_Texture: {fileID: 2800000, guid: 63e4733d50b234b429e1b506ec5d4981, type: 3}
+        m_Scale: {x: 0.0020932292, y: 0.0020932292}
+        m_Offset: {x: -0.1165, y: -0.0245}
+    - _MediumStars:
+        m_Texture: {fileID: 2800000, guid: 026d16b04d901fd4ba44ae3c46f2880a, type: 3}
+        m_Scale: {x: 14.285714, y: 14.285714}
+        m_Offset: {x: 0, y: 0}
+    - _SmallStars:
+        m_Texture: {fileID: 2800000, guid: 7eefe8f43b3e5bd49893b580a9a25236, type: 3}
+        m_Scale: {x: 14.285714, y: 14.285714}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
+    m_Colors: []
