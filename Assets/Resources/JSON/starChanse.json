@@ -1,0 +1,32 @@
+﻿[
+  {
+    "StartStr": "Red",
+    "StarType": 0,
+    "chanse": 100
+  },
+  {
+    "StartStr": "Yello",
+    "StarType": 1,
+    "chanse": 30
+  },
+  {
+    "StartStr": "White",
+    "StarType": 2,
+    "chanse": 20
+  },
+  {
+    "StartStr": "Blue",
+    "StarType": 3,
+    "chanse": 15
+  },
+  {
+    "StartStr": "Neutron",
+    "StarType": 4,
+    "chanse": 5
+  },
+  {
+    "StartStr": "Black",
+    "StarType": 5,
+    "chanse": 3
+  }
+]

@@ -6,5 +6,7 @@
 		public string name;
 		public EGoodsSize size;
 		public EGoodsAggregation aggregation;
+		public EGoodsOrigin origin;
+		public EGoodsGroup group;
 	}
 }

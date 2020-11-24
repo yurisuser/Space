@@ -2,16 +2,32 @@
 {
 	public enum EGoodsAggregation
 	{
-		solid = 1,
-		liquid = 2,
-		gaseous = 3
+		Solid = 0,
+		Liquid = 1,
+		Gaseous = 2
 	}
 
 	public enum EGoodsSize
 	{
-		S = 1,
-		M = 2,
-		L = 3,
-		XL = 4
+		S = 0,
+		M = 1,
+		L = 2,
+		XL = 3
+	}
+
+	public enum EGoodsOrigin
+	{
+		Unknow = 0,
+		Planetary = 1
+	}
+
+	public enum EGoodsGroup
+	{
+		Unknow = 0,
+		Metals = 1,
+		Gases = 2,
+		Nonmetals = 3,
+		Organic = 4,
+		Rare = 5
 	}
 }

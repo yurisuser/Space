@@ -1,26 +1,122 @@
 ﻿[
   {
     "id": 0,
-    "name": "null",
-    "sized": 1,
-    "aggregation": 1
+    "name": "Light metals",
+    "size": 0,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 1
   },
   {
     "id": 1,
-    "name": "one",
-    "sized": 1,
-    "aggregation": 2
+    "name": "Heavy metals",
+    "size": 0,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 1
   },
   {
     "id": 2,
-    "name": "two",
-    "sized": 2,
-    "aggregation": 3
+    "name": "Noble metals",
+    "size": 0,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 1
   },
   {
     "id": 3,
-    "name": "three",
-    "sized": 3,
-    "aggregation": 4
+    "name": "Simple gases",
+    "size": 2,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 2
+  },
+  {
+    "id": 4,
+    "name": "Halogens",
+    "size": 2,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 2
+  },
+  {
+    "id": 5,
+    "name": "Hydrocarbons",
+    "size": 2,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 2
+  },
+  {
+    "id": 6,
+    "name": "Metalloids",
+    "size": 1,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 3
+  },
+  {
+    "id": 7,
+    "name": "Unstable elements",
+    "size": 1,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 3
+  },
+  {
+    "id": 8,
+    "name": "Active elements",
+    "size": 1,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 3
+  },
+  {
+    "id": 9,
+    "name": "Simple organisms",
+    "size": 2,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 4
+  },
+  {
+    "id": 10,
+    "name": "Vegetation",
+    "size": 2,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 4
+  },
+  {
+    "id": 11,
+    "name": "Complex organisms",
+    "size": 2,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 4
+  },
+  {
+    "id": 12,
+    "name": "Correct crystals",
+    "size": 0,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 5
+  },
+  {
+    "id": 13,
+    "name": "Plasma structure",
+    "size": 0,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 5
+  },
+  {
+    "id": 14,
+    "name": "Superdense minerals",
+    "size": 0,
+    "aggregation": 0,
+    "origin": 1,
+    "group": 5
   }
 ]
