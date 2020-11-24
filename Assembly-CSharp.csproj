@@ -85,9 +85,12 @@
     <Compile Include="Assets\Classes\AI\Ship\Order\EOrders.cs" />
     <Compile Include="Assets\Classes\AI\Ship\Order\Order.cs" />
     <Compile Include="Assets\Classes\AI\Ship\Order\OrderAttribute.cs" />
-    <Compile Include="Assets\Classes\Core\Data.cs" />
+    <Compile Include="Assets\Classes\Core\Data\Data.cs" />
     <Compile Include="Assets\Classes\Core\Data\Goods.cs" />
     <Compile Include="Assets\Classes\Core\Data\GoodsEnums.cs" />
+    <Compile Include="Assets\Classes\Core\Data\PlanetChance.cs" />
+    <Compile Include="Assets\Classes\Core\Data\StarChance.cs" />
+    <Compile Include="Assets\Classes\Core\Data\StarToPlanetResources.cs" />
     <Compile Include="Assets\Classes\Core\Gmgr.cs" />
     <Compile Include="Assets\Classes\Core\PrefabService.cs" />
     <Compile Include="Assets\Classes\Core\SceneState\SceneState.cs" />

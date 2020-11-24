@@ -1,0 +1,32 @@
+﻿[
+  {
+    "PlanetStr": "Continental",
+    "planetType": 0,
+    "starType": [ 50, 40, 20, 10, 5, 2 ]
+  },
+  {
+    "PlanetStr": "Rock",
+    "planetType": 1,
+    "starType": [ 40, 50, 60, 60, 30, 15 ]
+  },
+  {
+    "PlanetStr": "Ice",
+    "planetType": 2,
+    "starType": [ 70, 60, 50, 40, 30, 15 ]
+  },
+  {
+    "PlanetStr": "Lava",
+    "planetType": 3,
+    "starType": [ 20, 20, 30, 40, 30, 15 ]
+  },
+  {
+    "PlanetStr": "Ocean",
+    "planetType": 4,
+    "starType": [ 50, 50, 30, 15, 2, 1 ]
+  },
+  {
+    "PlanetStr": "GasGiant",
+    "planetType": 5,
+    "starType": [ 80, 90, 90, 90, 20, 10 ]
+  }
+]

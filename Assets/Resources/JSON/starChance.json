@@ -1,0 +1,32 @@
+﻿[
+  {
+    "StartStr": "Red",
+    "type": 0,
+    "chance": 100
+  },
+  {
+    "StartStr": "Yello",
+    "type": 1,
+    "chance": 50
+  },
+  {
+    "StartStr": "White",
+    "type": 2,
+    "chance": 40
+  },
+  {
+    "StartStr": "Blue",
+    "type": 3,
+    "chance": 30
+  },
+  {
+    "StartStr": "Neutron",
+    "type": 4,
+    "chance": 10
+  },
+  {
+    "StartStr": "Black",
+    "type": 5,
+    "chance": 10
+  }
+]
