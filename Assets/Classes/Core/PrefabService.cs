@@ -4,8 +4,11 @@ using UnityEngine;
 public static class PrefabService
 {
 	private static readonly string path = "Prefabs/";
-	public static Dictionary<EStarTypes, GameObject> StarsGalaxyMap = new Dictionary<EStarTypes, GameObject>();
-	public static Dictionary<EStarTypes, GameObject> StarsSystemMap = new Dictionary<EStarTypes, GameObject>();
+	private static readonly string pathStarsGalaxyMap = "Prefabs/StarsGalaxyMap/";
+	private static readonly string pathStarsSystemMap = "Prefabs/StarsSystemMap/";
+
+	public static Dictionary<int, GameObject> StarsGalaxyMap = new Dictionary<int, GameObject>();
+	public static Dictionary<int, GameObject> StarsSystemMap = new Dictionary<int, GameObject>();
 	public static Dictionary<EPlanetTypes, GameObject> PlanetSystemMap = new Dictionary<EPlanetTypes, GameObject>();
 	public static Dictionary<EMoonTypes, GameObject> MoonSystemMap = new Dictionary<EMoonTypes, GameObject>();
 	public static UIPrefab UI = new UIPrefab();
@@ -23,32 +26,19 @@ public static class PrefabService
 	} 
 	public static void Init()
 	{
-		LoadStarsGalaxyMap();
-		LoadStarSystemMap();
+		LoadStarsPrefabs();
 		LoadPlanetSystemMap();
 		LoadMoonSystemMap();
 	}
 
-	private static void LoadStarsGalaxyMap()
+	private static void LoadStarsPrefabs()
 	{
-		StarsGalaxyMap.Add(EStarTypes.Black, Resources.Load<GameObject>(path + "StarsGalaxyMap/pfBlackStarGal"));
-		StarsGalaxyMap.Add(EStarTypes.Blue, Resources.Load<GameObject>(path + "StarsGalaxyMap/pfBlueStarGal"));
-		StarsGalaxyMap.Add(EStarTypes.Neutron, Resources.Load<GameObject>(path + "StarsGalaxyMap/pfNeutronStarGal"));
-		StarsGalaxyMap.Add(EStarTypes.Red, Resources.Load<GameObject>(path + "StarsGalaxyMap/pfRedStarGal"));
-		StarsGalaxyMap.Add(EStarTypes.White, Resources.Load<GameObject>(path + "StarsGalaxyMap/pfWhiteStarGal"));
-		StarsGalaxyMap.Add(EStarTypes.Yello, Resources.Load<GameObject>(path + "StarsGalaxyMap/pfYelloStarGal"));
+		for (int i = 0; i < Data.stars.Length; i++)
+		{
+			StarsGalaxyMap.Add(i, Resources.Load<GameObject>(pathStarsGalaxyMap + Data.stars[i].prefabGalaxyMap));
+			StarsSystemMap.Add(i, Resources.Load<GameObject>(pathStarsSystemMap + Data.stars[i].prefabSystemMap));
+		}
 	}
-
-	private static void LoadStarSystemMap()
-	{
-		StarsSystemMap.Add(EStarTypes.Black, Resources.Load<GameObject>(path + "StarsSystemMap/pfBlackStarSys"));
-		StarsSystemMap.Add(EStarTypes.Blue, Resources.Load<GameObject>(path + "StarsSystemMap/pfBlueStarSys"));
-		StarsSystemMap.Add(EStarTypes.Neutron, Resources.Load<GameObject>(path + "StarsSystemMap/pfNeutronStarSys"));
-		StarsSystemMap.Add(EStarTypes.Red, Resources.Load<GameObject>(path + "StarsSystemMap/pfRedStarSys"));
-		StarsSystemMap.Add(EStarTypes.White, Resources.Load<GameObject>(path + "StarsSystemMap/pfWhiteStarSys"));
-		StarsSystemMap.Add(EStarTypes.Yello, Resources.Load<GameObject>(path + "StarsSystemMap/pfYelloStarSys"));
-	}
-
 	private static void LoadPlanetSystemMap()
 	{
 		PlanetSystemMap.Add(EPlanetTypes.Continental, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetContinental"));

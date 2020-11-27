@@ -8,16 +8,16 @@ using static Settings.ExternData;
 
 public partial struct Data
 {
+	public static Star[] stars;
 	public static ShipRapam[] ships;
 	public static Goods[] goods;
-	public static StarChance[] starChance;
 	public static PlanetChance[] planetChance;
 	public static StarToPlanetResources[] starToPlanetResources;
 	public static void Init()
 	{
+		DBReader.Read();
 		ships = ReadSimple<ShipRapam>(SHIP_DATA_FILE);
 		goods = ReadSimple<Goods>(GOODS_DATA_FILE);
-		starChance = ReadSimple<StarChance>(STAR_CHANSE_FILE);
 		planetChance = ReadSimple<PlanetChance>(PLANET_CHANSE_FILE);
 		ReadTable<StarToPlanetResources>(STAR_TO_PLANET_RESOURCES_FILE);
 
@@ -49,7 +49,7 @@ public partial struct Data
 		try
 		{
 			json = File.ReadAllText(fileName);
-			Debug.Log(fileName + json);
+			//Debug.Log(fileName + json);
 		}
 		catch (System.Exception err)
 		{
@@ -57,7 +57,7 @@ public partial struct Data
 			throw;
 		}
 		result = JsonConvert.DeserializeObject(json);
-		Debug.Log(fileName + JsonConvert.SerializeObject(result));
+		//Debug.Log(fileName + JsonConvert.SerializeObject(result));
 		//return result;
 	}
 }
