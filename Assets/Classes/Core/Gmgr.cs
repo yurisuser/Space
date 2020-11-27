@@ -7,6 +7,7 @@ public class Gmgr : MonoBehaviour
 	private SceneState sceneState;
 	public Turner turner;
 	private AIManager ai_Manager;
+
 	void Start()
 	{
 		gmgr = this;
