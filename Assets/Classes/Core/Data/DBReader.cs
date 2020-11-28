@@ -9,7 +9,6 @@ public partial struct Data
 {
 	public struct DBReader
 	{
-
 		private static readonly string spaceDBName = "space.db";
 		private static readonly string starTableName = "star";
 		private static readonly string planetTableName = "planet";
@@ -113,10 +112,10 @@ public partial struct Data
 				PlanetOfStarProbability prob;
 				prob.id = reader.GetInt32(0);
 				prob.type = reader.GetInt32(1);
-				prob.probabilityOfStar = new int[columnCount - 2];
-				for (int i = 2; i < columnCount; i++)
+				prob.probabilityOfStar = new int[columnCount - 3];
+				for (int i = 3; i < columnCount; i++)
 				{
-					prob.probabilityOfStar[i - 2] = reader.GetInt32(i);
+					prob.probabilityOfStar[i - 3] = reader.GetInt32(i);
 				}
 				result.Add(prob);
 			}

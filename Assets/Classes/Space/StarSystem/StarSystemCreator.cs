@@ -8,16 +8,9 @@ using settings = Settings.Galaxy;
 public static class StarSystemCreator
 {
 	private static float currentGalaxyHandDistance;
-	private static int[] probabilitysStarsArr;
+
 	public static StarSystem GetRandomStarSystem(int numberStar)
 	{
-		probabilitysStarsArr = new int[Data.stars.Length];
-		probabilitysStarsArr[0] = Data.stars[0].probability;
-		for (int i = 1; i < Data.stars.Length; i++)
-		{
-			probabilitysStarsArr[i] = probabilitysStarsArr[i - 1] + Data.stars[i].probability;
-		}
-
 		Star star = CreateStar();
 		return new StarSystem
 		{
@@ -33,12 +26,19 @@ public static class StarSystemCreator
 	}
 
 	private static Star CreateStar()
-	{	int r = Random.Range(0, probabilitysStarsArr[probabilitysStarsArr.Length - 1]);
+	{
+		int[] probabilitysStarsArr = new int[Data.stars.Length];
+		probabilitysStarsArr[0] = Data.stars[0].probability;
+		for (int i = 1; i < Data.stars.Length; i++)
+		{
+			probabilitysStarsArr[i] = probabilitysStarsArr[i - 1] + Data.stars[i].probability;
+		}
+		int rnd = Random.Range(0, probabilitysStarsArr[probabilitysStarsArr.Length - 1]);
 		int id = Galaxy.GetNextId();
 		int type = 0;
 		for (int i = 0; i < probabilitysStarsArr.Length; i++)
 		{
-			if ( r <= probabilitysStarsArr[i])
+			if ( rnd <= probabilitysStarsArr[i])
 			{
 				type = i;
 				break;
