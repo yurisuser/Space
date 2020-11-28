@@ -9,6 +9,7 @@ using static Settings.ExternData;
 public partial struct Data
 {
 	public static Star[] stars;
+	public static Planet[] planets;
 	public static ShipRapam[] ships;
 	public static Goods[] goods;
 	public static PlanetChance[] planetChance;
@@ -30,7 +31,6 @@ public partial struct Data
 		try
 		{
 			json = File.ReadAllText(fileName);
-			//Debug.Log(fileName + json);
 		}
 		catch (System.Exception err)
 		{
@@ -49,7 +49,6 @@ public partial struct Data
 		try
 		{
 			json = File.ReadAllText(fileName);
-			//Debug.Log(fileName + json);
 		}
 		catch (System.Exception err)
 		{

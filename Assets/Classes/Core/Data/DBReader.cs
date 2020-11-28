@@ -12,6 +12,7 @@ public partial struct Data
 
 		private static readonly string spaceDBName = "space.db";
 		private static readonly string starTableName = "star";
+		private static readonly string planetTableName = "planet";
 
 		private static IDbCommand dbcmd;
 		private static IDataReader reader;
@@ -24,7 +25,9 @@ public partial struct Data
 			dbcmd = dbconn.CreateCommand();
 
 			stars = ReadStar();
-			Debug.Log(JsonConvert.SerializeObject(stars));
+			planets = ReadPlanet();
+
+			Debug.Log(JsonConvert.SerializeObject(planets));
 			reader.Close();
 			dbcmd.Dispose();
 			dbconn.Close();
@@ -49,6 +52,27 @@ public partial struct Data
 				star.prefabGalaxyMap = reader.GetString(5);
 				result.Add(star);
 			}
+			reader.Close();
+			return result.ToArray();
+		}
+
+		private static Planet[] ReadPlanet()
+		{
+			List<Planet> result = new List<Planet>();
+			string sqlQuery = $"SELECT id, type, name, prefab_system_map FROM {planetTableName}";
+			dbcmd.CommandText = sqlQuery;
+			reader = dbcmd.ExecuteReader();
+
+			while (reader.Read())
+			{
+				Planet planet;
+				planet.id = reader.GetInt32(0);
+				planet.type = reader.GetInt32(1);
+				planet.name = reader.GetString(2);
+				planet.prefabSystemMap = reader.GetString(3);
+				result.Add(planet);
+			}
+			reader.Close();
 			return result.ToArray();
 		}
 	}
