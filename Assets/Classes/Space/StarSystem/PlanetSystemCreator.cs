@@ -10,7 +10,7 @@ public class PlanetSystemCreator
 		{
 			planet = planet,
 			moonsArray = CreateMoonsArray(7, planet),
-	};
+		};
 		return planetSystem;
 	}
 
@@ -20,7 +20,7 @@ public class PlanetSystemCreator
 		{
 			id = Galaxy.GetNextId(),
 			motherStar = motherStar,
-			type = (EPlanetTypes)Random.Range(0, Enum.GetNames(typeof(EPlanetTypes)).Length),
+			type = Random.Range(0, Enum.GetNames(typeof(EPlanetTypes)).Length),
 			name = motherStar.name + " " + (char)(numberPlanet + 65),
 			rotateSpeed = 10,
 			orbitSpeed = 100,

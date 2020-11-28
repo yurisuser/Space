@@ -13,6 +13,7 @@ public partial struct Data
 		private static readonly string spaceDBName = "space.db";
 		private static readonly string starTableName = "star";
 		private static readonly string planetTableName = "planet";
+		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";
 
 		private static IDbCommand dbcmd;
 		private static IDataReader reader;
@@ -24,20 +25,42 @@ public partial struct Data
 			dbconn.Open();
 			dbcmd = dbconn.CreateCommand();
 
-			stars = ReadStar();
-			planets = ReadPlanet();
+			stars = ReadStar(starTableName);
+			planets = ReadPlanet(planetTableName);
+			planetsOfStarProbability = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
 
-			Debug.Log(JsonConvert.SerializeObject(planets));
+
+		//Debug.Log(JsonConvert.SerializeObject(planets));
 			reader.Close();
 			dbcmd.Dispose();
 			dbconn.Close();
 		}
 
-		private static Star[] ReadStar()
+		private static int GetTableRows(string tableName)
+		{
+			string sqlQuery = $"SELECT COUNT(*) FROM {tableName}";
+			dbcmd.CommandText = sqlQuery;
+			dbcmd.CommandType = CommandType.Text;
+			int resultRows = 0;
+			resultRows = Convert.ToInt32(dbcmd.ExecuteScalar());
+			reader = dbcmd.ExecuteReader();
+			reader.Close();
+			return resultRows;
+		}
+
+		private static int GetTableColumn(string tableName)
+		{
+			dbcmd.CommandText = $"SELECT * FROM {tableName}";
+			reader = dbcmd.ExecuteReader();
+			int resultColumn = reader.FieldCount;
+			reader.Close();
+			return resultColumn;
+		}
+
+		private static Star[] ReadStar(string tableName)
 		{
 			List<Star> result = new List<Star>();
-			string sqlQuery = "SELECT id, type, name, probability, prefab_system_map,"
-				+ $"prefab_galaxy_map FROM {starTableName}";
+			string sqlQuery = $"SELECT * FROM {tableName}";
 			dbcmd.CommandText = sqlQuery;
 			reader = dbcmd.ExecuteReader();
 
@@ -56,10 +79,10 @@ public partial struct Data
 			return result.ToArray();
 		}
 
-		private static Planet[] ReadPlanet()
+		private static Planet[] ReadPlanet(string tableName)
 		{
 			List<Planet> result = new List<Planet>();
-			string sqlQuery = $"SELECT id, type, name, prefab_system_map FROM {planetTableName}";
+			string sqlQuery = $"SELECT * FROM {tableName}";
 			dbcmd.CommandText = sqlQuery;
 			reader = dbcmd.ExecuteReader();
 
@@ -73,6 +96,32 @@ public partial struct Data
 				result.Add(planet);
 			}
 			reader.Close();
+			return result.ToArray();
+		}
+
+		private static PlanetOfStarProbability[] ReadPlanetOfStarProbability(string tableName)
+		{
+			List<PlanetOfStarProbability> result = new List<PlanetOfStarProbability>();
+			int rowsCount = GetTableRows(tableName);
+			int columnCount = GetTableColumn(tableName);
+			string sqlQuery = $"SELECT * FROM {tableName}";
+			dbcmd.CommandText = sqlQuery;
+			reader = dbcmd.ExecuteReader();
+
+			while (reader.Read())
+			{
+				PlanetOfStarProbability prob;
+				prob.id = reader.GetInt32(0);
+				prob.type = reader.GetInt32(1);
+				prob.probabilityOfStar = new int[columnCount - 2];
+				for (int i = 2; i < columnCount; i++)
+				{
+					prob.probabilityOfStar[i - 2] = reader.GetInt32(i);
+				}
+				result.Add(prob);
+			}
+			reader.Close();
+			Debug.Log("result:   " + JsonConvert.SerializeObject(result));
 			return result.ToArray();
 		}
 	}

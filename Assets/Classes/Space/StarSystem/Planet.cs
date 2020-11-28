@@ -5,7 +5,7 @@ public struct Planet: ISystemPosition
 	public int id;
 	public Star motherStar;
 	public string name;
-	public EPlanetTypes type;
+	public int type;
 	public float size;
 	public int orbitNumber;
 	public float orbitSpeed;

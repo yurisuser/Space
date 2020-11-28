@@ -6,10 +6,11 @@ public static class PrefabService
 	private static readonly string path = "Prefabs/";
 	private static readonly string pathStarsGalaxyMap = "Prefabs/StarsGalaxyMap/";
 	private static readonly string pathStarsSystemMap = "Prefabs/StarsSystemMap/";
+	private static readonly string pathPlanetsSystemMap = "Prefabs/PlanetsSystemMap/";
 
 	public static Dictionary<int, GameObject> StarsGalaxyMap = new Dictionary<int, GameObject>();
 	public static Dictionary<int, GameObject> StarsSystemMap = new Dictionary<int, GameObject>();
-	public static Dictionary<EPlanetTypes, GameObject> PlanetSystemMap = new Dictionary<EPlanetTypes, GameObject>();
+	public static Dictionary<int, GameObject> PlanetSystemMap = new Dictionary<int, GameObject>();
 	public static Dictionary<EMoonTypes, GameObject> MoonSystemMap = new Dictionary<EMoonTypes, GameObject>();
 	public static UIPrefab UI = new UIPrefab();
 	public class UIPrefab
@@ -41,12 +42,10 @@ public static class PrefabService
 	}
 	private static void LoadPlanetSystemMap()
 	{
-		PlanetSystemMap.Add(EPlanetTypes.Continental, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetContinental"));
-		PlanetSystemMap.Add(EPlanetTypes.GasGiant, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetGasGiant"));
-		PlanetSystemMap.Add(EPlanetTypes.Ice, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetIce"));
-		PlanetSystemMap.Add(EPlanetTypes.Lava, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetLava"));
-		PlanetSystemMap.Add(EPlanetTypes.Ocean, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetOcean"));
-		PlanetSystemMap.Add(EPlanetTypes.Rock, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetRock"));
+		for (int i = 0; i < Data.stars.Length; i++)
+		{
+			PlanetSystemMap.Add(i, Resources.Load<GameObject>(pathPlanetsSystemMap + Data.planets[i].prefabSystemMap));
+		}
 	}
 
 	private static void LoadMoonSystemMap()

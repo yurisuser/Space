@@ -10,6 +10,7 @@ public partial struct Data
 {
 	public static Star[] stars;
 	public static Planet[] planets;
+	public static PlanetOfStarProbability[] planetsOfStarProbability;
 	public static ShipRapam[] ships;
 	public static Goods[] goods;
 	public static PlanetChance[] planetChance;
