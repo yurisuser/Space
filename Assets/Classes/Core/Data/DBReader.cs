@@ -28,8 +28,6 @@ public partial struct Data
 			planets = ReadPlanet(planetTableName);
 			planetsOfStarProbability = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
 
-
-		//Debug.Log(JsonConvert.SerializeObject(planets));
 			reader.Close();
 			dbcmd.Dispose();
 			dbconn.Close();
@@ -89,9 +87,8 @@ public partial struct Data
 			{
 				Planet planet;
 				planet.id = reader.GetInt32(0);
-				planet.type = reader.GetInt32(1);
-				planet.name = reader.GetString(2);
-				planet.prefabSystemMap = reader.GetString(3);
+				planet.type = reader.GetString(1);
+				planet.prefabSystemMap = reader.GetString(2);
 				result.Add(planet);
 			}
 			reader.Close();
@@ -109,13 +106,14 @@ public partial struct Data
 
 			while (reader.Read())
 			{
+				int skipField = 2;
 				PlanetOfStarProbability prob;
 				prob.id = reader.GetInt32(0);
-				prob.type = reader.GetInt32(1);
-				prob.probabilityOfStar = new int[columnCount - 3];
-				for (int i = 3; i < columnCount; i++)
+				prob.type = reader.GetString(1);
+				prob.probabilityOfStar = new int[columnCount - skipField];
+				for (int i = skipField; i < columnCount; i++)
 				{
-					prob.probabilityOfStar[i - 3] = reader.GetInt32(i);
+					prob.probabilityOfStar[i - skipField] = reader.GetInt32(i);
 				}
 				result.Add(prob);
 			}
