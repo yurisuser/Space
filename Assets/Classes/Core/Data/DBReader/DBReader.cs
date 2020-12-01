@@ -13,6 +13,7 @@ public partial struct Data
 		private static readonly string planetTableName = "planet";
 		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";
 		private static readonly string goodsTableName = "goods";
+		private static readonly string planetaryResourcesProbabilityTableName = "planet_resources_probability";
 
 		private static IDbCommand dbcmd;
 		private static IDataReader reader;
@@ -28,6 +29,7 @@ public partial struct Data
 			planets = ReadPlanet(planetTableName);
 			planetsOfStarProbability = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
 			goods = ReadGoods(goodsTableName);
+			planetaryResourcesProbability = ReadPlanetaryResourcesProbability(planetaryResourcesProbabilityTableName);
 
 			reader.Close();
 			dbcmd.Dispose();

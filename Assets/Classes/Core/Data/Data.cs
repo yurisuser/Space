@@ -13,6 +13,7 @@ public partial struct Data
 	public static PlanetOfStarProbability[] planetsOfStarProbability;
 	public static ShipRapam[] ships;
 	public static Goods[] goods;
+	public static PlanetaryResourcesProbability[] planetaryResourcesProbability;
 	public static PlanetChance[] planetChance;
 	public static StarToPlanetResources[] starToPlanetResources;
 	public static void Init()
