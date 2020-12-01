@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using Mono.Data.Sqlite;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public partial struct Data
@@ -29,6 +30,7 @@ public partial struct Data
 			planets = ReadPlanet(planetTableName);
 			planetsOfStarProbability = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
 			goods = ReadGoods(goodsTableName);
+			Debug.Log(JsonConvert.SerializeObject(goods));
 			planetaryResourcesProbability = ReadPlanetaryResourcesProbability(planetaryResourcesProbabilityTableName);
 
 			reader.Close();
