@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Data;
 using Mono.Data.Sqlite;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public partial struct Data
 {
-	public struct DBReader
+	public partial struct DBReader
 	{
 		private static readonly string spaceDBName = "space.db";
 		private static readonly string starTableName = "star";
 		private static readonly string planetTableName = "planet";
 		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";
+		private static readonly string goodsTableName = "goods";
 
 		private static IDbCommand dbcmd;
 		private static IDataReader reader;
@@ -27,6 +27,7 @@ public partial struct Data
 			stars = ReadStar(starTableName);
 			planets = ReadPlanet(planetTableName);
 			planetsOfStarProbability = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
+			goods = ReadGoods(goodsTableName);
 
 			reader.Close();
 			dbcmd.Dispose();
@@ -118,7 +119,6 @@ public partial struct Data
 				result.Add(prob);
 			}
 			reader.Close();
-			Debug.Log("result:   " + JsonConvert.SerializeObject(result));
 			return result.ToArray();
 		}
 	}

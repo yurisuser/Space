@@ -4,9 +4,6 @@
 	{
 		public int id;
 		public string name;
-		public EGoodsSize size;
-		public EGoodsAggregation aggregation;
-		public EGoodsOrigin origin;
-		public EGoodsGroup group;
+		public string origin;
 	}
 }
