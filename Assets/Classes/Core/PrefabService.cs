@@ -34,17 +34,17 @@ public static class PrefabService
 
 	private static void LoadStarsPrefabs()
 	{
-		for (int i = 0; i < Data.stars.Length; i++)
+		for (int i = 0; i < Data.starsArr.Length; i++)
 		{
-			StarsGalaxyMap.Add(i, Resources.Load<GameObject>(pathStarsGalaxyMap + Data.stars[i].prefabGalaxyMap));
-			StarsSystemMap.Add(i, Resources.Load<GameObject>(pathStarsSystemMap + Data.stars[i].prefabSystemMap));
+			StarsGalaxyMap.Add(i, Resources.Load<GameObject>(pathStarsGalaxyMap + Data.starsArr[i].prefabGalaxyMap));
+			StarsSystemMap.Add(i, Resources.Load<GameObject>(pathStarsSystemMap + Data.starsArr[i].prefabSystemMap));
 		}
 	}
 	private static void LoadPlanetSystemMap()
 	{
-		for (int i = 0; i < Data.stars.Length; i++)
+		for (int i = 0; i < Data.starsArr.Length; i++)
 		{
-			PlanetSystemMap.Add(i, Resources.Load<GameObject>(pathPlanetsSystemMap + Data.planets[i].prefabSystemMap));
+			PlanetSystemMap.Add(i, Resources.Load<GameObject>(pathPlanetsSystemMap + Data.planetsArr[i].prefabSystemMap));
 		}
 	}
 

@@ -5,16 +5,17 @@ using static Settings.ExternData;
 
 public partial struct Data
 {
-	public static Star[] stars;
-	public static Planet[] planets;
-	public static PlanetOfStarProbability[] planetsOfStarProbability;
-	public static ShipRapam[] ships;
-	public static Goods[] goods;
-	public static PlanetaryResourcesProbability[] planetaryResourcesProbability;
+	public static Star[] starsArr;
+	public static Planet[] planetsArr;
+	public static PlanetOfStarProbability[] planetsOfStarProbabilityArr;
+	public static ShipRapam[] shipsArr;
+	public static Goods[] goodsArr;
+	public static PlanetaryResourcesProbability[] planetaryResourcesProbabilityArr;
+	public static ProductRecipe[] productRecipeArr;
 	public static void Init()
 	{
 		DBReader.Read();
-		ships = ReadSimple<ShipRapam>(SHIP_DATA_FILE);
+		shipsArr = ReadSimple<ShipRapam>(SHIP_DATA_FILE);
 	}
 
 	private static T[] ReadSimple<T>(string fileName)

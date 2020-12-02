@@ -32,11 +32,11 @@ public class PlanetSystemCreator
 
 	private static int GetPlanetType(int starType)
 	{
-		int[] probabilityesForStarType = new int[Data.planets.Length];
+		int[] probabilityesForStarType = new int[Data.planetsArr.Length];
 		int[] rangeProbabilityes = new int[probabilityesForStarType.Length];
 		for (int i = 0; i < probabilityesForStarType.Length; i++)
 		{
-			probabilityesForStarType[i] = Data.planetsOfStarProbability[i].probabilityOfStar[starType];
+			probabilityesForStarType[i] = Data.planetsOfStarProbabilityArr[i].probabilityOfStar[starType];
 		}
 		rangeProbabilityes[0] = probabilityesForStarType[0];
 		for (int i = 1; i < probabilityesForStarType.Length; i++)

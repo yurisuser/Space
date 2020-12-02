@@ -27,11 +27,11 @@ public static class StarSystemCreator
 
 	private static Star CreateStar()
 	{
-		int[] probabilitysStarsArr = new int[Data.stars.Length];
-		probabilitysStarsArr[0] = Data.stars[0].probability;
-		for (int i = 1; i < Data.stars.Length; i++)
+		int[] probabilitysStarsArr = new int[Data.starsArr.Length];
+		probabilitysStarsArr[0] = Data.starsArr[0].probability;
+		for (int i = 1; i < Data.starsArr.Length; i++)
 		{
-			probabilitysStarsArr[i] = probabilitysStarsArr[i - 1] + Data.stars[i].probability;
+			probabilitysStarsArr[i] = probabilitysStarsArr[i - 1] + Data.starsArr[i].probability;
 		}
 		int rnd = Random.Range(0, probabilitysStarsArr[probabilitysStarsArr.Length - 1]);
 		int id = Galaxy.GetNextId();

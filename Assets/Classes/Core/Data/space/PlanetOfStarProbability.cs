@@ -3,7 +3,7 @@
 	public struct PlanetOfStarProbability
 	{
 		public int id;
-		public string type;
+		public int type;
 		public int[] probabilityOfStar;
 	}
 }

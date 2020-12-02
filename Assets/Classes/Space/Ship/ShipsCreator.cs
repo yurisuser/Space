@@ -26,7 +26,7 @@ public static class ShipsCreator
 						currentPosition = position,
 					}
 				},
-				param = Data.ships[2]
+				param = Data.shipsArr[2]
 			};
 
 			if (ship.Id == 1018)

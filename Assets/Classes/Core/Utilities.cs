@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -10,7 +11,6 @@ public static class Utilities
 	{
 		return cam.ScreenToWorldPoint(position);
 	}
-
 	public static Vector3 MouseAtCentreScreen()
 	{
 		return Input.mousePosition - new Vector3(Screen.width / 2 , Screen.height / 2, 0);
@@ -69,5 +69,10 @@ public static class Utilities
 
 
 		}
+	}
+
+	public static void ObjectToConsole(System.Object obj)
+	{
+		Debug.Log(JsonConvert.SerializeObject(obj));
 	}
 }

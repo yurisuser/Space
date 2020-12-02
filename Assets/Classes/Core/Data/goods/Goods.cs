@@ -4,6 +4,6 @@
 	{
 		public int id;
 		public string name;
-		public string origin;
+		public int origin;
 	}
 }

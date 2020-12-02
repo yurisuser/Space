@@ -15,6 +15,8 @@ public partial struct Data
 		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";
 		private static readonly string goodsTableName = "goods";
 		private static readonly string planetaryResourcesProbabilityTableName = "planet_resources_probability";
+		private static readonly string recipeTableName = "product_recipe";
+
 
 		private static IDbCommand dbcmd;
 		private static IDataReader reader;
@@ -26,12 +28,12 @@ public partial struct Data
 			dbconn.Open();
 			dbcmd = dbconn.CreateCommand();
 
-			stars = ReadStar(starTableName);
-			planets = ReadPlanet(planetTableName);
-			planetsOfStarProbability = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
-			goods = ReadGoods(goodsTableName);
-			Debug.Log(JsonConvert.SerializeObject(goods));
-			planetaryResourcesProbability = ReadPlanetaryResourcesProbability(planetaryResourcesProbabilityTableName);
+			starsArr = ReadStar(starTableName);
+			planetsArr = ReadPlanet(planetTableName);
+			planetsOfStarProbabilityArr = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
+			goodsArr = ReadGoods(goodsTableName);
+			planetaryResourcesProbabilityArr = ReadPlanetaryResourcesProbability(planetaryResourcesProbabilityTableName);
+			productRecipeArr = ReadProductRecipes(recipeTableName);
 
 			reader.Close();
 			dbcmd.Dispose();
@@ -114,7 +116,7 @@ public partial struct Data
 				int skipField = 2;
 				PlanetOfStarProbability prob;
 				prob.id = reader.GetInt32(0);
-				prob.type = reader.GetString(1);
+				prob.type = reader.GetInt32(1);
 				prob.probabilityOfStar = new int[columnCount - skipField];
 				for (int i = skipField; i < columnCount; i++)
 				{
