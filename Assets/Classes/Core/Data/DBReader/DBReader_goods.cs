@@ -48,7 +48,6 @@ partial struct Data
 				result.Add(prob);
 			}
 			reader.Close();
-			//Debug.Log(JsonConvert.SerializeObject(result));
 			return result.ToArray();
 
 		}
@@ -90,6 +89,7 @@ partial struct Data
 					}
 
 				}
+
 				for (int i = srcRange[0]; i < srcRange[1]; i += 2)
 				{
 					if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
@@ -107,7 +107,6 @@ partial struct Data
 				recipe.resources = src.ToArray();
 				result.Add(recipe);
 			}
-			Utilities.ObjectToConsole(result);
 			return result.ToArray();
 		}
 	}

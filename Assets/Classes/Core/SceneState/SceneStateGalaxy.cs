@@ -18,6 +18,7 @@ public class SceneStateGalaxy : SceneState
 			star.name = i.ToString();
 			star.transform.SetParent(folder.transform);
 			star.GetComponent<StarGalaxyMap>().dist = Galaxy.StarSystemsArr[i].galaxyHandDistance;
+			star.GetComponent<StarGalaxyMap>().starsArrayIndex = i;
 		}
 	}
 }

@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections;
-using UnityEngine.EventSystems;
 using System;
 
 public class StarGalaxyMap : MonoBehaviour
 {
-	Camera cam;
+	public int starsArrayIndex = 0;
 	public float dist;
+	Camera cam;
 
 	private void Start()
 	{
@@ -16,7 +15,7 @@ public class StarGalaxyMap : MonoBehaviour
 	{
 		if(Utilities.CheckRaycastWithoutUI(cam, gameObject.name))
 		{
-			Gmgr.gmgr.LoadSceneStarSystem(Convert.ToInt32(gameObject.name));
+			Gmgr.gmgr.LoadSceneStarSystem(Convert.ToInt32(starsArrayIndex));
 		}
 	}
 }
