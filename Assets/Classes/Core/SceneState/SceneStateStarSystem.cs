@@ -164,6 +164,7 @@ public class SceneStateStarSystem : SceneState
 				starSystem.StationArr[i].position,
 				Quaternion.identity);
 			go.transform.SetParent(folder.transform);
+			go.GetComponent<StationSysMapScr>().SetIndexes(StarSystemIndexInArr, i);
 		}
 	}
 }

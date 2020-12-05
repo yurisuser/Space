@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 
-public class Station : ISystemPosition
+public struct Station : ISystemPosition
 {
-	public Data.StationParam param;
-	public GoodsStack[] cargohold;
 	public Vector3 position 
 	{
 		get
 		{
-			return param.currentPosition;
+			return _position;
 		}
-		set {}
+		set
+		{
+			_position = value;
+		}
 	}
+	public GoodsStack[] cargohold;
+	public ProduceModule[] produceModuleArr;
+
+	private Vector3 _position;
 }
