@@ -1,4 +1,4 @@
-﻿namespace AIShip
+﻿namespace AI
 {
 	public enum EStateNode
 	{

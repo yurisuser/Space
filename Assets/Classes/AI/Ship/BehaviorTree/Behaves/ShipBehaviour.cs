@@ -1,4 +1,6 @@
-﻿namespace AIShip
+﻿using AI;
+
+namespace AIShip
 {
 	public abstract class ShipBehaviour : Node
 	{
