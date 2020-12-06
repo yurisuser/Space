@@ -1,7 +1,7 @@
 ﻿public enum EProduceStatus
 {
 	work,
-	empty,
+	finished,
 	deficitRecorces,
 	pause
 }

@@ -7,6 +7,7 @@ using static Data;
 public static class StationProducer
 {
 	private static Station st;
+
 	public static void Tick(int starIndex, int stationIndex)
 	{
 		st = Galaxy.StarSystemsArr[starIndex].StationArr[stationIndex];
@@ -17,50 +18,99 @@ public static class StationProducer
 		DeleteEmptyStacks();
 		Galaxy.StarSystemsArr[starIndex].StationArr[stationIndex] = st;
 	}
-	private static bool CheckRecipeResources(ProductRecipe recipe, GoodsStack[] cargo)
-	{
-		foreach (var item in recipe.resources)
-		{
-			if (!Array.Exists(cargo, x => x.id == item.id && x.quantity <= item.quantity)) return false;
-		}
-		return true;
-	}
 
 	private static void Do(int indexModule)
 	{
+		if (st.produceModuleArr[indexModule].status == EProduceStatus.pause) return;
 
-		for (int i = 0; i < st.cargohold.Length; i++)
-		{
-			st.cargohold[i].quantity -= 3000;
+		if (st.produceModuleArr[indexModule].status == EProduceStatus.work)
+		{//если запущено, продолжать
+			Work(indexModule); 
+			return;
 		}
 
-		if (st.produceModuleArr[indexModule].status == EProduceStatus.work) Work(indexModule);
-
-		if (!CheckRecipeResources(st.produceModuleArr[indexModule].recipe, st.cargohold))
-		{
+		if (IsDeficitResources(st.produceModuleArr[indexModule].recipe, st.cargohold))
+		{//если русурсов мало, отказ
 			st.produceModuleArr[indexModule].status = EProduceStatus.deficitRecorces;
 			return;
 		}
 
-		if (st.produceModuleArr[indexModule].status == EProduceStatus.empty)
-		{
+		if (st.produceModuleArr[indexModule].status == EProduceStatus.finished)
+		{// если незапущено, запустить
 			StartNewProcess(indexModule);
+			if (st.produceModuleArr[indexModule].recipe.duration == st.produceModuleArr[indexModule].stageProcess)
+				FinishProcess(indexModule);
 			return;
 		}
+
+
+	}
+
+	private static bool IsDeficitResources(ProductRecipe recipe, GoodsStack[] cargo)
+	{
+		foreach (var item in recipe.resources)
+		{
+			if (Array.Exists(cargo, x => x.id == item.id && x.quantity <= item.quantity)) return true;
+		}
+		return false;
 	}
 
 	private static void StartNewProcess(int indexModule)
 	{
-		for (int i = 0; i < st.produceModuleArr[indexModule].recipe.resources.Length; i++)
-		{
-			var indexResource = Array.FindIndex(st.cargohold, x => st.produceModuleArr[indexModule].recipe.resources[i].id == x.id);
-			st.cargohold[indexResource].quantity -= st.produceModuleArr[indexModule].recipe.resources[i].quantity;
-		}
+		WithdrawResources(indexModule);
+		st.produceModuleArr[indexModule].stageProcess = 1;
+		st.produceModuleArr[indexModule].status = EProduceStatus.work;
 	}
 
 	private static void Work(int indexModule)
 	{
+		if (st.produceModuleArr[indexModule].stageProcess < st.produceModuleArr[indexModule].recipe.duration)
+		{
+			st.produceModuleArr[indexModule].stageProcess++;
+		}
+		if (st.produceModuleArr[indexModule].stageProcess >= st.produceModuleArr[indexModule].recipe.duration)
+		{
+			FinishProcess(indexModule);
+		}
+	}
 
+	private static void FinishProcess(int indexModule)
+	{
+		AddProducts(indexModule);
+		st.produceModuleArr[indexModule].stageProcess = 0;
+		st.produceModuleArr[indexModule].status = EProduceStatus.finished;
+	}
+
+	private static void WithdrawResources(int indexModule)
+	{
+		for (int i = 0; i < st.produceModuleArr[indexModule].recipe.resources.Length; i++)
+		{
+			for (int c = 0; c < st.cargohold.Length; c++)
+			{
+				if(st.produceModuleArr[indexModule].recipe.resources[i].id == st.cargohold[c].id)
+				{
+					st.cargohold[c].quantity -= st.produceModuleArr[indexModule].recipe.resources[i].quantity;
+					if (st.cargohold[c].quantity < 0) Debug.LogError("SubZero cargo quantity!");
+				}
+			}
+		}
+	}
+
+	private static void AddProducts(int indexModule)
+	{
+		foreach (var item in st.produceModuleArr[indexModule].recipe.production)
+		{
+			int i = Array.FindIndex(st.cargohold, x => x.id == item.id);
+			if (i >= 0)
+			{
+				st.cargohold[i].quantity += item.quantity;
+			}
+			else
+			{
+				st.cargohold = st.cargohold.Concat(new GoodsStack[] { item }).ToArray();
+			}
+			st.produceModuleArr[indexModule].stageProcess = 0f;
+		}
 	}
 
 	private static void DeleteEmptyStacks()

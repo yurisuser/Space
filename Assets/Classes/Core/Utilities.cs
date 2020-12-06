@@ -71,7 +71,7 @@ public static class Utilities
 		}
 	}
 
-	public static void ObjectToConsole(System.Object obj)
+	public static void ShowMeObject(System.Object obj)
 	{
 		Debug.Log(JsonConvert.SerializeObject(obj));
 	}
