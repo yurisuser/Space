@@ -1,9 +1,9 @@
 ﻿using AI;
 using UnityEngine;
 
-namespace AIShip
+namespace AI
 {
-	class GetRandomPosition : Leaf
+	class GetRandomPosition : Leaf<Ship>
 	{
 		public override EStateNode Tick(Ship ship)
 		{

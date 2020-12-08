@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AI;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Gmgr : MonoBehaviour
@@ -6,7 +7,7 @@ public class Gmgr : MonoBehaviour
 	public static Gmgr gmgr;
 	private SceneState sceneState;
 	public Turner turner;
-	private AIManager ai_Manager;
+	private AIShipManager ai_Manager;
 
 	void Start()
 	{
@@ -21,7 +22,7 @@ public class Gmgr : MonoBehaviour
 		turner = Turner.getInstance();
 		turner.TimeTrigger += TurnUpdate;
 		turner.GoStream();		
-		ai_Manager = AIManager.getInstance();
+		ai_Manager = AIShipManager.getInstance();
 		ai_Manager.Tick(); // initial tick
 	}
 

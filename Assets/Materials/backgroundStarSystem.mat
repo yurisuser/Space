@@ -29,11 +29,11 @@ Material:
         m_Offset: {x: -0.1165, y: -0.0245}
     - _MediumStars:
         m_Texture: {fileID: 2800000, guid: 026d16b04d901fd4ba44ae3c46f2880a, type: 3}
-        m_Scale: {x: 1142.8572, y: 1142.8572}
-        m_Offset: {x: 0, y: 0.000018181818}
+        m_Scale: {x: 714.2857, y: 714.2857}
+        m_Offset: {x: -0.017057497, y: 0.0063786055}
     - _SmallStars:
         m_Texture: {fileID: 2800000, guid: 7eefe8f43b3e5bd49893b580a9a25236, type: 3}
         m_Scale: {x: 2, y: 2}
-        m_Offset: {x: 0, y: 0.0000125}
+        m_Offset: {x: -0.011727029, y: 0.004385291}
     m_Floats: []
     m_Colors: []

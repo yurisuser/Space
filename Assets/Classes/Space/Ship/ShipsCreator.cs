@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System.Runtime.CompilerServices;
-using AIShip;
+using AI;
 
 public static class ShipsCreator
 {

@@ -1,8 +1,8 @@
 ﻿using AI;
 
-namespace AIShip
+namespace AI
 {
-	public class IsDesignedDestinationOrder : Condition
+	public class IsDesignedDestinationOrder : Condition<Ship>
 	{
 		public override EStateNode Tick(Ship ship)
 		{

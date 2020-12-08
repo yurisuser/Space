@@ -1,15 +1,15 @@
 ﻿using AI;
 
-namespace AIShip
+namespace AI
 {
-	public class BehavPatrol : ShipBehaviour
+	public class BehavPatrol : AIBehaviour<Ship>
 	{
 		public BehavPatrol()
 		{
-			behav =	new Repeater(
-				new Sequence(
+			behav =	new Repeater<Ship>(
+				new Sequence<Ship>(
 					new StartStepInit(),
-					new Invertor(new BehavMoveToPosition()),
+					new Invertor<Ship>(new BehavMoveToPosition()),
 					new GetRandomPosition()
 					)
 				);

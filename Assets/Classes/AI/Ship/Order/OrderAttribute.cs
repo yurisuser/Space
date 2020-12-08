@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace AIShip
+namespace AI
 {
 	public class OrderAttribute
 	{

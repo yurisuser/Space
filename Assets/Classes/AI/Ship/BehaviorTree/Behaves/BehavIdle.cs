@@ -1,8 +1,8 @@
 ﻿using AI;
 
-namespace AIShip
+namespace AI
 {
-	public class BehavIdle : ShipBehaviour
+	public class BehavIdle : AIBehaviour<Ship>
 	{
 		public BehavIdle()
 		{

@@ -1,8 +1,8 @@
 ﻿using AI;
 
-namespace AIShip
+namespace AI
 {
-	public class StartStepInit : Leaf
+	public class StartStepInit : Leaf<Ship>
 	{
 		public override EStateNode Tick(Ship ship)
 		{

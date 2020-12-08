@@ -1,9 +1,9 @@
 ﻿using AI;
 using UnityEngine;
 
-namespace AIShip
+namespace AI
 {
-	public class CalculateDestinationStep : Leaf
+	public class CalculateDestinationStep : Leaf<Ship>
 	{
 		public override EStateNode Tick(Ship ship)
 		{

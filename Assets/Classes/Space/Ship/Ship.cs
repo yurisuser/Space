@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AIShip;
+using AI;
 
 public class Ship : ISystemPosition
 {

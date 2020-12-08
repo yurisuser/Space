@@ -1,14 +1,14 @@
 ﻿using AI;
 
-namespace AIShip
+namespace AI
 {
-	public class BehavMoveToPosition : ShipBehaviour
+	public class BehavMoveToPosition : AIBehaviour<Ship>
 	{
 		public BehavMoveToPosition()
 		{
-			behav = new Sequence(
+			behav = new Sequence<Ship>(
 				new StartStepInit(),
-				new Invertor(new IsDesignedDestinationOrder()),
+				new Invertor<Ship>(new IsDesignedDestinationOrder()),
 				new CalculateDestinationStep()
 			);
 		}
