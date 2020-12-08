@@ -17,13 +17,14 @@ public static class StationProducer
 		}
 		DeleteEmptyStacks();
 		Galaxy.StarSystemsArr[starIndex].StationArr[stationIndex] = st;
+		Utilities.ShowMeObject(Galaxy.StarSystemsArr[11].StationArr[0].cargohold);
 	}
 
 	private static void Do(int indexModule)
 	{
-		if (st.produceModuleArr[indexModule].status == EProduceStatus.pause) return;
+		if (st.produceModuleArr[indexModule].state == EProducingState.pause) return;
 
-		if (st.produceModuleArr[indexModule].status == EProduceStatus.work)
+		if (st.produceModuleArr[indexModule].state == EProducingState.work)
 		{//если запущено, продолжать
 			Work(indexModule); 
 			return;
@@ -31,11 +32,11 @@ public static class StationProducer
 
 		if (IsDeficitResources(st.produceModuleArr[indexModule].recipe, st.cargohold))
 		{//если русурсов мало, отказ
-			st.produceModuleArr[indexModule].status = EProduceStatus.deficitRecorces;
+			st.produceModuleArr[indexModule].state = EProducingState.deficitRecorces;
 			return;
 		}
 
-		if (st.produceModuleArr[indexModule].status == EProduceStatus.finished)
+		if (st.produceModuleArr[indexModule].state == EProducingState.finished)
 		{// если незапущено, запустить
 			StartNewProcess(indexModule);
 			if (st.produceModuleArr[indexModule].recipe.duration == st.produceModuleArr[indexModule].stageProcess)
@@ -50,7 +51,14 @@ public static class StationProducer
 	{
 		foreach (var item in recipe.resources)
 		{
-			if (Array.Exists(cargo, x => x.id == item.id && x.quantity <= item.quantity)) return true;
+			//if (Array.Exists(cargo, x => x.id == item.id)) && x.quantity <= item.quantity)) return true;
+			for (int r = 0; r < recipe.resources.Length; r++)
+			{
+				for (int c = 0; c < cargo.Length; c++)
+				{
+
+				}
+			}
 		}
 		return false;
 	}
@@ -59,7 +67,7 @@ public static class StationProducer
 	{
 		WithdrawResources(indexModule);
 		st.produceModuleArr[indexModule].stageProcess = 1;
-		st.produceModuleArr[indexModule].status = EProduceStatus.work;
+		st.produceModuleArr[indexModule].state = EProducingState.work;
 	}
 
 	private static void Work(int indexModule)
@@ -78,7 +86,7 @@ public static class StationProducer
 	{
 		AddProducts(indexModule);
 		st.produceModuleArr[indexModule].stageProcess = 0;
-		st.produceModuleArr[indexModule].status = EProduceStatus.finished;
+		st.produceModuleArr[indexModule].state = EProducingState.finished;
 	}
 
 	private static void WithdrawResources(int indexModule)

@@ -1,7 +1,6 @@
-﻿using AI;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace AI
+namespace AI.AIShip
 {
 	public class CalculateDestinationStep : Leaf<Ship>
 	{

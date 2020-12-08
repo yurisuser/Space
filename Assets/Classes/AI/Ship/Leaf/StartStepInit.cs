@@ -1,6 +1,4 @@
-﻿using AI;
-
-namespace AI
+﻿namespace AI.AIShip
 {
 	public class StartStepInit : Leaf<Ship>
 	{

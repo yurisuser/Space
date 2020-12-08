@@ -1,7 +1,7 @@
 ﻿using static Data;
-public struct ProduceModule
+public class ProducingModule
 {
 	public ProductRecipe recipe;
 	public float stageProcess;
-	public EProduceStatus status;
+	public EProducingState state;
 }

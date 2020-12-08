@@ -1,4 +1,6 @@
-﻿namespace AI
+﻿using AI.AIShip;
+
+namespace AI
 {
 	public static class AIManager
 	{

@@ -41,13 +41,13 @@ public static class StationCreator
 		return result;
 	}
 
-	private static ProduceModule[] TestAddProduceModule()
+	private static ProducingModule[] TestAddProduceModule()
 	{
-		return new ProduceModule[] {
-			new ProduceModule{
+		return new ProducingModule[] {
+			new ProducingModule{
 				recipe = Data.productRecipeArr[1],
 				stageProcess = 0,
-				status = EProduceStatus.finished
+				state = EProducingState.finished
 			}
 		};
 	}

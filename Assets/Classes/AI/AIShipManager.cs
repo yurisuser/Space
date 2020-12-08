@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AI
+namespace AI.AIShip
 {
 	public static class AIShipManager
 	{

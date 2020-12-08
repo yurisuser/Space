@@ -1,4 +1,4 @@
-﻿public enum EProduceStatus
+﻿public enum EProducingState
 {
 	work,
 	finished,

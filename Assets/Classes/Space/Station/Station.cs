@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public struct Station : ISystemPosition
+public class Station : ISystemPosition
 {
 	public Vector3 position 
 	{
@@ -14,7 +14,7 @@ public struct Station : ISystemPosition
 		}
 	}
 	public GoodsStack[] cargohold;
-	public ProduceModule[] produceModuleArr;
+	public ProducingModule[] produceModuleArr;
 
 	private Vector3 _position;
 }
