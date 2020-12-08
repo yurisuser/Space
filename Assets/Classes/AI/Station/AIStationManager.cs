@@ -1,6 +1,0 @@
-﻿namespace AI
-{
-	class AIStationManager
-	{
-	}
-}

@@ -7,7 +7,6 @@ public class Gmgr : MonoBehaviour
 	public static Gmgr gmgr;
 	private SceneState sceneState;
 	public Turner turner;
-	private AIShipManager ai_Manager;
 
 	void Start()
 	{
@@ -22,8 +21,7 @@ public class Gmgr : MonoBehaviour
 		turner = Turner.getInstance();
 		turner.TimeTrigger += TurnUpdate;
 		turner.GoStream();		
-		ai_Manager = AIShipManager.getInstance();
-		ai_Manager.Tick(); // initial tick
+		AIManager.Tick(); // initial tick
 	}
 
 	private void FixedUpdate()
@@ -39,7 +37,7 @@ public class Gmgr : MonoBehaviour
 	private void TurnUpdate()
 	{
 		Debug.Log("Turner update tick");
-		ai_Manager.Tick();
+		AIManager.Tick();
 		StationManager.Tick();
 	}
 	void Awake()
