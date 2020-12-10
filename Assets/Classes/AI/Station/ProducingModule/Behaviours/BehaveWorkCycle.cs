@@ -6,20 +6,38 @@ namespace AI.AIStation.ProdModule
 	{
 		public WorkCycle()
 		{
-			Sequence<ProdModuleWrapper> startCycle = new Sequence<ProdModuleWrapper>(
-				
+			Sequence<ProdModuleWrapper> checkDeficit = new Sequence<ProdModuleWrapper>(
+				new IsDeficitResources(),
+				new SetModuleState(EProducingState.deficitRecorces)
 				);
 
-			//behav = 
-			//	new Sequence<ProdModuleWrapper>(
-			//		new Invertor<ProdModuleWrapper>(new IsModuleState(EProducingState.pause)),
-			//		new IsModuleState(EProducingState.work),
-			//		new Sequence<ProdModuleWrapper>(
-			//			new IsNotLastStepProcess(),
-			//			new NextWorkCycle()
-			//			)
-			//		);
 
+			Sequence<ProdModuleWrapper> lastStep = new Sequence<ProdModuleWrapper>(
+					new IsLastStepOfProcess(),
+					new FinishWork(),
+					new SetModuleState(EProducingState.finished)
+					);
+
+			Sequence<ProdModuleWrapper> workChain = new Sequence<ProdModuleWrapper>(
+				new IsModuleState(EProducingState.work),
+				new NextWorkCycle(),
+				lastStep
+				);
+
+
+			Sequence<ProdModuleWrapper> startProcess = new Sequence<ProdModuleWrapper>(
+				new IsModuleState(EProducingState.finished),
+				new Invertor<ProdModuleWrapper>(checkDeficit),
+				new StartNewProcess(),
+				new SetModuleState(EProducingState.work),
+				lastStep
+				);
+
+			behav = new Selector<ProdModuleWrapper>(
+				new IsModuleState(EProducingState.pause),
+				workChain,
+				startProcess
+				);
 		}
 
 		public override EStateNode Tick(ProdModuleWrapper subj)

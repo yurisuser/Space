@@ -9,6 +9,8 @@ namespace AI.AIStation.ProdModule
 	public class IsModuleState : Condition<ProdModuleWrapper>
 	{
 		private EProducingState state;
+
+		private IsModuleState() { }
 		public IsModuleState(EProducingState state)
 		{
 			this.state = state;

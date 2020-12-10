@@ -2,7 +2,7 @@
 {
 	public class Selector<T>  : Node<T>
 	{
-		//Селектор. Работает до первого не FAILURE
+		//Селектор. Работает до первого SUCCESS
 		public Selector(params Node<T>[] nodeArr) : base(nodeArr) { }
 
 		public override EStateNode Tick(T subj)
@@ -11,7 +11,7 @@
 			foreach (var item in nodes)
 			{
 				result = item.Tick(subj);
-				if (result != EStateNode.FAILURE) return result;
+				if (result == EStateNode.SUCCESS) return result;
 			}
 			return EStateNode.FAILURE;
 		}

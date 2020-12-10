@@ -17,7 +17,6 @@ public static class StationProducer
 		}
 		DeleteEmptyStacks();
 		Galaxy.StarSystemsArr[starIndex].StationArr[stationIndex] = st;
-		Utilities.ShowMeObject(Galaxy.StarSystemsArr[11].StationArr[0].cargohold);
 	}
 
 	private static void Do(int indexModule)

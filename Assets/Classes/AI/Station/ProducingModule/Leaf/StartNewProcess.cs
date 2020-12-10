@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AI.AIStation.ProdModule
@@ -8,8 +9,8 @@ namespace AI.AIStation.ProdModule
 		public override EStateNode Tick(ProdModuleWrapper wrapper)
 		{
 			wrapper.module.stageProcess = 1;
-			wrapper.module.state = EProducingState.work;
 			WithdrawResources(wrapper);
+			DeleteEmptyStacks(wrapper);
 			return EStateNode.SUCCESS;
 		}
 
@@ -26,6 +27,17 @@ namespace AI.AIStation.ProdModule
 					}
 				}
 			}
+		}
+
+		private void DeleteEmptyStacks(ProdModuleWrapper w)
+		{
+			List<GoodsStack> result = new List<GoodsStack>();
+			for (int i = 0; i < w.station.cargohold.Length; i++)
+			{
+				if (w.station.cargohold[i].quantity <= 0) continue;
+				result.Add(w.station.cargohold[i]);
+			}
+			w.station.cargohold = result.ToArray();
 		}
 	}
 }
