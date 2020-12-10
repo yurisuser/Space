@@ -2,9 +2,9 @@
 
 namespace AI.AIStation.ProdModule
 {
-	public class WorkCycle : AIBehaviour<ProdModuleWrapper>
+	public class BehaveProducingModule : AIBehaviour<ProdModuleWrapper>
 	{
-		public WorkCycle()
+		public BehaveProducingModule()
 		{
 			Sequence<ProdModuleWrapper> checkDeficit = new Sequence<ProdModuleWrapper>(
 				new IsDeficitResources(),
@@ -40,9 +40,9 @@ namespace AI.AIStation.ProdModule
 				);
 		}
 
-		public override EStateNode Tick(ProdModuleWrapper subj)
+		public override EStateNode Tick(ProdModuleWrapper w)
 		{
-			throw new NotImplementedException();
+			return behav.Tick(w);
 		}
 	}
 }

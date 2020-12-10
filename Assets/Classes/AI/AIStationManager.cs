@@ -1,8 +1,8 @@
-﻿namespace AI
+﻿namespace AI.AIStation
 {
 	public static class AIStationManager
 	{
-		public static StationBehave stationBehave = new StationBehave();
+		private static StationBehave stationBehave = new StationBehave();
 
 		public static void Tick()
 		{

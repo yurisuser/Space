@@ -38,7 +38,7 @@ public class Gmgr : MonoBehaviour
 	{
 		Debug.Log("Turner update tick");
 		AIManager.Tick();
-		StationManager.Tick();
+		//StationManager.Tick();
 	}
 	void Awake()
 	{
