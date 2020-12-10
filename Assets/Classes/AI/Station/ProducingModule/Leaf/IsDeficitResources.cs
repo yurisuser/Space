@@ -8,7 +8,9 @@ namespace AI.AIStation.ProdModule
 		{
 			foreach (var item in wrapper.module.recipe.resources)
 			{
-				if (Array.Exists(wrapper.station.cargohold, x => x.id == item.id && x.quantity >= item.quantity)) 
+				if (!Array.Exists(wrapper.station.cargohold, x => x.id == item.id))
+					return EStateNode.SUCCESS;
+				if (Array.Exists(wrapper.station.cargohold, x => x.id == item.id && x.quantity < item.quantity)) 
 					return EStateNode.SUCCESS;
 			}
 			return EStateNode.FAILURE;

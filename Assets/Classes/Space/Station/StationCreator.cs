@@ -10,7 +10,7 @@ public static class StationCreator
 			Station st = new Station
 			{
 				position = GetRNDPosition(),
-				cargohold = TestAddResources(100),
+				cargohold = TestAddResources(8),
 				produceModuleArr = TestAddProduceModule()
 			};
 			result[i] = st;
