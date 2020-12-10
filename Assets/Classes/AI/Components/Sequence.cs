@@ -4,6 +4,7 @@
 	{
 		//Последовательность. Работает до первого FAILURE
 		public Sequence(params Node<T>[] nodeArr) : base(nodeArr) { }
+		public Sequence(string name, params Node<T>[] nodeArr) : base(name, nodeArr) { }
 
 		public override EStateNode Tick(T subj)
 		{

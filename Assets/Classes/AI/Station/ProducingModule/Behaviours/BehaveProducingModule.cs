@@ -7,18 +7,21 @@ namespace AI.AIStation.ProdModule
 		public BehaveProducingModule()
 		{
 			Sequence<ProdModuleWrapper> checkDeficit = new Sequence<ProdModuleWrapper>(
+				"checkDeficit",
 				new IsDeficitResources(),
 				new SetModuleState(EProducingState.deficitRecorces)
 				);
 
 
 			Sequence<ProdModuleWrapper> lastStep = new Sequence<ProdModuleWrapper>(
-					new IsLastStepOfProcess(),
-					new FinishWork(),
-					new SetModuleState(EProducingState.finished)
-					);
+				"lastStep",
+				new IsLastStepOfProcess(),
+				new FinishWork(),
+				new SetModuleState(EProducingState.finished)
+				);
 
 			Sequence<ProdModuleWrapper> workChain = new Sequence<ProdModuleWrapper>(
+				"workChain",
 				new IsModuleState(EProducingState.work),
 				new NextWorkCycle(),
 				lastStep
@@ -26,6 +29,7 @@ namespace AI.AIStation.ProdModule
 
 
 			Sequence<ProdModuleWrapper> startProcess = new Sequence<ProdModuleWrapper>(
+				"startProcess",
 				new IsModuleState(EProducingState.finished),
 				new Invertor<ProdModuleWrapper>(checkDeficit),
 				new StartNewProcess(),
@@ -34,6 +38,7 @@ namespace AI.AIStation.ProdModule
 				);
 
 			behav = new Selector<ProdModuleWrapper>(
+				"behav",
 				new IsModuleState(EProducingState.pause),
 				workChain,
 				startProcess

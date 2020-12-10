@@ -4,6 +4,7 @@
 	{
 		//Селектор. Работает до первого SUCCESS
 		public Selector(params Node<T>[] nodeArr) : base(nodeArr) { }
+		public Selector(string name, params Node<T>[] nodeArr) : base(name, nodeArr) { }
 
 		public override EStateNode Tick(T subj)
 		{
