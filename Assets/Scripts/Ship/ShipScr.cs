@@ -5,16 +5,16 @@ using AI;
 
 public class ShipScr : MonoBehaviour
 {
+	private Order order;
 	private GameObject destOrder;
 	private GameObject destStep;
-	private int oldTurn;
-	private Vector3 oldDestinationStep;
-	private float progress;
-	public Ship ship;
-	public string id;
+	private int currentTurn;
+	private float progress = 0;
+	private Ship ship;
+	public int shipId; //for scene
 	void Start()
 	{
-		DrawDestinations();
+
 		if (ship.Id == 1018)
 		{
 			gameObject.GetComponent<Renderer>().material.color = Color.cyan;
@@ -24,12 +24,26 @@ public class ShipScr : MonoBehaviour
 	public void SetShip(Ship ship)
 	{
 		this.ship = ship;
-		this.id = ship.Id.ToString();
+		shipId = ship.Id;
+		order = ship.order.Clone();
+		DrawDestinations();
+		if (ship.Id == 1017) Utilities.ShowMeObject(order);
 	}
 	void Update()
 	{
+		CheckEndTurn();
 		Move();
 		MoveNavigationPoints();
+	}
+
+	private void CheckEndTurn()
+	{
+		if (currentTurn != Turner.GetCurrentTime())
+		{
+			progress = 0;
+			currentTurn = Turner.GetCurrentTime();
+			order = ship.order.Clone();
+		}
 	}
 
 	private void DrawDestinations()
@@ -47,14 +61,9 @@ public class ShipScr : MonoBehaviour
 	}
 	private void Move()
 	{
-		transform.position = ship.order.attribute.currentPosition;
-		transform.position = Vector3.Lerp(ship.order.attribute.currentPosition, ship.order.attribute.destinationStep, progress);
+		transform.position = order.attribute.currentPosition;
+		transform.position = Vector3.Lerp(order.attribute.currentPosition, order.attribute.destinationStep, progress);
 		progress += Time.deltaTime / Settings.Time.TURN_LENGTH;
-
-		if (oldTurn != Turner.GetCurrentTime()) progress = 0;
-		oldTurn = Turner.GetCurrentTime();
-		oldDestinationStep = ship.order.attribute.destinationStep;
-		//if (ship.Id == 1097) Debug.Log("Progress " + progress);
 	}
 
 	private void MoveNavigationPoints()

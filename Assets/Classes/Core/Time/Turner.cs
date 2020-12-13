@@ -5,7 +5,7 @@ public class Turner
 	private static Turner turner;
 	private float elapsedTime = 0f;
 	public int allowedTimeSteps = 0;
-	private static int _currentTime;
+	private static int _currentTime = 1;
 	private Turner() { }
 	public event _delegate TimeTrigger;
 	public delegate void _delegate();
@@ -30,7 +30,7 @@ public class Turner
 	private void InnerClock()
 	{
 		if (allowedTimeSteps == 0) return;
-		if(elapsedTime > Settings.Time.TURN_LENGTH)
+		if(elapsedTime > Settings.Time.TURN_LENGTH && TaskManager.isAllFinished)
 		{
 			elapsedTime = 0f;
 			allowedTimeSteps--;

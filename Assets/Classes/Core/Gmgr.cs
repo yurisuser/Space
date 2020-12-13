@@ -1,4 +1,5 @@
 ﻿using AI;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,6 +8,7 @@ public class Gmgr : MonoBehaviour
 	public static Gmgr gmgr;
 	private SceneState sceneState;
 	public Turner turner;
+	//private Thread thread = new Thread(new ThreadStart(AIManager.Tick));
 
 	void Start()
 	{
@@ -20,26 +22,23 @@ public class Gmgr : MonoBehaviour
 		///
 		turner = Turner.getInstance();
 		turner.TimeTrigger += TurnUpdate;
-		turner.GoStream();		
-		AIManager.Tick(); // initial tick
-	}
-
-	private void FixedUpdate()
-	{
+		turner.GoStream();
+		TaskManager.Tick();// initial tick
 	}
 
 	private void Update()
 	{
 		if (turner != null)
-			turner.Tick();	
+			turner.Tick();
+		Utilities.ShowMe(5, TaskManager.isAllFinished);
 	}
 
 	private void TurnUpdate()
 	{
 		Debug.Log("Turner update tick");
-		AIManager.Tick();
-		//StationManager.Tick();
+		TaskManager.Tick();
 	}
+
 	void Awake()
 	{
 		DontDestroyOnLoad(gameObject);

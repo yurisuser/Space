@@ -1,5 +1,6 @@
 ﻿using AI.AIShip;
 using AI.AIStation;
+using UnityEngine;
 
 namespace AI
 {
@@ -9,7 +10,6 @@ namespace AI
 		{
 			AIShipManager.Tick();
 			AIStationManager.Tick();
-			Utilities.ShowMeObject(Galaxy.StarSystemsArr[11].StationArr[0].cargohold);
 		}
 	}
 }
