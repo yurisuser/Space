@@ -1,14 +1,20 @@
-﻿using UnityEngine;
-
+﻿using System.Diagnostics;
+using UnityEngine;
+using static Settings.Time;
 public class Turner 
 {
 	private static Turner turner;
 	private float elapsedTime = 0f;
-	public int allowedTimeSteps = 0;
 	private static int _currentTime = 1;
-	private Turner() { }
+	private static Stopwatch aiDelay = new Stopwatch();
+
 	public event _delegate TimeTrigger;
+	public int allowedTimeSteps = 0;
+	public static float turn_length = MIN_TURN_LENGTH;
 	public delegate void _delegate();
+	
+	private Turner() { }
+
 	public static Turner getInstance()
 	{
 		if (turner != null)
@@ -22,7 +28,7 @@ public class Turner
 		 return _currentTime;
 	}
 
-	public void Tick()
+	public void Update()
 	{
 		InnerClock();
 	}
@@ -30,15 +36,30 @@ public class Turner
 	private void InnerClock()
 	{
 		if (allowedTimeSteps == 0) return;
-		if(elapsedTime > Settings.Time.TURN_LENGTH && TaskManager.isAllFinished)
+		elapsedTime += Time.deltaTime;
+		if (!TaskManager.isAllFinished) return;
+		
+		aiDelay.Stop();
+
+		if(elapsedTime > turn_length)
 		{
+			turn_length = CalculateTurnLength();
 			elapsedTime = 0f;
 			allowedTimeSteps--;
 			_currentTime++;
 			TimeTrigger();
+			aiDelay.Restart();
 			return;
 		}
-		elapsedTime += Time.deltaTime;
+	}
+
+	private float CalculateTurnLength()
+	{
+		if (elapsedTime * TIME_BUFFER < MIN_TURN_LENGTH) 
+			return MIN_TURN_LENGTH;
+		float aiDelaySec = aiDelay.ElapsedMilliseconds / 1000f;
+		if (aiDelaySec < MIN_TURN_LENGTH) return MIN_TURN_LENGTH;
+		return aiDelaySec * TIME_BUFFER;
 	}
 	public void SetCurrentTime(int newTime)
 	{

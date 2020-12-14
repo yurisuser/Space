@@ -8,7 +8,6 @@ public class Gmgr : MonoBehaviour
 	public static Gmgr gmgr;
 	private SceneState sceneState;
 	public Turner turner;
-	//private Thread thread = new Thread(new ThreadStart(AIManager.Tick));
 
 	void Start()
 	{
@@ -29,7 +28,7 @@ public class Gmgr : MonoBehaviour
 	private void Update()
 	{
 		if (turner != null)
-			turner.Tick();
+			turner.Update();
 		Utilities.ShowMe(5, TaskManager.isAllFinished);
 	}
 

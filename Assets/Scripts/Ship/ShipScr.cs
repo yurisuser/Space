@@ -27,7 +27,6 @@ public class ShipScr : MonoBehaviour
 		shipId = ship.Id;
 		order = ship.order.Clone();
 		DrawDestinations();
-		if (ship.Id == 1017) Utilities.ShowMeObject(order);
 	}
 	void Update()
 	{
@@ -63,7 +62,7 @@ public class ShipScr : MonoBehaviour
 	{
 		transform.position = order.attribute.currentPosition;
 		transform.position = Vector3.Lerp(order.attribute.currentPosition, order.attribute.destinationStep, progress);
-		progress += Time.deltaTime / Settings.Time.TURN_LENGTH;
+		progress += Time.deltaTime / Turner.turn_length;
 	}
 
 	private void MoveNavigationPoints()
