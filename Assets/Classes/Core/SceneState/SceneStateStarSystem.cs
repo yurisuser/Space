@@ -57,6 +57,7 @@ public class SceneStateStarSystem : SceneState
 				planet.size * Settings.StarSystem.PLANET_SCALE,
 				planet.size * Settings.StarSystem.PLANET_SCALE);
 			go.transform.SetParent(folder.transform);
+			go.GetComponent<PlanetSysMap>().planet = starSystem.planetSystemsArray[i].planet;
 			DrawMoons(starSystem.planetSystemsArray[i]);
 			DrawMoonsOrbit(starSystem.planetSystemsArray[i]);
 		}

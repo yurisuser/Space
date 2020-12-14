@@ -11,6 +11,7 @@ public class Planet: ISystemPosition
 	public float orbitSpeed;
 	public float rotateSpeed;
 	public float angleOnOrbit;
+	public ResourcePoint[] resources;
 	public Vector3 position
 	{
 		get

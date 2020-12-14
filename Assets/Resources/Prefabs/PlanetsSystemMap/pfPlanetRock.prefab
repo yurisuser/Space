@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 33340728339804482}
   - component: {fileID: 135482855353588350}
   - component: {fileID: 23343951126986580}
+  - component: {fileID: 7640317238255984809}
   m_Layer: 0
   m_Name: pfPlanetRock
   m_TagString: Untagged
@@ -93,3 +94,15 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!114 &7640317238255984809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234674513983284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a8bf477d6e95634198715ce5fb3dc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
