@@ -19,27 +19,27 @@ public class time_panel : MonoBehaviour
     void Update()
     {
         textGo.text ="day: " + Turner.GetCurrentTime().ToString();
-        if (gmgr.turner.allowedTimeSteps <= 0)
+        if (Turner.allowedTimeSteps <= 0)
 		{
             elapsedTime.text = "";
 		} else
 		{
-            elapsedTime.text = gmgr.turner.allowedTimeSteps.ToString();
+            elapsedTime.text = Turner.allowedTimeSteps.ToString();
 		}        
 	}
 
     public void OnceHandler()
 	{
-        gmgr.turner.GoStep();
+        Turner.GoStep();
 	}
 
     public void StreamHandler()
 	{
-        gmgr.turner.GoStream();
+        Turner.GoStream();
     }
 
     public void PauseHandler()
 	{
-        gmgr.turner.Stop();
+        Turner.Stop();
     }
 }

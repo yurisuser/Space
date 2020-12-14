@@ -7,7 +7,6 @@ public class Gmgr : MonoBehaviour
 {
 	public static Gmgr gmgr;
 	private SceneState sceneState;
-	public Turner turner;
 
 	void Start()
 	{
@@ -19,16 +18,14 @@ public class Gmgr : MonoBehaviour
 		//LoadSceneGalaxy();
 		LoadSceneStarSystem(11);
 		///
-		turner = Turner.getInstance();
-		turner.TimeTrigger += TurnUpdate;
-		turner.GoStream();
+		Turner.TimeTrigger += TurnUpdate;
+		Turner.GoStream();
 		TaskManager.Tick();// initial tick
 	}
 
 	private void Update()
 	{
-		if (turner != null)
-			turner.Update();
+		Turner.Update();
 		Utilities.ShowMe(5, TaskManager.isAllFinished);
 	}
 
