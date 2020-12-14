@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public struct Moon: ISystemPosition
+public class Moon: ISystemPosition
 {
 	public int id;
 	public Planet motherPlanet;

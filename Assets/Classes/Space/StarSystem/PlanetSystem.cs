@@ -1,5 +1,5 @@
 ﻿
-public struct PlanetSystem
+public class PlanetSystem
 {
 	public int id;
 	public Planet planet;

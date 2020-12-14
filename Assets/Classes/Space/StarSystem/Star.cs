@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-public struct Star
+﻿public class Star
 {
 	public int id;
 	public int type;

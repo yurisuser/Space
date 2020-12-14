@@ -1,3 +1,4 @@
 ﻿public static class PlanetCreator
 {
+
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public struct StarSystem
+public class StarSystem
 {
 	public int id;
 	public float galaxyHandDistance;

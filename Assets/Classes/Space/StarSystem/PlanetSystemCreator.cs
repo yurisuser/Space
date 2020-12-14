@@ -5,7 +5,7 @@ public class PlanetSystemCreator
 {
 	public static PlanetSystem GetRandomPlanetSystem(int numberPlanet, Star motherStar)
 	{
-		Planet planet = CreatePlanet(numberPlanet, motherStar);
+		Planet planet = CreatePlanets(numberPlanet, motherStar);
 		PlanetSystem planetSystem = new PlanetSystem
 		{
 			planet = planet,
@@ -14,7 +14,7 @@ public class PlanetSystemCreator
 		return planetSystem;
 	}
 
-	private static Planet CreatePlanet(int numberPlanet, Star motherStar)
+	private static Planet CreatePlanets(int numberPlanet, Star motherStar)
 	{
 		return new Planet
 		{
