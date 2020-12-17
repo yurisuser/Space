@@ -22,6 +22,7 @@ public class CameraStarSystem : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
+        cam.orthographicSize = settings.DEFAULT_ZOOM;
         targetOrthographicSize = cam.orthographicSize;
     }
     void Update()

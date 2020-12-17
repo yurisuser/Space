@@ -36,7 +36,7 @@ public class PlanetSystemCreator
 			orbitNumber = numberMoon,
 			orbitSpeed = 50,
 			rotateSpeed = 5,
-			size = Random.Range(.1f, planet.size / 2),
+			size = Random.Range(.1f, planet.mass / 2),
 			type = (EMoonTypes)Random.Range(0, Enum.GetNames(typeof(EMoonTypes)).Length)
 		};
 		return moon;

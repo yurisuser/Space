@@ -52,12 +52,12 @@ public class SceneStateStarSystem : SceneState
 				PrefabService.PlanetSystemMap[planet.type],
 				planet.position,
 				Quaternion.identity);
+			go.GetComponent<PlanetSysMapScr>().planet = starSystem.planetSystemsArray[i].planet;
 			go.transform.localScale += new Vector3(
-				planet.size * Settings.StarSystem.PLANET_SCALE,
-				planet.size * Settings.StarSystem.PLANET_SCALE,
-				planet.size * Settings.StarSystem.PLANET_SCALE);
+				planet.mass * Settings.StarSystem.PLANET_SCALE,
+				planet.mass * Settings.StarSystem.PLANET_SCALE,
+				planet.mass * Settings.StarSystem.PLANET_SCALE);
 			go.transform.SetParent(folder.transform);
-			go.GetComponent<PlanetSysMap>().planet = starSystem.planetSystemsArray[i].planet;
 			DrawMoons(starSystem.planetSystemsArray[i]);
 			DrawMoonsOrbit(starSystem.planetSystemsArray[i]);
 		}

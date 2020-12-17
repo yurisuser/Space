@@ -6,7 +6,7 @@ public class Planet: ISystemPosition
 	public Star motherStar;
 	public string name;
 	public int type;
-	public float size;
+	public float mass;
 	public int orbitNumber;
 	public float orbitSpeed;
 	public float rotateSpeed;

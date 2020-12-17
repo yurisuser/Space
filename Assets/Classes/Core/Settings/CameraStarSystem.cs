@@ -3,6 +3,7 @@
 	public struct CameraStarSystem
 	{
 		public readonly static float CAMERA_LAYER = -50;
+		public readonly static float DEFAULT_ZOOM = 2000f;
 		public readonly static float MAX_CAMERA_OFFSET = 10000f;
 		public readonly static float MAX_ZOOM = 8000f;
 		public readonly static float MIN_ZOOM = 100f;

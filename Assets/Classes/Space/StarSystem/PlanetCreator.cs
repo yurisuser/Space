@@ -14,7 +14,7 @@ public static class PlanetCreator
 			name = motherStar.name + " " + (char)(numberPlanet + 65),
 			rotateSpeed = 10,
 			orbitSpeed = 100,
-			size = 1,
+			mass = 1,
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet,
 		};
@@ -50,7 +50,7 @@ public static class PlanetCreator
 
 	private static ResourcePoint[] GetResourcePoints(Planet planet)
 	{
-		ResourcePoint[] result = new ResourcePoint[(int)(planet.size * 10)];
+		ResourcePoint[] result = new ResourcePoint[(int)(planet.mass * 10)];
 
 		List<int> idsRes =  new List<int>();
 		List<int> probabRes = new List<int>();

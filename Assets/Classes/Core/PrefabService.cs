@@ -13,14 +13,17 @@ public static class PrefabService
 	public static Dictionary<int, GameObject> PlanetSystemMap = new Dictionary<int, GameObject>();
 	public static Dictionary<EMoonTypes, GameObject> MoonSystemMap = new Dictionary<EMoonTypes, GameObject>();
 	public static UIPrefab UI = new UIPrefab();
+	public static Sprite[] goodsImages;
 	public class UIPrefab
 	{
 		private string path = "Prefabs/UI/";
 		public GameObject ShowMePanel;
+		public GameObject PlanetPanel;
 
 		public UIPrefab()
 		{
 			ShowMePanel = Resources.Load<GameObject>(path + "ShowMePanel");
+			PlanetPanel = Resources.Load<GameObject>(path + "PlanetPanel/PlanetPanel");
 		}
 
 
@@ -30,6 +33,7 @@ public static class PrefabService
 		LoadStarsPrefabs();
 		LoadPlanetSystemMap();
 		LoadMoonSystemMap();
+		LoadGoodsSprites();
 	}
 
 	private static void LoadStarsPrefabs()
@@ -53,5 +57,10 @@ public static class PrefabService
 		MoonSystemMap.Add(EMoonTypes.Ice, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetIce"));
 		MoonSystemMap.Add(EMoonTypes.Lava, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetLava"));
 		MoonSystemMap.Add(EMoonTypes.Rock, Resources.Load<GameObject>(path + "PlanetsSystemMap/pfPlanetRock"));
+	}
+
+	private static void LoadGoodsSprites()
+	{
+		goodsImages = Resources.LoadAll<Sprite>("Textures/goods64x64");
 	}
 }

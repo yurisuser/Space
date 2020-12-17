@@ -47,10 +47,6 @@ namespace AI.AIStation.ProdModule
 
 		public override EStateNode Tick(ProdModuleWrapper w)
 		{
-			if (Turner.GetCurrentTime() > 3)
-			{
-				var i = 2;
-			}
 			return behav.Tick(w);
 		}
 	}
