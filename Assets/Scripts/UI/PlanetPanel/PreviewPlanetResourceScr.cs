@@ -10,7 +10,6 @@ public class PreviewPlanetResourceScr : MonoBehaviour
     {
         transform.Find("Panel").Find("Image").GetComponent<Image>().sprite = PrefabService.goodsImages[goodsId];
         transform.Find("ResourceName").GetComponent<Text>().text = Data.GetGoodsById(goodsId).name;
-        Utilities.ShowMeObject(values);
 		transform.Find("Values").GetComponent<Text>().text = string.Join(", ", values);
 	}
 

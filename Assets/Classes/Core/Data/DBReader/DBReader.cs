@@ -12,9 +12,13 @@ public partial struct Data
 		private static readonly string spaceDBName = "space.db";
 		private static readonly string starTableName = "star";
 		private static readonly string planetTableName = "planet";
+		private static readonly string moonTableName = "moons";
+
 		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";
-		private static readonly string goodsTableName = "goods";
 		private static readonly string planetaryResourcesProbabilityTableName = "planet_resources_probability";
+		private static readonly string moonProbability = "moon_of_planet_probability";
+
+		private static readonly string goodsTableName = "goods";
 		private static readonly string recipeTableName = "product_recipe";
 
 
@@ -29,10 +33,14 @@ public partial struct Data
 			dbcmd = dbconn.CreateCommand();
 
 			starsArr = ReadStar(starTableName);
-			planetsArr = ReadPlanet(planetTableName);
-			planetsOfStarProbabilityArr = ReadPlanetOfStarProbability(planetOfStarProbabilityTableName);
-			goodsArr = ReadGoods(goodsTableName);
+			planetsArr = ReadPlanetOrMoon(planetTableName);
+			moonsArr = ReadPlanetOrMoon(moonTableName);
+
+			planetsOfStarProbabilityArr = ReadProbability(planetOfStarProbabilityTableName);
 			planetaryResourcesProbabilityArr = ReadPlanetaryResourcesProbability(planetaryResourcesProbabilityTableName);
+			moonOfPlanetProbabilityArr = ReadProbability(moonProbability);
+
+			goodsArr = ReadGoods(goodsTableName);
 			productRecipeArr = ReadProductRecipes(recipeTableName);
 
 			reader.Close();
@@ -83,18 +91,18 @@ public partial struct Data
 			return result.ToArray();
 		}
 
-		private static Planet[] ReadPlanet(string tableName)
+		private static Moon[] ReadPlanetOrMoon(string tableName)
 		{
-			List<Planet> result = new List<Planet>();
-			string sqlQuery = $"SELECT * FROM {tableName}";
+			List<Moon> result = new List<Moon>();
+			string sqlQuery = $"SELECT id, name, prefab_system_map FROM {tableName}";
 			dbcmd.CommandText = sqlQuery;
 			reader = dbcmd.ExecuteReader();
 
 			while (reader.Read())
 			{
-				Planet planet;
+				Moon planet = new Moon();
 				planet.id = reader.GetInt32(0);
-				planet.type = reader.GetString(1);
+				planet.name = reader.GetString(1);
 				planet.prefabSystemMap = reader.GetString(2);
 				result.Add(planet);
 			}
@@ -102,9 +110,9 @@ public partial struct Data
 			return result.ToArray();
 		}
 
-		private static PlanetOfStarProbability[] ReadPlanetOfStarProbability(string tableName)
+		private static Probability[] ReadProbability(string tableName)
 		{
-			List<PlanetOfStarProbability> result = new List<PlanetOfStarProbability>();
+			List<Probability> result = new List<Probability>();
 			int rowsCount = GetTableRows(tableName);
 			int columnCount = GetTableColumn(tableName);
 			string sqlQuery = $"SELECT * FROM {tableName}";
@@ -114,13 +122,13 @@ public partial struct Data
 			while (reader.Read())
 			{
 				int skipField = 2;
-				PlanetOfStarProbability prob;
+				Probability prob = new Probability();
 				prob.id = reader.GetInt32(0);
 				prob.type = reader.GetInt32(1);
-				prob.probabilityOfStar = new int[columnCount - skipField];
+				prob.probability = new int[columnCount - skipField];
 				for (int i = skipField; i < columnCount; i++)
 				{
-					prob.probabilityOfStar[i - skipField] = reader.GetInt32(i);
+					prob.probability[i - skipField] = reader.GetInt32(i);
 				}
 				result.Add(prob);
 			}

@@ -19,7 +19,7 @@ public class PlanetPanelScr : MonoBehaviour
 	{
         transform.Find("inf").Find("PlanetDescription").GetComponent<Text>().text = 
         $"name: {planet.name}\n" +
-        $"type : {Array.Find(Data.planetsArr, x => x.id == planet.type).type}\n" +
+        $"type : {Array.Find(Data.planetsArr, x => x.id == planet.type).name}\n" +
         $"mass (e.m.): {planet.mass} \n" +
         $"orbital speed: {planet.orbitSpeed}\n";
 

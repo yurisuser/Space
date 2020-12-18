@@ -7,10 +7,14 @@ public partial struct Data
 {
 	public static Star[] starsArr;
 	public static Planet[] planetsArr;
-	public static PlanetOfStarProbability[] planetsOfStarProbabilityArr;
-	public static ShipRapam[] shipsArr;
-	public static Goods[] goodsArr;
+	public static Moon[] moonsArr;
+	public static Probability[] planetsOfStarProbabilityArr;
+	public static Probability[] moonOfPlanetProbabilityArr;
 	public static PlanetaryResourcesProbability[] planetaryResourcesProbabilityArr;
+	
+	public static ShipRapam[] shipsArr;
+
+	public static Goods[] goodsArr;
 	public static ProductRecipe[] productRecipeArr;
 	public static void Init()
 	{

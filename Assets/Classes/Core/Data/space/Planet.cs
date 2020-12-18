@@ -1,9 +1,9 @@
 ﻿public partial struct Data
 {
-	public struct Planet
+	public class Planet
 	{
 		public int id;
-		public string type;
+		public string name;
 		public string prefabSystemMap;
 	}
 }

@@ -28,7 +28,7 @@ public static class PlanetCreator
 		int[] rangeProbabilityes = new int[probabilityesForStarType.Length];
 		for (int i = 0; i < probabilityesForStarType.Length; i++)
 		{
-			probabilityesForStarType[i] = Data.planetsOfStarProbabilityArr[i].probabilityOfStar[starType];
+			probabilityesForStarType[i] = Data.planetsOfStarProbabilityArr[i].probability[starType];
 		}
 		rangeProbabilityes[0] = probabilityesForStarType[0];
 		for (int i = 1; i < probabilityesForStarType.Length; i++)

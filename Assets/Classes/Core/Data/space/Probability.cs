@@ -1,9 +1,9 @@
 ﻿public partial struct Data
 {
-	public struct PlanetOfStarProbability
+	public class Probability
 	{
 		public int id;
 		public int type;
-		public int[] probabilityOfStar;
+		public int[] probability;
 	}
 }
