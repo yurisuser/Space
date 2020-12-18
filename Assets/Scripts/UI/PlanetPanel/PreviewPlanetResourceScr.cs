@@ -3,16 +3,20 @@ using UnityEngine.UI;
 
 public class PreviewPlanetResourceScr : MonoBehaviour
 {
-    public int goodId;
+    private int goodsId;
+    private int[] values = new int[]{0};
 
-    private Sprite img;
     void Start()
     {
-        transform.Find("Panel").Find("Image").GetComponent<Image>().sprite = PrefabService.goodsImages[goodId];
+        transform.Find("Panel").Find("Image").GetComponent<Image>().sprite = PrefabService.goodsImages[goodsId];
+        transform.Find("ResourceName").GetComponent<Text>().text = Data.GetGoodsById(goodsId).name;
+        Utilities.ShowMeObject(values);
+		transform.Find("Values").GetComponent<Text>().text = string.Join(", ", values);
 	}
 
-    void Update()
-    {
-
-    }
+    public void SetParam(int goodsId, int[] values)
+	{
+        this.goodsId = goodsId;
+        this.values = values;
+	}
 }

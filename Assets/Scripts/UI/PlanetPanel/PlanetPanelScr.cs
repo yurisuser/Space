@@ -7,7 +7,6 @@ public class PlanetPanelScr : MonoBehaviour
     public Planet planet;
 
     private Text headtext;
-    private string description;
     void Start()
     {
         headtext = transform.Find("Head").Find("HeadText").GetComponent<Text>();
@@ -25,13 +24,12 @@ public class PlanetPanelScr : MonoBehaviour
         $"orbital speed: {planet.orbitSpeed}\n";
 
     }
-    void Update()
-    {
-
-	}
 
     public void PlanetResources()
 	{
-        transform.Find("res").GetComponent<PreviewerBuilderScr>().BuildPreview(planet);
-	}
+        Transform planetPanel = transform.Find("res");
+        planetPanel.GetComponent<PreviewerBuilderScr>().CreatePreview(planet, transform);
+        transform.Find("res").Find("Text").GetComponent<Text>().text = $"available resource: {planetPanel.GetComponent<PreviewerBuilderScr>().GetCountResources().ToString()}";
+
+    }
 }

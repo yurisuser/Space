@@ -19,11 +19,13 @@ public static class PrefabService
 		private string path = "Prefabs/UI/";
 		public GameObject ShowMePanel;
 		public GameObject PlanetPanel;
+		public GameObject PlanetResourcePreview;
 
 		public UIPrefab()
 		{
 			ShowMePanel = Resources.Load<GameObject>(path + "ShowMePanel");
 			PlanetPanel = Resources.Load<GameObject>(path + "PlanetPanel/PlanetPanel");
+			PlanetResourcePreview = Resources.Load<GameObject>(path + "PlanetPanel/ResourcePreview");
 		}
 
 

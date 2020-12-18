@@ -1,5 +1,5 @@
 ﻿public class PlanetResources
 {
 	public int idResource;
-	public float extraction;
+	public int extraction;
 }
