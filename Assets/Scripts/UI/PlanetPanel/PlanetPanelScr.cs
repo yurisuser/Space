@@ -24,7 +24,6 @@ public class PlanetPanelScr : MonoBehaviour
         $"type : {Array.Find(Data.planetsArr, x => x.id == body.type).name}\n" +
         $"mass (e.m.): {body.mass} \n" +
         $"orbital speed: {body.orbitSpeed}\n";
-
     }
 
     public void PlanetResources()

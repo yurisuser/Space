@@ -20,6 +20,7 @@ public partial struct Data
 
 		private static readonly string goodsTableName = "goods";
 		private static readonly string recipeTableName = "product_recipe";
+		private static readonly string miningRecipeTableName = "mining_recipe";
 
 
 		private static IDbCommand dbcmd;
@@ -42,6 +43,7 @@ public partial struct Data
 
 			goodsArr = ReadGoods(goodsTableName);
 			productRecipeArr = ReadProductRecipes(recipeTableName);
+			miningRecipesArr = ReadMiningRecipes(miningRecipeTableName);
 
 			reader.Close();
 			dbcmd.Dispose();

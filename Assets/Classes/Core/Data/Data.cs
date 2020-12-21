@@ -16,6 +16,8 @@ public partial struct Data
 
 	public static Goods[] goodsArr;
 	public static ProductRecipe[] productRecipeArr;
+	public static MiningRecipe[] miningRecipesArr;
+
 	public static void Init()
 	{
 		DBReader.Read();

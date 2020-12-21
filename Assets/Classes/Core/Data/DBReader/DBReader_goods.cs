@@ -54,8 +54,8 @@ partial struct Data
 
 		private static ProductRecipe[] ReadProductRecipes(string tableName)
 		{
-			int[] prodRange = {4, 13};
-			int[] srcRange = {14, 23 };
+			int[] productionRange = {4, 13};
+			int[] resourceRange = {14, 23 };
 			List<ProductRecipe> result = new List<ProductRecipe>();
 
 			string sqlQuery = "SELECT id, name, description, duration, product_1, product_1_count, product_2, product_2_count, " +
@@ -68,14 +68,14 @@ partial struct Data
 
 			while (reader.Read())
 			{
-				ProductRecipe recipe;
+				ProductRecipe recipe = new ProductRecipe();
 				recipe.id = reader.GetInt32(0);
 				recipe.name = reader.GetString(1);
 				recipe.description = reader.GetString(2);
 				recipe.duration = reader.GetInt32(3);
 				List<GoodsStack> prod = new List<GoodsStack>();
 				List<GoodsStack> src = new List<GoodsStack>();
-				for (int i = prodRange[0]; i < prodRange[1]; i += 2)
+				for (int i = productionRange[0]; i < productionRange[1]; i += 2)
 				{
 					if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
 					{
@@ -90,7 +90,7 @@ partial struct Data
 
 				}
 
-				for (int i = srcRange[0]; i < srcRange[1]; i += 2)
+				for (int i = resourceRange[0]; i < resourceRange[1]; i += 2)
 				{
 					if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
 					{
@@ -107,6 +107,29 @@ partial struct Data
 				recipe.resources = src.ToArray();
 				result.Add(recipe);
 			}
+			reader.Close();
+			return result.ToArray();
+		}
+
+		private static MiningRecipe[] ReadMiningRecipes(string tableName)
+		{
+			List<MiningRecipe> result = new List<MiningRecipe>();
+
+			string query = $"SELECT id, goods, count, duration FROM {tableName}";
+			dbcmd.CommandText = query;
+			reader = dbcmd.ExecuteReader();
+
+			while (reader.Read())
+			{
+				MiningRecipe recipe = new MiningRecipe() { 
+					id = reader.GetInt32(0),
+					goodsId = reader.GetInt32(1),
+					goodsCount = reader.GetInt32(2),
+					duration = reader.GetInt32(3)
+				};
+				result.Add(recipe);
+			}
+			reader.Close();
 			return result.ToArray();
 		}
 	}
