@@ -66,8 +66,6 @@ public static class Utilities
 		for (int i = 0; i < size; i++)
 		{
 			GameObject.Find(("ShowMeText" + i.ToString()).ToString()).GetComponent<Text>().text = ShowMeArr[i];
-
-
 		}
 	}
 

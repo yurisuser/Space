@@ -85,7 +85,6 @@ public static class PlanetCreator
 					break;
 				}
 			}
-
 		}
 		return result;
 	}
