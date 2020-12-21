@@ -2,7 +2,7 @@
 
 public class PlanetSysMapScr : MonoBehaviour
 {
-    public Planet planet;
+    public SubStarBody planet;
     void Start()
     {
 
@@ -32,6 +32,6 @@ public class PlanetSysMapScr : MonoBehaviour
             Quaternion.identity
             );
         panel.name = goName;
-        panel.GetComponent<PlanetPanelScr>().planet = planet;
+        panel.GetComponent<PlanetPanelScr>().body = planet;
 	}
 }

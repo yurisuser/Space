@@ -1,16 +1,9 @@
 ﻿using UnityEngine;
 
-public class Moon: ISystemPosition
+public class Moon: SubStarBody, ISystemPosition
 {
-	public int id;
 	public Planet motherPlanet;
-	public string name;
-	public EMoonTypes type;
-	public float size;
-	public int orbitNumber;
-	public float orbitSpeed;
-	public float rotateSpeed;
-	public float angleOnOrbit;
+
 	public Vector3 position
 	{
 		get

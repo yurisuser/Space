@@ -103,10 +103,11 @@ public class SceneStateStarSystem : SceneState
 			obj = Object.Instantiate(PrefabService.MoonSystemMap[(EMoonTypes)moon.type], moonposition, Quaternion.identity);
 			obj.name = planetSystem.planet.name + " " + (i + 1).ToString();
 			obj.transform.localScale += new Vector3(
-				moon.size * Settings.StarSystem.MOON_SCALE, 
-				moon.size * Settings.StarSystem.MOON_SCALE, 
-				moon.size * Settings.StarSystem.MOON_SCALE);
+				moon.mass * Settings.StarSystem.MOON_SCALE, 
+				moon.mass * Settings.StarSystem.MOON_SCALE, 
+				moon.mass * Settings.StarSystem.MOON_SCALE);
 			obj.transform.SetParent(folder.transform);
+			obj.GetComponent<PlanetSysMapScr>().planet = moon;
 		}
 	}
 

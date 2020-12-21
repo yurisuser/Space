@@ -4,13 +4,13 @@ using UnityEngine.UI;
 
 public class PlanetPanelScr : MonoBehaviour
 {
-    public Planet planet;
+    public SubStarBody body;
 
     private Text headtext;
     void Start()
     {
         headtext = transform.Find("Head").Find("HeadText").GetComponent<Text>();
-        headtext.text = planet.name;
+        headtext.text = body.name;
         ShowPlanetDescription();
     }
 
@@ -18,17 +18,17 @@ public class PlanetPanelScr : MonoBehaviour
     private void ShowPlanetDescription()
 	{
         transform.Find("inf").Find("PlanetDescription").GetComponent<Text>().text = 
-        $"name: {planet.name}\n" +
-        $"type : {Array.Find(Data.planetsArr, x => x.id == planet.type).name}\n" +
-        $"mass (e.m.): {planet.mass} \n" +
-        $"orbital speed: {planet.orbitSpeed}\n";
+        $"name: {body.name}\n" +
+        $"type : {Array.Find(Data.planetsArr, x => x.id == body.type).name}\n" +
+        $"mass (e.m.): {body.mass} \n" +
+        $"orbital speed: {body.orbitSpeed}\n";
 
     }
 
     public void PlanetResources()
 	{
         Transform planetPanel = transform.Find("res");
-        planetPanel.GetComponent<PreviewerBuilderScr>().CreatePreview(planet, transform);
+        planetPanel.GetComponent<PreviewerBuilderScr>().CreatePreview(body, transform);
         transform.Find("res").Find("Text").GetComponent<Text>().text = $"available resource: {planetPanel.GetComponent<PreviewerBuilderScr>().GetCountResources().ToString()}";
 
     }

@@ -6,7 +6,7 @@ public class PreviewerBuilderScr : MonoBehaviour
 	private List<ResourcePoint> resources;
 	private List<List<int>> values;
 
-	public void CreatePreview(Planet planet, Transform parent)
+	public void CreatePreview(SubStarBody planet, Transform parent)
 	{
 		Calculate(planet);
 		Draw(parent.Find("res"));
@@ -17,7 +17,7 @@ public class PreviewerBuilderScr : MonoBehaviour
 		return resources.Count;
 	}
 
-	private void Calculate(Planet planet)
+	private void Calculate(SubStarBody planet)
 	{
 		resources = new List<ResourcePoint>();
 		values = new List<List<int>>();
