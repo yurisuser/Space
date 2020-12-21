@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 public static class MoonCreator
@@ -29,20 +26,45 @@ public static class MoonCreator
 			orbitSpeed = 50,
 			rotateSpeed = 5,
 			mass = Random.Range(.05f, planet.mass / 2),
-			type = GetTypeMoon(),
+			type = GetMoonType(planet.type),
 		};
 		moon.resources = GetResourcePoints(moon);
 		return moon;
 	}
 
-	private static int GetTypeMoon()
+	private static int GetMoonType(int planetType)
 	{
-		return Random.Range(Data.moonsArr[0].id, Data.moonsArr[Data.moonsArr.Length - 1].id);
+		int[] probabilityesForPlanetType = new int[Data.moonsArr.Length];
+		int[] rangeProbabilityes = new int[probabilityesForPlanetType.Length];
+
+		for (int i = 0; i < probabilityesForPlanetType.Length; i++)
+		{
+			probabilityesForPlanetType[i] = Data.moonOfPlanetProbabilityArr[i].probability[planetType];
+		}
+
+		rangeProbabilityes[0] = probabilityesForPlanetType[0];
+		for (int i = 1; i < probabilityesForPlanetType.Length; i++)
+		{
+			rangeProbabilityes[i] = rangeProbabilityes[i - 1] + probabilityesForPlanetType[i];
+		}
+
+		int type = 0;
+		int rnd = Random.Range(0, rangeProbabilityes[rangeProbabilityes.Length - 1]);
+
+		for (int i = 0; i < rangeProbabilityes.Length; i++)
+		{
+			if (rnd <= rangeProbabilityes[i])
+			{
+				type = Data.moonsArr[i].id;
+				break;
+			}
+		}
+		return type;
 	}
 
 	private static ResourcePoint[] GetResourcePoints(Moon moon)
 	{
-		ResourcePoint[] result = new ResourcePoint[(int)(moon.mass * 10)];
+		ResourcePoint[] result = new ResourcePoint[Random.Range(0, (int)(moon.mass * 10))];
 
 		List<int> idsRes = new List<int>();
 		List<int> probabRes = new List<int>();
@@ -71,7 +93,7 @@ public static class MoonCreator
 					PlanetResources planetRes = new PlanetResources
 					{
 						idResource = idsRes[j],
-						extraction = Random.Range(20, 80),
+						extraction = Random.Range(5, 30),
 					};
 					ResourcePoint resPoint = new ResourcePoint { resource = planetRes };
 					result[i] = resPoint;

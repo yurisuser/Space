@@ -100,7 +100,7 @@ public class SceneStateStarSystem : SceneState
 		{
 			moon = planetSystem.moonsArray[i];
 			Vector3 moonposition = planetSystem.moonsArray[i].position;
-			obj = Object.Instantiate(PrefabService.MoonSystemMap[(EMoonTypes)moon.type], moonposition, Quaternion.identity);
+			obj = Object.Instantiate(PrefabService.PlanetSystemMap[moon.type], moonposition, Quaternion.identity);
 			obj.name = planetSystem.planet.name + " " + (i + 1).ToString();
 			obj.transform.localScale += new Vector3(
 				moon.mass * Settings.StarSystem.MOON_SCALE, 

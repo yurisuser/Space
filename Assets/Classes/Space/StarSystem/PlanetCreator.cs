@@ -50,7 +50,7 @@ public static class PlanetCreator
 
 	private static ResourcePoint[] GetResourcePoints(Planet planet)
 	{
-		ResourcePoint[] result = new ResourcePoint[(int)(planet.mass * 10)];
+		ResourcePoint[] result = new ResourcePoint[Random.Range(0, (int)(planet.mass * 10))];
 
 		List<int> idsRes =  new List<int>();
 		List<int> probabRes = new List<int>();
@@ -78,7 +78,7 @@ public static class PlanetCreator
 				{
 					PlanetResources planetRes = new PlanetResources {
 						idResource = idsRes[j],
-						extraction = Random.Range(20, 80),
+						extraction = Random.Range(10, 50),
 						};
 					ResourcePoint resPoint = new ResourcePoint { resource = planetRes };
 					result[i] = resPoint;
