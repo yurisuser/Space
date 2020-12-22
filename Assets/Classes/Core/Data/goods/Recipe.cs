@@ -1,6 +1,6 @@
 ﻿public partial struct Data
 {
-	public class ProductRecipe
+	public class Recipe
 	{
 		public int id;
 		public string name;
@@ -9,5 +9,4 @@
 		public GoodsStack[] resources;
 		public GoodsStack[] production;
 	}
-
 }

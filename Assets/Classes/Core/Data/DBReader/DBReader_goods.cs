@@ -115,7 +115,7 @@ partial struct Data
 		{
 			List<MiningRecipe> result = new List<MiningRecipe>();
 
-			string query = $"SELECT id, goods, count, duration FROM {tableName}";
+			string query = $"SELECT id, name, description, duration, product_1, product_1_count FROM {tableName}";
 			dbcmd.CommandText = query;
 			reader = dbcmd.ExecuteReader();
 
@@ -123,9 +123,10 @@ partial struct Data
 			{
 				MiningRecipe recipe = new MiningRecipe() { 
 					id = reader.GetInt32(0),
-					goodsId = reader.GetInt32(1),
-					goodsCount = reader.GetInt32(2),
-					duration = reader.GetInt32(3)
+					name = reader.GetString(1),
+					description = reader.GetString(2),
+					duration = reader.GetInt32(3),
+					production = new GoodsStack[1] {new GoodsStack { id = reader.GetInt32(4), quantity = reader.GetInt32(5)} },
 				};
 				result.Add(recipe);
 			}
