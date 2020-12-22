@@ -18,7 +18,7 @@ public static class PlanetCreator
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet,
 		};
-		planet.resourceDeposits = GetResourceDeposits(planet);
+		planet.resourceDepositsArr = GetResourceDeposits(planet);
 		return planet;
 	}
 

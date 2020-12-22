@@ -1,8 +1,8 @@
-﻿namespace AI.AIStation
+﻿namespace AI.AISubStar
 {
-	public static class AIStationManager
+	public static class AISubStarManager
 	{
-		private static StationBehave stationBehave = new StationBehave();
+		private static SubStarBehave subStarBehave = new SubStarBehave();
 
 		public static void Tick()
 		{
@@ -10,7 +10,7 @@
 			{
 				for (int s = 0; s < Galaxy.StarSystemsArr[i].StationArr.Length; s++)
 				{
-					stationBehave.Tick(Galaxy.StarSystemsArr[i].StationArr[s]);
+					subStarBehave.Tick(Galaxy.StarSystemsArr[i].StationArr[s]);
 				}
 			}
 		}

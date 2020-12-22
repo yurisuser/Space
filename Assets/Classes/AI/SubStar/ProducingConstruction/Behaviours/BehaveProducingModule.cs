@@ -1,26 +1,26 @@
 ﻿using System;
 
-namespace AI.AIStation.ProdModule
+namespace AI.AISubStar.ProdModule
 {
-	public class BehaveProducingModule : AIBehaviour<ProdModuleWrapper>
+	public class BehaveProducingModule : AIBehaviour<ProdConstructionWrapper>
 	{
 		public BehaveProducingModule()
 		{
-			Sequence<ProdModuleWrapper> checkDeficit = new Sequence<ProdModuleWrapper>(
+			Sequence<ProdConstructionWrapper> checkDeficit = new Sequence<ProdConstructionWrapper>(
 				"checkDeficit",
 				new IsDeficitResources(),
 				new SetModuleState(EProducingState.deficitRecorces)
 				);
 
 
-			Sequence<ProdModuleWrapper> lastStep = new Sequence<ProdModuleWrapper>(
+			Sequence<ProdConstructionWrapper> lastStep = new Sequence<ProdConstructionWrapper>(
 				"lastStep",
 				new IsLastStepOfProcess(),
 				new FinishWork(),
 				new SetModuleState(EProducingState.finished)
 				);
 
-			Sequence<ProdModuleWrapper> workChain = new Sequence<ProdModuleWrapper>(
+			Sequence<ProdConstructionWrapper> workChain = new Sequence<ProdConstructionWrapper>(
 				"workChain",
 				new IsModuleState(EProducingState.work),
 				new NextWorkCycle(),
@@ -28,16 +28,16 @@ namespace AI.AIStation.ProdModule
 				);
 
 
-			Sequence<ProdModuleWrapper> startProcess = new Sequence<ProdModuleWrapper>(
+			Sequence<ProdConstructionWrapper> startProcess = new Sequence<ProdConstructionWrapper>(
 				"startProcess",
 				new IsModuleState(EProducingState.finished),
-				new Invertor<ProdModuleWrapper>(checkDeficit),
+				new Invertor<ProdConstructionWrapper>(checkDeficit),
 				new StartNewProcess(),
 				new SetModuleState(EProducingState.work),
 				lastStep
 				);
 
-			behav = new Selector<ProdModuleWrapper>(
+			behav = new Selector<ProdConstructionWrapper>(
 				"behav",
 				new IsModuleState(EProducingState.pause),
 				workChain,
@@ -45,7 +45,7 @@ namespace AI.AIStation.ProdModule
 				);
 		}
 
-		public override EStateNode Tick(ProdModuleWrapper w)
+		public override EStateNode Tick(ProdConstructionWrapper w)
 		{
 			return behav.Tick(w);
 		}

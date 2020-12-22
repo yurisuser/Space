@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AI.AIStation.ProdModule
+namespace AI.AISubStar.ProdModule
 {
-	public class IsModuleState : Condition<ProdModuleWrapper>
+	public class IsModuleState : Condition<ProdConstructionWrapper>
 	{
 		private EProducingState state;
 
@@ -15,7 +15,7 @@ namespace AI.AIStation.ProdModule
 		{
 			this.state = state;
 		}
-		public override EStateNode Tick(ProdModuleWrapper w)
+		public override EStateNode Tick(ProdConstructionWrapper w)
 		{
 			if (w.module.state == state) return EStateNode.SUCCESS;
 			return EStateNode.FAILURE;

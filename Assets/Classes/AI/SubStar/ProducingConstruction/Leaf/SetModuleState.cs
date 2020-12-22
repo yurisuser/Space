@@ -1,6 +1,6 @@
-﻿namespace AI.AIStation.ProdModule
+﻿namespace AI.AISubStar.ProdModule
 {
-	public class SetModuleState : Leaf<ProdModuleWrapper>
+	public class SetModuleState : Leaf<ProdConstructionWrapper>
 	{
 		private EProducingState state;
 		private SetModuleState() { }
@@ -9,7 +9,7 @@
 		{
 			this.state = state;
 		}
-		public override EStateNode Tick(ProdModuleWrapper w)
+		public override EStateNode Tick(ProdConstructionWrapper w)
 		{
 			w.module.state = state;
 			return EStateNode.SUCCESS;

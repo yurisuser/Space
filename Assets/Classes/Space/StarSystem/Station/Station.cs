@@ -13,7 +13,6 @@ public class Station : SubStarBody, ISystemPosition
 			_position = value;
 		}
 	}
-	public GoodsStack[] storage;
 
 	private Vector3 _position;
 

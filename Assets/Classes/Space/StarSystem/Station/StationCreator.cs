@@ -11,7 +11,7 @@ public static class StationCreator
 			{
 				position = GetRNDPosition(),
 				storage = TestAddResources(8),
-				producingConstructions = TestAddProduceModule()
+				producingConstructionsArr = TestAddProduceConstruction()
 			};
 			result[i] = st;
 		}
@@ -41,7 +41,7 @@ public static class StationCreator
 		return result;
 	}
 
-	private static ProducingConstruction[] TestAddProduceModule()
+	private static ProducingConstruction[] TestAddProduceConstruction()
 	{
 		return new ProducingConstruction[] {
 			new ProducingConstruction{

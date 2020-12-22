@@ -9,8 +9,9 @@
 	public float orbitSpeed;
 	public float rotateSpeed;
 	public float angleOnOrbit;
-	public ResourceDeposit[] resourceDeposits;
-	public ProducingConstruction[] producingConstructions;
+	public ResourceDeposit[] resourceDepositsArr;
+	public ProducingConstruction[] producingConstructionsArr;
+	public GoodsStack[] storage;
 
 	public abstract void Tick();
 }

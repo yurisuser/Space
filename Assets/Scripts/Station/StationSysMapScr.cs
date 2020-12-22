@@ -26,9 +26,9 @@ public class StationSysMapScr : MonoBehaviour
     }
     private void Show()
     {        
-        Utilities.ShowMe(1, $"Recipe {st.producingConstructions[0].recipe.name}");
+        Utilities.ShowMe(1, $"Recipe {st.producingConstructionsArr[0].recipe.name}");
         st = Galaxy.StarSystemsArr[starIndex].StationArr[0];
-        int prodId = st.producingConstructions[0].recipe.production[0].id;
+        int prodId = st.producingConstructionsArr[0].recipe.production[0].id;
         int indexProd = Array.FindIndex(st.storage, x => x.id == prodId);
         if (st.storage.Length > 0)
             Utilities.ShowMe(2, $"item: {st.storage[indexProd].id} q: {st.storage[indexProd].quantity}");

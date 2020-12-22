@@ -28,7 +28,7 @@ public static class MoonCreator
 			mass = Random.Range(.05f, planet.mass / 2),
 			type = GetMoonType(planet.type),
 		};
-		moon.resourceDeposits = GetResourceDeposits(moon);
+		moon.resourceDepositsArr = GetResourceDeposits(moon);
 		return moon;
 	}
 
