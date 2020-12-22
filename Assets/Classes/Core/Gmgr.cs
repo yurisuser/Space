@@ -33,6 +33,7 @@ public class Gmgr : MonoBehaviour
 	{
 		Debug.Log("Turner update tick");
 		TaskManager.Tick();
+		Utilities.ShowMeObject(Galaxy.StarSystemsArr[11].StationArr[0].storage);
 	}
 
 	void Awake()

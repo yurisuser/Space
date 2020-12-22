@@ -22,16 +22,16 @@ public class PreviewerBuilderScr : MonoBehaviour
 		resources = new List<ResourceDeposit>();
 		values = new List<List<int>>();
 		List<int> temp = new List<int>();
-		for (int i = 0; i < planet.resourceDepositsArr.Length; i++)
+		for (int i = 0; i < planet.industrialPointsArr.Length; i++)
 		{
-			if (!resources.Exists(x => x.idResource == planet.resourceDepositsArr[i].idResource))
+			if (!resources.Exists(x => x.idResource == planet.industrialPointsArr[i].resourceDeposit.idResource))
 			{
-				resources.Add(planet.resourceDepositsArr[i]);
-				values.Add(new List<int> { planet.resourceDepositsArr[i].extraction });
+				resources.Add(planet.industrialPointsArr[i].resourceDeposit);
+				values.Add(new List<int> { planet.industrialPointsArr[i].resourceDeposit.extraction });
 				continue;
 			}
-			int index = resources.FindIndex(x => x.idResource == planet.resourceDepositsArr[i].idResource);
-			values[index].Add(planet.resourceDepositsArr[i].extraction);
+			int index = resources.FindIndex(x => x.idResource == planet.industrialPointsArr[i].resourceDeposit.idResource);
+			values[index].Add(planet.industrialPointsArr[i].resourceDeposit.extraction);
 		}
 		foreach (var item in values)
 		{

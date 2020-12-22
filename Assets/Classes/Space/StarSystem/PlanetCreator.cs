@@ -18,7 +18,7 @@ public static class PlanetCreator
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet,
 		};
-		planet.resourceDepositsArr = GetResourceDeposits(planet);
+		planet. industrialPointsArr = GetIndustrialPoints(planet);
 		return planet;
 	}
 
@@ -48,9 +48,9 @@ public static class PlanetCreator
 		return type;
 	}
 
-	private static ResourceDeposit[] GetResourceDeposits(Planet planet)
+	private static IndustrialPoint[] GetIndustrialPoints(Planet planet)
 	{
-		ResourceDeposit[] result = new ResourceDeposit[Random.Range(0, (int)(planet.mass * 10))];
+		IndustrialPoint[] result = new IndustrialPoint[Random.Range(0, (int)(planet.mass * 10))];
 
 		List<int> idsRes =  new List<int>();
 		List<int> probabRes = new List<int>();
@@ -80,7 +80,11 @@ public static class PlanetCreator
 						idResource = idsRes[j],
 						extraction = Random.Range(10, 50),
 						};
-					result[i] = planetRes;
+					result[i] = new IndustrialPoint
+					{
+						resourceDeposit = planetRes,
+						producingConstruction = null
+					};
 					break;
 				}
 			}

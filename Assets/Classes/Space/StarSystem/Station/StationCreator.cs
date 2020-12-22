@@ -11,7 +11,7 @@ public static class StationCreator
 			{
 				position = GetRNDPosition(),
 				storage = TestAddResources(8),
-				producingConstructionsArr = TestAddProduceConstruction()
+				industrialPointsArr = TestAddProduceConstruction()
 			};
 			result[i] = st;
 		}
@@ -41,14 +41,17 @@ public static class StationCreator
 		return result;
 	}
 
-	private static ProducingConstruction[] TestAddProduceConstruction()
+	private static IndustrialPoint[] TestAddProduceConstruction()
 	{
-		return new ProducingConstruction[] {
-			new ProducingConstruction{
-				recipe = Data.productRecipeArr[1],
-				stageProcess = 0,
-				state = EProducingState.finished
-			}
+		return new IndustrialPoint[] {
+			new IndustrialPoint {
+				producingConstruction = new ProducingConstruction {
+					recipe = Data.productRecipeArr[1],
+					stageProcess = 0,
+					state = EProducingState.finished
+					},
+				resourceDeposit = null
+			} 
 		};
 	}
 }

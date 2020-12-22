@@ -28,7 +28,7 @@ public static class MoonCreator
 			mass = Random.Range(.05f, planet.mass / 2),
 			type = GetMoonType(planet.type),
 		};
-		moon.resourceDepositsArr = GetResourceDeposits(moon);
+		moon.industrialPointsArr = GetIndustrialPoints(moon);
 		return moon;
 	}
 
@@ -62,9 +62,9 @@ public static class MoonCreator
 		return type;
 	}
 
-	private static ResourceDeposit[] GetResourceDeposits(Moon moon)
+	private static IndustrialPoint[] GetIndustrialPoints(Moon moon)
 	{
-		ResourceDeposit[] result = new ResourceDeposit[Random.Range(0, (int)(moon.mass * 10))];
+		IndustrialPoint[] result = new IndustrialPoint[Random.Range(0, (int)(moon.mass * 10))];
 
 		List<int> idsRes = new List<int>();
 		List<int> probabRes = new List<int>();
@@ -95,7 +95,11 @@ public static class MoonCreator
 						idResource = idsRes[j],
 						extraction = Random.Range(5, 30),
 					};
-					result[i] = planetRes;
+					result[i] = new IndustrialPoint
+					{
+						resourceDeposit = planetRes,
+						producingConstruction = null
+					};
 					break;
 				}
 			}
