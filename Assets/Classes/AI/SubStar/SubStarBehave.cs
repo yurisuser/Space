@@ -6,7 +6,7 @@
 		public SubStarBehave()
 		{
 			behav = new Selector<SubStarBody>(
-				new WorkProducingModules()
+				new WorkProducingConstruction()
 				);
 		}
 

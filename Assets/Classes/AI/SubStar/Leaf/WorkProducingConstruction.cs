@@ -2,7 +2,7 @@
 
 namespace AI.AISubStar
 {
-	public class WorkProducingModules : Leaf<SubStarBody>
+	public class WorkProducingConstruction : Leaf<SubStarBody>
 	{
 		public override EStateNode Tick(SubStarBody body)
 		{
