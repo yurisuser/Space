@@ -15,14 +15,14 @@ namespace AI.AIStation.ProdModule
 		{
 			foreach (var item in w.module.recipe.production)
 			{
-				int i = Array.FindIndex(w.station.cargohold, x => x.id == item.id);
+				int i = Array.FindIndex(w.station.storage, x => x.id == item.id);
 				if (i >= 0)
 				{
-					w.station.cargohold[i].quantity += item.quantity;
+					w.station.storage[i].quantity += item.quantity;
 				}
 				else
 				{
-					w.station.cargohold = w.station.cargohold.Concat(new GoodsStack[] { item }).ToArray();
+					w.station.storage = w.station.storage.Concat(new GoodsStack[] { item }).ToArray();
 				}
 				w.module.stageProcess = 0f;
 			}

@@ -10,8 +10,8 @@ public static class StationCreator
 			Station st = new Station
 			{
 				position = GetRNDPosition(),
-				cargohold = TestAddResources(8),
-				produceModuleArr = TestAddProduceModule()
+				storage = TestAddResources(8),
+				producingConstructions = TestAddProduceModule()
 			};
 			result[i] = st;
 		}
@@ -41,10 +41,10 @@ public static class StationCreator
 		return result;
 	}
 
-	private static ProducingModule[] TestAddProduceModule()
+	private static ProducingConstruction[] TestAddProduceModule()
 	{
-		return new ProducingModule[] {
-			new ProducingModule{
+		return new ProducingConstruction[] {
+			new ProducingConstruction{
 				recipe = Data.productRecipeArr[1],
 				stageProcess = 0,
 				state = EProducingState.finished

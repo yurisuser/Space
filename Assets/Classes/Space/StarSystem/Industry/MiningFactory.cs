@@ -1,4 +1,4 @@
-﻿public class MiningFactory : PlanetBuilding
+﻿public class MiningFactory : IndustrialBuilding
 {
 	private ResourcePoint resourcePoint;
 	private SubStarBody planet;

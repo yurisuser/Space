@@ -20,7 +20,7 @@ public class PlanetPanelScr : MonoBehaviour
 	{
         transform.Find("inf").Find("PlanetDescription").GetComponent<Text>().text =
         $"name: {body.name}\n" +
-        $"resuorces fileds: {body.resources.Length} type: {body.resources.Select(x => x.resource.idResource).Distinct().Count()}\n" +
+        $"resuorces fileds: {body.resourceDeposits.Length} type: {body.resourceDeposits.Select(x => x.idResource).Distinct().Count()}\n" +
         $"type : {Array.Find(Data.planetsArr, x => x.id == body.type).name}\n" +
         $"mass (e.m.): {body.mass} \n" +
         $"orbital speed: {body.orbitSpeed}\n";
@@ -30,7 +30,6 @@ public class PlanetPanelScr : MonoBehaviour
 	{
         Transform planetPanel = transform.Find("res");
         planetPanel.GetComponent<PreviewerBuilderScr>().CreatePreview(body, transform);
-        transform.Find("res").Find("Text").GetComponent<Text>().text = $"available resource: {planetPanel.GetComponent<PreviewerBuilderScr>().GetCountResources().ToString()}";
-
+        transform.Find("res").Find("Text").GetComponent<Text>().text = $"available resource: {planetPanel.GetComponent<PreviewerBuilderScr>().GetCountResources()}";
     }
 }

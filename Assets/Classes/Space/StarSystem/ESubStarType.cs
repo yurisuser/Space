@@ -1,5 +1,6 @@
 ﻿	public enum ESubStarType
 	{
 		planet,
-		moon
+		moon,
+		station
 	}

@@ -16,4 +16,9 @@ public class Planet: SubStarBody, ISystemPosition
 		}
 		set { }
 	}
+
+	public override void Tick()
+	{
+		throw new System.NotImplementedException();
+	}
 }

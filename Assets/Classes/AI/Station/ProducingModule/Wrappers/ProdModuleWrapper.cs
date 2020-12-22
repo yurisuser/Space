@@ -2,7 +2,7 @@
 {
 	public struct ProdModuleWrapper
 	{
-		public ProducingModule module;
+		public ProducingConstruction module;
 		public Station station;
 	}
 }

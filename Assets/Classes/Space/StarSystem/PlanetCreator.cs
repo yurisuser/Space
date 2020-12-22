@@ -18,7 +18,7 @@ public static class PlanetCreator
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet,
 		};
-		planet.resources = GetResourcePoints(planet);
+		planet.resourceDeposits = GetResourceDeposits(planet);
 		return planet;
 	}
 
@@ -48,9 +48,9 @@ public static class PlanetCreator
 		return type;
 	}
 
-	private static ResourcePoint[] GetResourcePoints(Planet planet)
+	private static ResourceDeposit[] GetResourceDeposits(Planet planet)
 	{
-		ResourcePoint[] result = new ResourcePoint[Random.Range(0, (int)(planet.mass * 10))];
+		ResourceDeposit[] result = new ResourceDeposit[Random.Range(0, (int)(planet.mass * 10))];
 
 		List<int> idsRes =  new List<int>();
 		List<int> probabRes = new List<int>();
@@ -76,12 +76,11 @@ public static class PlanetCreator
 			{
 				if (rnd < rangeProbab[j])
 				{
-					PlanetResources planetRes = new PlanetResources {
+					ResourceDeposit planetRes = new ResourceDeposit {
 						idResource = idsRes[j],
 						extraction = Random.Range(10, 50),
 						};
-					ResourcePoint resPoint = new ResourcePoint { resource = planetRes };
-					result[i] = resPoint;
+					result[i] = planetRes;
 					break;
 				}
 			}

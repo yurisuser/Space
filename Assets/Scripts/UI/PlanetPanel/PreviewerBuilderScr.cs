@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PreviewerBuilderScr : MonoBehaviour
 {
-	private List<ResourcePoint> resources;
+	private List<ResourceDeposit> resources;
 	private List<List<int>> values;
 
 	public void CreatePreview(SubStarBody planet, Transform parent)
@@ -19,19 +19,19 @@ public class PreviewerBuilderScr : MonoBehaviour
 
 	private void Calculate(SubStarBody planet)
 	{
-		resources = new List<ResourcePoint>();
+		resources = new List<ResourceDeposit>();
 		values = new List<List<int>>();
 		List<int> temp = new List<int>();
-		for (int i = 0; i < planet.resources.Length; i++)
+		for (int i = 0; i < planet.resourceDeposits.Length; i++)
 		{
-			if (!resources.Exists(x => x.resource.idResource == planet.resources[i].resource.idResource))
+			if (!resources.Exists(x => x.idResource == planet.resourceDeposits[i].idResource))
 			{
-				resources.Add(planet.resources[i]);
-				values.Add(new List<int> { planet.resources[i].resource.extraction });
+				resources.Add(planet.resourceDeposits[i]);
+				values.Add(new List<int> { planet.resourceDeposits[i].extraction });
 				continue;
 			}
-			int index = resources.FindIndex(x => x.resource.idResource == planet.resources[i].resource.idResource);
-			values[index].Add(planet.resources[i].resource.extraction);
+			int index = resources.FindIndex(x => x.idResource == planet.resourceDeposits[i].idResource);
+			values[index].Add(planet.resourceDeposits[i].extraction);
 		}
 		foreach (var item in values)
 		{
@@ -56,7 +56,7 @@ public class PreviewerBuilderScr : MonoBehaviour
 				parent
 				);
 			resourcePreview.name += i.ToString();
-			resourcePreview.GetComponent<PreviewPlanetResourceScr>().SetParam(resources[i].resource.idResource, values[i].ToArray());
+			resourcePreview.GetComponent<PreviewPlanetResourceScr>().SetParam(resources[i].idResource, values[i].ToArray());
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿public class PlanetResources
+﻿public class ResourceDeposit
 {
 	public int idResource;
 	public int extraction;

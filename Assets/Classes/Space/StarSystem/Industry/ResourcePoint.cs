@@ -1,5 +1,5 @@
 ﻿public class ResourcePoint
 {
-	public PlanetResources resource;
-	public PlanetBuilding building;
+	public ResourceDeposit resource;
+	public IndustrialBuilding building;
 }

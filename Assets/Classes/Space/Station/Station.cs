@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Station : ISystemPosition
+public class Station : SubStarBody, ISystemPosition
 {
 	public Vector3 position 
 	{
@@ -13,8 +13,12 @@ public class Station : ISystemPosition
 			_position = value;
 		}
 	}
-	public GoodsStack[] cargohold;
-	public ProducingModule[] produceModuleArr;
+	public GoodsStack[] storage;
 
 	private Vector3 _position;
+
+	public override void Tick()
+	{
+		throw new System.NotImplementedException();
+	}
 }

@@ -6,9 +6,9 @@ namespace AI.AIStation
 	{
 		public override EStateNode Tick(Station s)
 		{
-			for (int i = 0; i < s.produceModuleArr.Length; i++)
+			for (int i = 0; i < s.producingConstructions.Length; i++)
 			{
-				ProducingModuleManager.Tick(s, s.produceModuleArr[i]);
+				ProducingModuleManager.Tick(s, s.producingConstructions[i]);
 			}
 			return EStateNode.SUCCESS;
 		}

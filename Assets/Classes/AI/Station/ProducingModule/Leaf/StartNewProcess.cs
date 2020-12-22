@@ -18,12 +18,12 @@ namespace AI.AIStation.ProdModule
 		{
 			for (int i = 0; i < wrapper.module.recipe.resources.Length; i++)
 			{
-				for (int c = 0; c < wrapper.station.cargohold.Length; c++)
+				for (int c = 0; c < wrapper.station.storage.Length; c++)
 				{
-					if (wrapper.module.recipe.resources[i].id == wrapper.station.cargohold[c].id)
+					if (wrapper.module.recipe.resources[i].id == wrapper.station.storage[c].id)
 					{
-						wrapper.station.cargohold[c].quantity -= wrapper.module.recipe.resources[i].quantity;
-						if (wrapper.station.cargohold[c].quantity < 0) Debug.LogError("SubZero cargo quantity!");
+						wrapper.station.storage[c].quantity -= wrapper.module.recipe.resources[i].quantity;
+						if (wrapper.station.storage[c].quantity < 0) Debug.LogError("SubZero cargo quantity!");
 					}
 				}
 			}
@@ -32,12 +32,12 @@ namespace AI.AIStation.ProdModule
 		private void DeleteEmptyStacks(ProdModuleWrapper w)
 		{
 			List<GoodsStack> result = new List<GoodsStack>();
-			for (int i = 0; i < w.station.cargohold.Length; i++)
+			for (int i = 0; i < w.station.storage.Length; i++)
 			{
-				if (w.station.cargohold[i].quantity <= 0) continue;
-				result.Add(w.station.cargohold[i]);
+				if (w.station.storage[i].quantity <= 0) continue;
+				result.Add(w.station.storage[i]);
 			}
-			w.station.cargohold = result.ToArray();
+			w.station.storage = result.ToArray();
 		}
 	}
 }
