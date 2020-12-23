@@ -15,8 +15,8 @@ public class Gmgr : MonoBehaviour
 		PrefabService.Init();
 		GalaxyCreator.CreateGalaxy();
 		///
-		//LoadSceneGalaxy();
-		LoadSceneStarSystem(11);
+		LoadSceneGalaxy();
+		//LoadSceneStarSystem(11);
 		///
 		Turner.TimeTrigger += TurnUpdate;
 		Turner.GoStream();
@@ -33,7 +33,6 @@ public class Gmgr : MonoBehaviour
 	{
 		Debug.Log("Turner update tick");
 		TaskManager.Tick();
-		Utilities.ShowMeObject(Galaxy.StarSystemsArr[11].StationArr[0].storage);
 	}
 
 	void Awake()

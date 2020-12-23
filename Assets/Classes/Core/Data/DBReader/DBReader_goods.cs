@@ -121,12 +121,13 @@ partial struct Data
 
 			while (reader.Read())
 			{
-				MiningRecipe recipe = new MiningRecipe() { 
+				MiningRecipe recipe = new MiningRecipe() {
 					id = reader.GetInt32(0),
 					name = reader.GetString(1),
 					description = reader.GetString(2),
 					duration = reader.GetInt32(3),
-					production = new GoodsStack[1] {new GoodsStack { id = reader.GetInt32(4), quantity = reader.GetInt32(5)} },
+					production = new GoodsStack[1] { new GoodsStack { id = reader.GetInt32(4), quantity = reader.GetInt32(5) } },
+					resources = new GoodsStack[0]
 				};
 				result.Add(recipe);
 			}

@@ -9,8 +9,6 @@
 	public float orbitSpeed;
 	public float rotateSpeed;
 	public float angleOnOrbit;
-	//public ResourceDeposit[] resourceDepositsArr;
-	//public ProducingConstruction[] industrialPointsArr;
 	public IndustrialPoint[] industrialPointsArr;
 	public GoodsStack[] storage;
 

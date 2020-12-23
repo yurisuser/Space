@@ -6,6 +6,10 @@ namespace AI.AISubStar.ProdModule
 	{
 		public override EStateNode Tick(ProdConstructionWrapper wrapper)
 		{
+			if (wrapper.module.recipe.resources.Length == 0)
+			{
+				return EStateNode.FAILURE;
+			}
 			foreach (var item in wrapper.module.recipe.resources)
 			{
 				if (!Array.Exists(wrapper.body.storage, x => x.id == item.id))

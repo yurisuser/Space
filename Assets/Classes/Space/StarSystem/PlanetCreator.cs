@@ -17,6 +17,7 @@ public static class PlanetCreator
 			mass = 1,
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet,
+			storage = new GoodsStack[0]
 		};
 		planet. industrialPointsArr = GetIndustrialPoints(planet);
 		return planet;
@@ -80,11 +81,17 @@ public static class PlanetCreator
 						idResource = idsRes[j],
 						extraction = Random.Range(10, 50),
 						};
-					result[i] = new IndustrialPoint
+					var industrialPoint = new IndustrialPoint
 					{
 						resourceDeposit = planetRes,
-						producingConstruction = null
+						producingConstruction = new ProducingConstruction
+						{
+							recipe = Data.miningRecipesArr[planetRes.idResource],
+							stageProcess = 0,
+							state = EProducingState.finished
+						}
 					};
+					result[i] = industrialPoint;
 					break;
 				}
 			}

@@ -27,6 +27,7 @@ public static class MoonCreator
 			rotateSpeed = 5,
 			mass = Random.Range(.05f, planet.mass / 2),
 			type = GetMoonType(planet.type),
+			storage = new GoodsStack[0]
 		};
 		moon.industrialPointsArr = GetIndustrialPoints(moon);
 		return moon;
@@ -90,16 +91,22 @@ public static class MoonCreator
 			{
 				if (rnd < rangeProbab[j])
 				{
-					ResourceDeposit planetRes = new ResourceDeposit
+					ResourceDeposit moonRes = new ResourceDeposit
 					{
 						idResource = idsRes[j],
 						extraction = Random.Range(5, 30),
 					};
-					result[i] = new IndustrialPoint
+					var industrialPoint = new IndustrialPoint
 					{
-						resourceDeposit = planetRes,
-						producingConstruction = null
+						resourceDeposit = moonRes,
+						producingConstruction = new ProducingConstruction
+						{
+							recipe = Data.miningRecipesArr[moonRes.idResource],
+							stageProcess = 0,
+							state = EProducingState.finished
+						}
 					};
+					result[i] = industrialPoint;
 					break;
 				}
 			}
