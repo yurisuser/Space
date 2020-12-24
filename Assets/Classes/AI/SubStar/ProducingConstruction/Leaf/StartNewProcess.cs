@@ -10,7 +10,6 @@ namespace AI.AISubStar.ProdModule
 		{
 			wrapper.module.stageProcess = 1;
 			WithdrawResources(wrapper);
-			DeleteEmptyStacks(wrapper);
 			return EStateNode.SUCCESS;
 		}
 
@@ -18,26 +17,8 @@ namespace AI.AISubStar.ProdModule
 		{
 			for (int i = 0; i < wrapper.module.recipe.resources.Length; i++)
 			{
-				for (int c = 0; c < wrapper.body.storage.Length; c++)
-				{
-					if (wrapper.module.recipe.resources[i].id == wrapper.body.storage[c].id)
-					{
-						wrapper.body.storage[c].quantity -= wrapper.module.recipe.resources[i].quantity;
-						if (wrapper.body.storage[c].quantity < 0) Debug.LogError("SubZero cargo quantity!");
-					}
-				}
+				wrapper.body.storage.Subtract(wrapper.module.recipe.resources[i]);
 			}
-		}
-
-		private void DeleteEmptyStacks(ProdConstructionWrapper w)
-		{
-			List<GoodsStack> result = new List<GoodsStack>();
-			for (int i = 0; i < w.body.storage.Length; i++)
-			{
-				if (w.body.storage[i].quantity <= 0) continue;
-				result.Add(w.body.storage[i]);
-			}
-			w.body.storage = result.ToArray();
 		}
 	}
 }

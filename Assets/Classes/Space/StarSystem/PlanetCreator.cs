@@ -16,8 +16,7 @@ public static class PlanetCreator
 			orbitSpeed = 100,
 			mass = 1,
 			orbitNumber = numberPlanet,
-			angleOnOrbit = 15 * numberPlanet,
-			storage = new GoodsStack[0]
+			angleOnOrbit = 15 * numberPlanet
 		};
 		planet. industrialPointsArr = GetIndustrialPoints(planet);
 		return planet;

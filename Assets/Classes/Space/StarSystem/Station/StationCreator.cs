@@ -10,7 +10,7 @@ public static class StationCreator
 			Station st = new Station
 			{
 				position = GetRNDPosition(),
-				storage = TestAddResources(8),
+				storage = new Storage() { goodsArr = TestAddResources(10)},
 				industrialPointsArr = TestAddProduceConstruction()
 			};
 			result[i] = st;

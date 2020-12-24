@@ -26,8 +26,7 @@ public static class MoonCreator
 			orbitSpeed = 50,
 			rotateSpeed = 5,
 			mass = Random.Range(.05f, planet.mass / 2),
-			type = GetMoonType(planet.type),
-			storage = new GoodsStack[0]
+			type = GetMoonType(planet.type)
 		};
 		moon.industrialPointsArr = GetIndustrialPoints(moon);
 		return moon;

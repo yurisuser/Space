@@ -10,7 +10,7 @@
 	public float rotateSpeed;
 	public float angleOnOrbit;
 	public IndustrialPoint[] industrialPointsArr;
-	public GoodsStack[] storage;
+	public Storage storage;
 
 	public abstract void Tick();
 }

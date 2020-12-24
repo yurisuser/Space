@@ -15,7 +15,7 @@ public class PlanetSysMapScr : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-        Utilities.ShowMeObject(planet.storage);
+        Utilities.ShowMeObject(planet.storage.goodsArr);
         ShowPlanetPanel();
 	}
 

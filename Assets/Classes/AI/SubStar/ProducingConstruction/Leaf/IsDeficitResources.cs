@@ -12,10 +12,7 @@ namespace AI.AISubStar.ProdModule
 			}
 			foreach (var item in wrapper.module.recipe.resources)
 			{
-				if (!Array.Exists(wrapper.body.storage, x => x.id == item.id))
-					return EStateNode.SUCCESS;
-				if (Array.Exists(wrapper.body.storage, x => x.id == item.id && x.quantity < item.quantity)) 
-					return EStateNode.SUCCESS;
+				if (!wrapper.body.storage.isEnough(item)) return EStateNode.SUCCESS;
 			}
 			return EStateNode.FAILURE;
 		}
