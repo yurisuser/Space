@@ -68,23 +68,20 @@ partial struct Data
 
 			while (reader.Read())
 			{
-				ProductRecipe recipe = new ProductRecipe();
-				recipe.id = reader.GetInt32(0);
-				recipe.name = reader.GetString(1);
-				recipe.description = reader.GetString(2);
-				recipe.duration = reader.GetInt32(3);
+
+
 				List<GoodsStack> prod = new List<GoodsStack>();
-				List<GoodsStack> src = new List<GoodsStack>();
+				List<GoodsStack> resources = new List<GoodsStack>();
 				for (int i = productionRange[0]; i < productionRange[1]; i += 2)
 				{
 					if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
 					{
-						int g = reader.GetInt32(i);
-						int c = reader.GetInt32(i + 1);
+						int goodsId = reader.GetInt32(i);
+						int quantity = reader.GetInt32(i + 1);
 						prod.Add(new GoodsStack()
 						{
-							id = g,
-							quantity = c
+							id = goodsId,
+							quantity = quantity
 						});
 					}
 
@@ -94,17 +91,23 @@ partial struct Data
 				{
 					if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
 					{
-						int g = reader.GetInt32(i);
-						int c = reader.GetInt32(i + 1);
-						src.Add(new GoodsStack()
+						int goodId = reader.GetInt32(i);
+						int quantity = reader.GetInt32(i + 1);
+						resources.Add(new GoodsStack()
 						{
-							id = g,
-							quantity = c
+							id = goodId,
+							quantity = quantity
 						});
 					}
 				}
-				recipe.production = prod.ToArray();
-				recipe.resources = src.ToArray();
+				ProductRecipe recipe = new ProductRecipe(
+					id: reader.GetInt32(0),
+					name: reader.GetString(1),
+					description: reader.GetString(2),
+					duration: reader.GetInt32(3),
+					resources: resources.ToArray(),
+					production: prod.ToArray()
+				);
 				result.Add(recipe);
 			}
 			reader.Close();
@@ -121,14 +124,14 @@ partial struct Data
 
 			while (reader.Read())
 			{
-				MiningRecipe recipe = new MiningRecipe() {
-					id = reader.GetInt32(0),
-					name = reader.GetString(1),
-					description = reader.GetString(2),
-					duration = reader.GetInt32(3),
-					production = new GoodsStack[1] { new GoodsStack { id = reader.GetInt32(4), quantity = reader.GetInt32(5) } },
-					resources = new GoodsStack[0]
-				};
+				MiningRecipe recipe = new MiningRecipe(
+					id: reader.GetInt32(0),
+					name: reader.GetString(1),
+					description: reader.GetString(2),
+					duration: reader.GetInt32(3),
+					resources: new GoodsStack[0],
+					production: new GoodsStack[1] { new GoodsStack { id = reader.GetInt32(4), quantity = reader.GetInt32(5) } }
+					);
 				result.Add(recipe);
 			}
 			reader.Close();
