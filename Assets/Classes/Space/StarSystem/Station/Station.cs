@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-public class Station : SubStarBody, ISystemPosition
+public class Station : SubStarBody
 {
-	public Vector3 position 
+	public override Vector3 position
 	{
 		get
 		{

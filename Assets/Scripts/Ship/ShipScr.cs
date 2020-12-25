@@ -15,7 +15,7 @@ public class ShipScr : MonoBehaviour
 	void Start()
 	{
 
-		if (ship.Id == 1018)
+		if (ship.id == 1018)
 		{
 			gameObject.GetComponent<Renderer>().material.color = Color.cyan;
 		}
@@ -24,7 +24,7 @@ public class ShipScr : MonoBehaviour
 	public void SetShip(Ship ship)
 	{
 		this.ship = ship;
-		shipId = ship.Id;
+		shipId = ship.id;
 		order = ship.order.Clone();
 		DrawDestinations();
 	}

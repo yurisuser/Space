@@ -1,4 +1,6 @@
-﻿public abstract class SubStarBody
+﻿using UnityEngine;
+
+public abstract class SubStarBody: ISystemPosition
 {
 	public int id;
 	public string name;
@@ -15,6 +17,11 @@
 	public SubStarBody()
 	{
 		storage = new Storage(0);
+	}
+
+	public virtual Vector3 position { 
+		get => throw new System.NotImplementedException(); 
+		set => throw new System.NotImplementedException(); 
 	}
 
 	public abstract void Tick();

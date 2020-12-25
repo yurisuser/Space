@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class Planet: SubStarBody, ISystemPosition
+public class Planet: SubStarBody
 {
 	public Star motherStar;
 
-	public Vector3 position
+	public override Vector3 position
 	{
 		get
 		{

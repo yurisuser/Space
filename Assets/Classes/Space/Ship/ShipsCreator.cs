@@ -13,7 +13,7 @@ public static class ShipsCreator
 			Ship ship = new Ship
 			{
 				dest = getRNDPosition(),
-				Id = Galaxy.GetNextId(),
+				id = Galaxy.GetNextId(),
 				name = Random.Range(0, 100).ToString(),
 				order = new Order {
 					e_order = EOrders.Patrol,
@@ -26,7 +26,7 @@ public static class ShipsCreator
 				param = Data.shipsParamArr[0]
 			};
 
-			if (ship.Id == 1018)
+			if (ship.id == 1018)
 			{
 				ship.order.attribute.currentPosition = new Vector3(-1000, 0, -3);
 				ship.order.attribute.destinationOrder = new Vector3(1000,0, -3);
