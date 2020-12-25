@@ -5,10 +5,18 @@ using System.Linq;
 public struct Storage
 {
 	public GoodsStack[] goodsArr;
+	public readonly int limit;
+
+	public Storage(int limit)
+	{
+		this.limit = limit;
+		goodsArr = new GoodsStack[0];
+	}
 
 	public bool Add(GoodsStack stack)
 	{
 		if (stack.quantity <= 0) return false;
+		if (!isEnoughSpace(stack.quantity)) return false;
 		if (goodsArr == null) goodsArr = new GoodsStack[0];
 		int index = Array.FindIndex(goodsArr, x => x.id == stack.id);
 		if (index >=  0)
@@ -33,9 +41,17 @@ public struct Storage
 		return true;
 	}
 
-	public bool isEnough(GoodsStack stack)
+	public bool isEnoughGoods(GoodsStack stack)
 	{
 		return Array.Exists(goodsArr, x => x.id == stack.id && x.quantity >= stack.quantity);
+	}
+
+	public bool isEnoughSpace(int newValue)
+	{
+		if (limit == 0) return true;
+		int newSumm = goodsArr.Sum(x => x.quantity) + newValue;
+		if (newSumm <= limit) return true;
+		return false;
 	}
 	private void DeleteStack(int index)
 	{

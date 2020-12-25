@@ -12,6 +12,10 @@
 	public IndustrialPoint[] industrialPointsArr;
 	public Storage storage;
 
+	public SubStarBody()
+	{
+		storage = new Storage(0);
+	}
+
 	public abstract void Tick();
 }
-
