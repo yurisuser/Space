@@ -3,8 +3,9 @@
 	public struct ShipRapam
 	{
 		public int id;
-		public string name;
-		public int speed;
-		public int cargo;
+		public int shipId;
+		public string modelName;
+		public int maxSpeed;
+		public int baseCargoSize;
 	}
 }

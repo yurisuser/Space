@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEditor;
-using System.Runtime.CompilerServices;
 using AI;
 
 public static class ShipsCreator
@@ -22,11 +20,10 @@ public static class ShipsCreator
 					attribute = new OrderAttribute
 					{
 						destinationOrder = destination,
-						//destinationStep = destination/5,
 						currentPosition = position,
 					}
 				},
-				param = Data.shipsArr[2]
+				param = Data.shipsParamArr[0]
 			};
 
 			if (ship.Id == 1018)

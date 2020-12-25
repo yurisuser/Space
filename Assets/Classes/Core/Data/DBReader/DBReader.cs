@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using Mono.Data.Sqlite;
-using Newtonsoft.Json;
 using UnityEngine;
 
 public partial struct Data
@@ -10,17 +8,19 @@ public partial struct Data
 	public partial struct DBReader
 	{
 		private static readonly string spaceDBName = "space.db";
+		//Space
 		private static readonly string starTableName = "star";
 		private static readonly string planetTableName = "planet";
 		private static readonly string moonTableName = "moons";
-
 		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";
 		private static readonly string planetaryResourcesProbabilityTableName = "planet_resources_probability";
 		private static readonly string moonProbability = "moon_of_planet_probability";
-
+		//Goods
 		private static readonly string goodsTableName = "goods";
 		private static readonly string recipeTableName = "product_recipe";
 		private static readonly string miningRecipeTableName = "mining_recipe";
+		//Ships
+		private static readonly string shipsParamTableName = "ship_param";
 
 
 		private static IDbCommand dbcmd;
@@ -32,18 +32,19 @@ public partial struct Data
 			dbconn = (IDbConnection)new SqliteConnection(conn);
 			dbconn.Open();
 			dbcmd = dbconn.CreateCommand();
-
+			//Space
 			starsArr = ReadStar(starTableName);
 			planetsArr = ReadPlanetOrMoon(planetTableName);
 			moonsArr = ReadPlanetOrMoon(moonTableName);
-
 			planetsOfStarProbabilityArr = ReadProbability(planetOfStarProbabilityTableName);
 			planetaryResourcesProbabilityArr = ReadPlanetaryResourcesProbability(planetaryResourcesProbabilityTableName);
 			moonOfPlanetProbabilityArr = ReadProbability(moonProbability);
-
+			//Goods
 			goodsArr = ReadGoods(goodsTableName);
 			productRecipeArr = ReadProductRecipes(recipeTableName);
 			miningRecipesArr = ReadMiningRecipes(miningRecipeTableName);
+			//Ship
+			shipsParamArr = ReadShipsParam(shipsParamTableName);
 
 			reader.Close();
 			dbcmd.Dispose();
@@ -71,71 +72,6 @@ public partial struct Data
 			return resultColumn;
 		}
 
-		private static Star[] ReadStar(string tableName)
-		{
-			List<Star> result = new List<Star>();
-			string sqlQuery = $"SELECT * FROM {tableName}";
-			dbcmd.CommandText = sqlQuery;
-			reader = dbcmd.ExecuteReader();
-
-			while (reader.Read())
-			{
-				Star star;
-				star.id = reader.GetInt32(0);
-				star.type = reader.GetInt32(1);
-				star.name = reader.GetString(2);
-				star.probability = reader.GetInt32(3);
-				star.prefabSystemMap = reader.GetString(4);
-				star.prefabGalaxyMap = reader.GetString(5);
-				result.Add(star);
-			}
-			reader.Close();
-			return result.ToArray();
-		}
-
-		private static Moon[] ReadPlanetOrMoon(string tableName)
-		{
-			List<Moon> result = new List<Moon>();
-			string sqlQuery = $"SELECT id, name, prefab_system_map FROM {tableName}";
-			dbcmd.CommandText = sqlQuery;
-			reader = dbcmd.ExecuteReader();
-
-			while (reader.Read())
-			{
-				Moon planet = new Moon();
-				planet.id = reader.GetInt32(0);
-				planet.name = reader.GetString(1);
-				planet.prefabSystemMap = reader.GetString(2);
-				result.Add(planet);
-			}
-			reader.Close();
-			return result.ToArray();
-		}
-
-		private static Probability[] ReadProbability(string tableName)
-		{
-			List<Probability> result = new List<Probability>();
-			int rowsCount = GetTableRows(tableName);
-			int columnCount = GetTableColumn(tableName);
-			string sqlQuery = $"SELECT * FROM {tableName}";
-			dbcmd.CommandText = sqlQuery;
-			reader = dbcmd.ExecuteReader();
-
-			while (reader.Read())
-			{
-				int skipField = 2;
-				Probability prob = new Probability();
-				prob.id = reader.GetInt32(0);
-				prob.type = reader.GetInt32(1);
-				prob.probability = new int[columnCount - skipField];
-				for (int i = skipField; i < columnCount; i++)
-				{
-					prob.probability[i - skipField] = reader.GetInt32(i);
-				}
-				result.Add(prob);
-			}
-			reader.Close();
-			return result.ToArray();
-		}
+		
 	}
 }
