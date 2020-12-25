@@ -31,16 +31,8 @@ public class StationSysMapScr : MonoBehaviour
     }
     private void Show()
     {
-        //Utilities.ShowMeObject(st.industrialPointsArr[0].producingConstruction);
-        //Utilities.ShowMeObject(st.storage.goodsArr);
-        //Utilities.ShowMe(1, $"Recipe {st.industrialPointsArr[0].producingConstruction.recipe.name}");
-
         st = Galaxy.StarSystemsArr[starIndex].StationArr[0];
         int prodId = st.industrialPointsArr[0].producingConstruction.recipe.production[0].id;
         int indexProd = Array.FindIndex(st.storage.goodsArr, x => x.id == prodId);
-        if (st.storage.goodsArr.Length > 0)
-            Utilities.ShowMe(2, $"item: {st.storage.goodsArr[indexProd].id} q: {st.storage.goodsArr[indexProd].quantity}");
-        else
-            Utilities.ShowMe(2, "null");
     }
 }

@@ -40,8 +40,6 @@ public class CameraGalaxy : MonoBehaviour
         if (!Input.GetMouseButton(0) && !Cursor.visible) Cursor.visible = true;
         if (Input.GetMouseButton(0) && Utilities.CheckRaycastWithoutUI(cam, BackgroundObjectName))
 		{
-            Utilities.ShowMe(1, cam.aspect);
-
 			Cursor.visible = false;
 			transform.position += (mouseOldPosition - mousePosition)  * SpeedCamMove;
             if (transform.position.x > settings.MAX_CAMERA_OFFSET)
