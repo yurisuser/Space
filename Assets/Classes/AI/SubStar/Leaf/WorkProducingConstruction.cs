@@ -8,7 +8,7 @@ namespace AI.AISubStar
 		{
 			for (int i = 0; i < body.manufacture.industrialPointsArr.Length; i++)
 			{
-				ManufactureManager.Tick(body, body.manufacture.industrialPointsArr[i].producingConstruction);
+				ManufactureManager.Tick(body, body.manufacture.industrialPointsArr[i].manufactureConstruction);
 			}
 			return EStateNode.SUCCESS;
 		}

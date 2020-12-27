@@ -1,4 +1,6 @@
-﻿public class Manufacture
+﻿using System.Collections.Generic;
+
+public class Manufacture
 {
 	private SubStarBody parent;
 

@@ -4,13 +4,13 @@ using System.Linq;
 
 public struct Storage
 {
-	public GoodsStack[] goodsArr;
+	private GoodsStack[] goodsArr;
 	public readonly int limit;
 
-	public Storage(int limit)
+	public Storage(int limit, GoodsStack[] goodsArr)
 	{
 		this.limit = limit;
-		goodsArr = new GoodsStack[0];
+		this.goodsArr = goodsArr;
 	}
 
 	public bool Add(GoodsStack stack)
@@ -52,6 +52,11 @@ public struct Storage
 		int newSumm = goodsArr.Sum(x => x.quantity) + newValue;
 		if (newSumm <= limit) return true;
 		return false;
+	}
+
+	public GoodsStack[] GetStorage()
+	{
+		return goodsArr;
 	}
 	private void DeleteStack(int index)
 	{

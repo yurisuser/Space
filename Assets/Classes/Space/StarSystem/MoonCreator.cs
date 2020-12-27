@@ -99,7 +99,7 @@ public static class MoonCreator
 					var industrialPoint = new IndustrialPoint
 					{
 						resourceDeposit = moonRes,
-						producingConstruction = new ManufactureConstruction
+						manufactureConstruction = new ManufactureConstruction
 						{
 							recipe = Data.miningRecipesArr[moonRes.idResource],
 							stageProcess = 0,

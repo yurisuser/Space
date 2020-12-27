@@ -16,7 +16,7 @@ public abstract class SubStarBody: ISystemPosition
 
 	public SubStarBody()
 	{
-		storage = new Storage(0);
+		storage = new Storage(0, new GoodsStack[0]);
 	}
 
 	public virtual Vector3 position { 

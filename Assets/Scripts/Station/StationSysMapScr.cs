@@ -20,7 +20,7 @@ public class StationSysMapScr : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-        Utilities.ShowMeObject(st.storage.goodsArr);
+        Utilities.ShowMeObject(st.storage.GetStorage());
 	}
 
 	public void SetIndexes(int starIndex, int stationIndex)
@@ -32,7 +32,7 @@ public class StationSysMapScr : MonoBehaviour
     private void Show()
     {
         st = Galaxy.StarSystemsArr[starIndex].StationArr[0];
-        int prodId = st.manufacture.industrialPointsArr[0].producingConstruction.recipe.production[0].id;
-        int indexProd = Array.FindIndex(st.storage.goodsArr, x => x.id == prodId);
+        int prodId = st.manufacture.industrialPointsArr[0].manufactureConstruction.recipe.production[0].id;
+        int indexProd = Array.FindIndex(st.storage.GetStorage(), x => x.id == prodId);
     }
 }

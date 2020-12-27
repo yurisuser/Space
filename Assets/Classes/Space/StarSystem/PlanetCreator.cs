@@ -84,7 +84,7 @@ public static class PlanetCreator
 					var industrialPoint = new IndustrialPoint
 					{
 						resourceDeposit = planetRes,
-						producingConstruction = new ManufactureConstruction
+						manufactureConstruction = new ManufactureConstruction
 						{
 							recipe = Data.miningRecipesArr[planetRes.idResource],
 							stageProcess = 0,
