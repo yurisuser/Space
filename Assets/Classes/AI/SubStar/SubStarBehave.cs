@@ -10,9 +10,9 @@
 				);
 		}
 
-		public override EStateNode Tick(SubStarBody station)
+		public override EStateNode Tick(SubStarBody body)
 		{
-			return behav.Tick(station);
+			return behav.Tick(body);
 		}
 	}
 }

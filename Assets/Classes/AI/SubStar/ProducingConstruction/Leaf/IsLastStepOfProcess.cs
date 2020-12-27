@@ -1,8 +1,8 @@
-﻿namespace AI.AISubStar.ProdModule
+﻿namespace AI.AISubStar.Manufacture
 {
-	public class IsLastStepOfProcess : Condition<ProdConstructionWrapper>
+	public class IsLastStepOfProcess : Condition<ManufactureWrapper>
 	{
-		public override EStateNode Tick(ProdConstructionWrapper w)
+		public override EStateNode Tick(ManufactureWrapper w)
 		{
 			if (w.module.stageProcess >= w.module.recipe.duration)
 			{

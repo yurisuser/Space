@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
 
-namespace AI.AISubStar.ProdModule
+namespace AI.AISubStar.Manufacture
 {
-	public class FinishWork : Leaf<ProdConstructionWrapper>
+	public class FinishWork : Leaf<ManufactureWrapper>
 	{
-		public override EStateNode Tick(ProdConstructionWrapper w)
+		public override EStateNode Tick(ManufactureWrapper w)
 		{
 			w.module.stageProcess = 0;
 			AddProducts(w);
 			return EStateNode.SUCCESS;
 		}
-		private void AddProducts(ProdConstructionWrapper w)
+		private void AddProducts(ManufactureWrapper w)
 		{
 			foreach (var item in w.module.recipe.production)
 			{

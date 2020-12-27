@@ -1,5 +1,5 @@
 ﻿using static Data;
-public class ProducingConstruction
+public class ManufactureConstruction
 {
 	public Recipe recipe;
 	public float stageProcess;

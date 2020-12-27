@@ -1,8 +1,8 @@
-﻿namespace AI.AISubStar.ProdModule
+﻿namespace AI.AISubStar.Manufacture
 {
-	public class NextWorkCycle : Node<ProdConstructionWrapper>
+	public class NextWorkCycle : Node<ManufactureWrapper>
 	{
-		public override EStateNode Tick(ProdConstructionWrapper w)
+		public override EStateNode Tick(ManufactureWrapper w)
 		{
 			w.module.stageProcess++;
 			return EStateNode.SUCCESS;

@@ -1,4 +1,4 @@
-﻿using AI.AISubStar.ProdModule;
+﻿using AI.AISubStar.Manufacture;
 
 namespace AI.AISubStar
 {
@@ -6,9 +6,9 @@ namespace AI.AISubStar
 	{
 		public override EStateNode Tick(SubStarBody body)
 		{
-			for (int i = 0; i < body.industrialPointsArr.Length; i++)
+			for (int i = 0; i < body.manufacture.industrialPointsArr.Length; i++)
 			{
-				ProducingModuleManager.Tick(body, body.industrialPointsArr[i].producingConstruction);
+				ManufactureManager.Tick(body, body.manufacture.industrialPointsArr[i].producingConstruction);
 			}
 			return EStateNode.SUCCESS;
 		}

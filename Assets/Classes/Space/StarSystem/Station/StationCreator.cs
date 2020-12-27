@@ -10,10 +10,11 @@ public static class StationCreator
 			Station st = new Station
 			{
 				position = GetRNDPosition(),
-				storage = new Storage() { goodsArr = TestAddResources(10)},
-				industrialPointsArr = TestAddProduceConstruction()
+				storage = new Storage() { goodsArr = TestAddResources(10)}
 			};
-			result[i] = st;
+			st.manufacture = new Manufacture(st);
+			st.manufacture.industrialPointsArr = TestAddProduceConstruction();
+		result[i] = st;
 		}
 		return result;
 	}
@@ -45,7 +46,7 @@ public static class StationCreator
 	{
 		return new IndustrialPoint[] {
 			new IndustrialPoint {
-				producingConstruction = new ProducingConstruction {
+				producingConstruction = new ManufactureConstruction {
 					recipe = Data.productRecipeArr[1],
 					stageProcess = 0,
 					state = EProducingState.finished

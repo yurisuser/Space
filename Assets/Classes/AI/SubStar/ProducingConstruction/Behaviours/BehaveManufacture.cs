@@ -1,26 +1,26 @@
 ﻿using System;
 
-namespace AI.AISubStar.ProdModule
+namespace AI.AISubStar.Manufacture
 {
-	public class BehaveProducingModule : AIBehaviour<ProdConstructionWrapper>
+	public class BehaveManufacture : AIBehaviour<ManufactureWrapper>
 	{
-		public BehaveProducingModule()
+		public BehaveManufacture()
 		{
-			Sequence<ProdConstructionWrapper> checkDeficit = new Sequence<ProdConstructionWrapper>(
+			Sequence<ManufactureWrapper> checkDeficit = new Sequence<ManufactureWrapper>(
 				"checkDeficit",
 				new IsDeficitResources(),
 				new SetModuleState(EProducingState.deficitRecorces)
 				);
 
 
-			Sequence<ProdConstructionWrapper> lastStep = new Sequence<ProdConstructionWrapper>(
+			Sequence<ManufactureWrapper> lastStep = new Sequence<ManufactureWrapper>(
 				"lastStep",
 				new IsLastStepOfProcess(),
 				new FinishWork(),
 				new SetModuleState(EProducingState.finished)
 				);
 
-			Sequence<ProdConstructionWrapper> workChain = new Sequence<ProdConstructionWrapper>(
+			Sequence<ManufactureWrapper> workChain = new Sequence<ManufactureWrapper>(
 				"workChain",
 				new IsModuleState(EProducingState.work),
 				new NextWorkCycle(),
@@ -28,16 +28,16 @@ namespace AI.AISubStar.ProdModule
 				);
 
 
-			Sequence<ProdConstructionWrapper> startProcess = new Sequence<ProdConstructionWrapper>(
+			Sequence<ManufactureWrapper> startProcess = new Sequence<ManufactureWrapper>(
 				"startProcess",
 				new IsModuleState(EProducingState.finished),
-				new Invertor<ProdConstructionWrapper>(checkDeficit),
+				new Invertor<ManufactureWrapper>(checkDeficit),
 				new StartNewProcess(),
 				new SetModuleState(EProducingState.work),
 				lastStep
 				);
 
-			behav = new Selector<ProdConstructionWrapper>(
+			behav = new Selector<ManufactureWrapper>(
 				"behav",
 				new IsModuleState(EProducingState.pause),
 				workChain,
@@ -45,7 +45,7 @@ namespace AI.AISubStar.ProdModule
 				);
 		}
 
-		public override EStateNode Tick(ProdConstructionWrapper w)
+		public override EStateNode Tick(ManufactureWrapper w)
 		{
 			return behav.Tick(w);
 		}

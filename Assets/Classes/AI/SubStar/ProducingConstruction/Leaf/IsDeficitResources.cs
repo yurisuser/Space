@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace AI.AISubStar.ProdModule
+namespace AI.AISubStar.Manufacture
 {
-	public class IsDeficitResources : Condition<ProdConstructionWrapper>
+	public class IsDeficitResources : Condition<ManufactureWrapper>
 	{
-		public override EStateNode Tick(ProdConstructionWrapper wrapper)
+		public override EStateNode Tick(ManufactureWrapper wrapper)
 		{
 			if (wrapper.module.recipe.resources.Length == 0)
 			{

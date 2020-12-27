@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AI.AISubStar.ProdModule
+namespace AI.AISubStar.Manufacture
 {
-	public class StartNewProcess : Leaf<ProdConstructionWrapper>
+	public class StartNewProcess : Leaf<ManufactureWrapper>
 	{
-		public override EStateNode Tick(ProdConstructionWrapper wrapper)
+		public override EStateNode Tick(ManufactureWrapper wrapper)
 		{
 			wrapper.module.stageProcess = 1;
 			WithdrawResources(wrapper);
 			return EStateNode.SUCCESS;
 		}
 
-		private void WithdrawResources(ProdConstructionWrapper wrapper)
+		private void WithdrawResources(ManufactureWrapper wrapper)
 		{
 			for (int i = 0; i < wrapper.module.recipe.resources.Length; i++)
 			{

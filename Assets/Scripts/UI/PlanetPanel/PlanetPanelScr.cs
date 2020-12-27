@@ -20,7 +20,7 @@ public class PlanetPanelScr : MonoBehaviour
 	{
         transform.Find("inf").Find("PlanetDescription").GetComponent<Text>().text =
         $"name: {body.name}\n" +
-        $"resuorces fileds: {body.industrialPointsArr.Length} type: {body.industrialPointsArr.Select(x => x.resourceDeposit.idResource).Distinct().Count()}\n" +
+        $"resuorces fileds: {body.manufacture.industrialPointsArr.Length} type: {body.manufacture.industrialPointsArr.Select(x => x.resourceDeposit.idResource).Distinct().Count()}\n" +
         $"type : {Array.Find(Data.planetsArr, x => x.id == body.type).name}\n" +
         $"mass (e.m.): {body.mass} \n" +
         $"orbital speed: {body.orbitSpeed}\n";
