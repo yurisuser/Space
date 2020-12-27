@@ -18,8 +18,8 @@ public static class PlanetCreator
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet
 		};
-		planet.manufacture = new Manufacture(planet);
-		planet.manufacture.industrialPointsArr = GetIndustrialPoints(planet);
+		planet.industry = new Industry(planet);
+		planet.industry.industrialPointsArr = GetIndustrialPoints(planet);
 		return planet;
 	}
 
@@ -84,7 +84,7 @@ public static class PlanetCreator
 					var industrialPoint = new IndustrialPoint
 					{
 						resourceDeposit = planetRes,
-						manufactureConstruction = new ManufactureConstruction
+						manufactureConstruction = new IndustryConstruction
 						{
 							recipe = Data.miningRecipesArr[planetRes.idResource],
 							stageProcess = 0,

@@ -7,7 +7,7 @@ partial struct Data
 		private static Goods[] ReadGoods(string tableName)
 		{
 			List<Goods> result = new List<Goods>();
-			string sqlQuery = $"SELECT * FROM {tableName}";
+			string sqlQuery = $"SELECT id, name, origin, price FROM {tableName}";
 			dbcmd.CommandText = sqlQuery;
 			reader = dbcmd.ExecuteReader();
 
@@ -17,6 +17,7 @@ partial struct Data
 				goods.id = reader.GetInt32(0);
 				goods.name = reader.GetString(1);
 				goods.origin = reader.GetInt32(2);
+				goods.price = reader.GetInt32(3);
 				result.Add(goods);
 			}
 

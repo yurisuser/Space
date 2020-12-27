@@ -54,6 +54,11 @@ public struct Storage
 		return false;
 	}
 
+	public int GetGoodsAmount(int id)
+	{
+		return (Array.Find(goodsArr, x => x.id == id)).quantity;
+	}
+
 	public GoodsStack[] GetStorage()
 	{
 		return goodsArr;

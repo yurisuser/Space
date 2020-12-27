@@ -32,7 +32,7 @@ public class StationSysMapScr : MonoBehaviour
     private void Show()
     {
         st = Galaxy.StarSystemsArr[starIndex].StationArr[0];
-        int prodId = st.manufacture.industrialPointsArr[0].manufactureConstruction.recipe.production[0].id;
+        int prodId = st.industry.industrialPointsArr[0].manufactureConstruction.recipe.production[0].id;
         int indexProd = Array.FindIndex(st.storage.GetStorage(), x => x.id == prodId);
     }
 }

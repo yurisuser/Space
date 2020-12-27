@@ -2,7 +2,7 @@
 {
 	public struct ManufactureWrapper
 	{
-		public ManufactureConstruction module;
+		public IndustryConstruction module;
 		public SubStarBody body;
 	}
 }

@@ -7,6 +7,7 @@ public partial struct Data
 		public int id;
 		public string name;
 		public int origin;
+		public int price;
 	}
 
 	public static Goods GetGoodsById(int id)
