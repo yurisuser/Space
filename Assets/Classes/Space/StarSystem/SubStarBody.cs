@@ -11,6 +11,7 @@ public abstract class SubStarBody: ISystemPosition
 	public float orbitSpeed;
 	public float rotateSpeed;
 	public float angleOnOrbit;
+	public Resourcer resourcer;
 	public Industry industry;
 	public Storage storage;
 

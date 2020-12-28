@@ -3,7 +3,7 @@
 	private SubStarBody parent;
 
 	public IndustryStats stats;
-	public IndustrialPoint[] industrialPointsArr;
+	public IndustryConstruction[] construction;
 
 	public Industry(SubStarBody parent)
 	{

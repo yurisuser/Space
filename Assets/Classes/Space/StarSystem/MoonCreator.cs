@@ -28,8 +28,7 @@ public static class MoonCreator
 			mass = Random.Range(.05f, planet.mass / 2),
 			type = GetMoonType(planet.type)
 		};
-		moon.industry = new Industry(moon);
-		moon.industry.industrialPointsArr = GetIndustrialPoints(moon);
+		moon.resourcer = GetResourcer(moon);
 		return moon;
 	}
 
@@ -63,13 +62,11 @@ public static class MoonCreator
 		return type;
 	}
 
-	private static IndustrialPoint[] GetIndustrialPoints(Moon moon)
+	private static Resourcer GetResourcer(Moon moon)
 	{
-		IndustrialPoint[] result = new IndustrialPoint[Random.Range(0, (int)(moon.mass * 10))];
-
+		var result = new ResourceDeposit[Random.Range(0, (int)(moon.mass * 10))];
 		List<int> idsRes = new List<int>();
 		List<int> probabRes = new List<int>();
-
 		for (int i = 0; i < Data.planetaryResourcesProbabilityArr.Length; i++)
 		{
 			if (Data.planetaryResourcesProbabilityArr[i].probabilityOfPlanet[moon.type] == 0) continue;
@@ -79,6 +76,7 @@ public static class MoonCreator
 
 		int[] rangeProbab = new int[probabRes.Count];
 		rangeProbab[0] = probabRes[0];
+
 		for (int i = 1; i < rangeProbab.Length; i++)
 		{
 			rangeProbab[i] = rangeProbab[i - 1] + probabRes[i];
@@ -91,26 +89,16 @@ public static class MoonCreator
 			{
 				if (rnd < rangeProbab[j])
 				{
-					ResourceDeposit moonRes = new ResourceDeposit
+					ResourceDeposit res = new ResourceDeposit
 					{
 						idResource = idsRes[j],
-						extraction = Random.Range(5, 30),
+						extraction = Random.Range(10, 50),
 					};
-					var industrialPoint = new IndustrialPoint
-					{
-						resourceDeposit = moonRes,
-						manufactureConstruction = new IndustryConstruction
-						{
-							recipe = Data.miningRecipesArr[moonRes.idResource],
-							stageProcess = 0,
-							state = EProducingState.finished
-						}
-					};
-					result[i] = industrialPoint;
+					result[i] = res;
 					break;
 				}
 			}
 		}
-		return result;
+		return new Resourcer(result, moon);
 	}
 }

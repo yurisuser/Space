@@ -14,7 +14,7 @@ public class Market
 
 	public void Init()
 	{
-		if (parent.industry == null || parent.industry.industrialPointsArr == null) return;
+		if (parent.industry == null || parent.industry.construction == null) return;
 		InitOffers();
 		RecalculateAllOffersPrices();
 	}

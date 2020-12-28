@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public static class PlanetCreator
@@ -18,8 +17,9 @@ public static class PlanetCreator
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet
 		};
-		planet.industry = new Industry(planet);
-		planet.industry.industrialPointsArr = GetIndustrialPoints(planet);
+		//planet.industry = new Industry(planet);
+		//planet.industry.construction = GetIndustrialPoints(planet);
+		planet.resourcer = GetResourcer(planet);
 		return planet;
 	}
 
@@ -49,13 +49,11 @@ public static class PlanetCreator
 		return type;
 	}
 
-	private static IndustrialPoint[] GetIndustrialPoints(Planet planet)
+	private static Resourcer GetResourcer(Planet planet)
 	{
-		IndustrialPoint[] result = new IndustrialPoint[Random.Range(0, (int)(planet.mass * 10))];
-
-		List<int> idsRes =  new List<int>();
+		var result = new ResourceDeposit[Random.Range(0, (int)(planet.mass * 10))];
+		List<int> idsRes = new List<int>();
 		List<int> probabRes = new List<int>();
-
 		for (int i = 0; i < Data.planetaryResourcesProbabilityArr.Length; i++)
 		{
 			if (Data.planetaryResourcesProbabilityArr[i].probabilityOfPlanet[planet.type] == 0) continue;
@@ -65,6 +63,7 @@ public static class PlanetCreator
 
 		int[] rangeProbab = new int[probabRes.Count];
 		rangeProbab[0] = probabRes[0];
+
 		for (int i = 1; i < rangeProbab.Length; i++)
 		{
 			rangeProbab[i] = rangeProbab[i - 1] + probabRes[i];
@@ -77,25 +76,16 @@ public static class PlanetCreator
 			{
 				if (rnd < rangeProbab[j])
 				{
-					ResourceDeposit planetRes = new ResourceDeposit {
+					ResourceDeposit res = new ResourceDeposit
+					{
 						idResource = idsRes[j],
 						extraction = Random.Range(10, 50),
-						};
-					var industrialPoint = new IndustrialPoint
-					{
-						resourceDeposit = planetRes,
-						manufactureConstruction = new IndustryConstruction
-						{
-							recipe = Data.miningRecipesArr[planetRes.idResource],
-							stageProcess = 0,
-							state = EProducingState.finished
-						}
 					};
-					result[i] = industrialPoint;
+					result[i] = res;
 					break;
 				}
 			}
 		}
-		return result;
+		return new Resourcer(result, planet);
 	}
 }

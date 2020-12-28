@@ -13,7 +13,7 @@ public static class StationCreator
 			};
 			st.storage = new Storage(0, TestAddResources(10));
 			st.industry = new Industry(st);
-			st.industry.industrialPointsArr = TestAddProduceConstruction();
+			st.industry.construction = TestAddIdustryConstruction();
 		result[i] = st;
 		}
 		return result;
@@ -42,16 +42,13 @@ public static class StationCreator
 		return result;
 	}
 
-	private static IndustrialPoint[] TestAddProduceConstruction()
+	private static IndustryConstruction[] TestAddIdustryConstruction()
 	{
-		return new IndustrialPoint[] {
-			new IndustrialPoint {
-				manufactureConstruction = new IndustryConstruction {
+		return new IndustryConstruction[] {
+			new IndustryConstruction {
 					recipe = Data.productRecipeArr[1],
 					stageProcess = 0,
 					state = EProducingState.finished
-					},
-				resourceDeposit = null
 			} 
 		};
 	}
