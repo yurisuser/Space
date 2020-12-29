@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7830217527399494980}
   - component: {fileID: 6036349630864512243}
   - component: {fileID: -4324048016027170846}
+  - component: {fileID: 1111703840934961753}
   m_Layer: 0
   m_Name: TestStation
   m_TagString: Untagged
@@ -93,7 +94,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 500
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-4324048016027170846
 MonoBehaviour:
@@ -107,6 +108,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a311bd8f836d3e540a199a47bf198a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &1111703840934961753
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619512254808404305}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9175522384765608192
 GameObject:
   m_ObjectHideFlags: 0

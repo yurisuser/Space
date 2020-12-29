@@ -17,9 +17,10 @@ public class Storage
 		if (stack.quantity <= 0) return false;
 		if (goodsArr == null) goodsArr = new GoodsStack[0];
 		int index = Array.FindIndex(goodsArr, x => x.id == stack.id);
-		if (index >=  0)
+		if (index > -1)
 		{
 			goodsArr[index].quantity += stack.quantity;
+			return true;
 		}
 		goodsArr = goodsArr.Concat(new GoodsStack[] { stack }).ToArray();
 		return true;

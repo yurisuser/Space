@@ -31,7 +31,7 @@ public static class IndustryCreator
 		}
 		else
 		{
-			recipe = (Recipe)miningRecipesArr[Random.Range(0, miningRecipesArr.Length - 1)];
+			recipe = (Recipe)miningRecipesArr[deposit.idResource];
 			deposit.isExistConstruction = true;
 		}
 
@@ -41,5 +41,33 @@ public static class IndustryCreator
 		industryConstruction.recipe = recipe;
 
 		return industryConstruction;
+	}
+
+	private static void CalcResourcesReserv(Storage storage, Industry industry)
+	{
+		List<GoodsStack> result = new List<GoodsStack>();
+		for (int c = 0; c < industry.construction.Length; c++)
+		{
+			for (int r = 0; r < industry.construction[c].recipe.perTurn.Length; r++)
+			{
+				if (industry.construction[c].recipe.perTurn[r].amount < 0)
+				{
+					int index = result.FindIndex(x => x.id == industry.construction[c].recipe.perTurn[r].goodsId);
+					if (index > -1)
+					{
+						result[index] = new GoodsStack
+						{
+							id = result[index].id,
+							quantity = result[index].quantity + (int)(industry.construction[c].recipe.perTurn[r].amount * Settings.Industry.PROCESSING_RESERV_STEPS * -1)
+						};
+						continue;
+					}
+					result.Add(new GoodsStack {
+						id = result[index].id,
+						quantity = (int)(industry.construction[c].recipe.perTurn[r].amount * Settings.Industry.PROCESSING_RESERV_STEPS * -1)
+					});
+				}
+			}
+		}
 	}
 }
