@@ -1,5 +1,5 @@
 ﻿public struct StatsGoodsElement
 {
 	public int goodsId;
-	public int pointCount;
+	public int limitAmount;
 }

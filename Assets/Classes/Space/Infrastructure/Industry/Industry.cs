@@ -9,5 +9,7 @@
 	{
 		this.construction = construction == null ? new IndustryConstruction[0] : construction;
 		this.parent = parent;
+		stats = new IndustryStats();
+		stats.CalculateStats(this);
 	}
 }

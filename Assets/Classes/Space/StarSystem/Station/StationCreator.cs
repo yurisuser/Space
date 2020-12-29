@@ -12,8 +12,7 @@ public static class StationCreator
 				position = GetRNDPosition()
 			};
 			st.storage = StorageCreator.CreateStorage(null, st);
-			st.industry = new Industry(st, null);
-			st.industry.construction = TestAddIdustryConstruction();
+			st.industry = IndustryCreator.TestCreateFullIndustry(st);
 			st.storage.AddTestResources(st);
 		result[i] = st;
 		}
@@ -47,7 +46,7 @@ public static class StationCreator
 	{
 		return new IndustryConstruction[] {
 			new IndustryConstruction {
-					recipe = Data.productRecipeArr[1],
+					recipe = Data.productRecipeArr[0],
 					stageProcess = 0,
 					state = EProducingState.finished
 			} 

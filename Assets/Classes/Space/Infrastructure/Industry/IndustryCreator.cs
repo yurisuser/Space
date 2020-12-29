@@ -11,6 +11,7 @@ public static class IndustryCreator
 		if (body.resourcer == null)
 		{
 			industry.construction = new IndustryConstruction[] { CreateIndustryConstruction(null) };
+			industry.stats.CalculateStats(industry);
 			return industry;
 		}
 		for (int i = 0; i < body.resourcer.resourceDeposits.Length; i++)
@@ -18,6 +19,7 @@ public static class IndustryCreator
 			constructions.Add(CreateIndustryConstruction(body.resourcer.resourceDeposits[i]));
 		}
 		industry.construction = constructions.ToArray();
+		industry.stats.CalculateStats(industry);
 		return industry;
 	}
 

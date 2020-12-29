@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StationSysMapScr : MonoBehaviour
@@ -20,8 +18,9 @@ public class StationSysMapScr : MonoBehaviour
 
 	private void OnMouseDown()
 	{
+        Debug.Log("-----");
         Utilities.ShowMeObject(st.industry);
-        Utilities.ShowMeObject(st.storage.GetStorage());
+        //Utilities.ShowMeObject(st.storage.GetStorage());
     }
 
 	public void SetIndexes(int starIndex, int stationIndex)
