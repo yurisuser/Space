@@ -11,9 +11,10 @@ public static class StationCreator
 			{
 				position = GetRNDPosition()
 			};
-			st.storage = StorageCreator.CreateStorage(TestAddResources(10), st);
+			st.storage = StorageCreator.CreateStorage(null, st);
 			st.industry = new Industry(st, null);
 			st.industry.construction = TestAddIdustryConstruction();
+			st.storage.AddTestResources(st);
 		result[i] = st;
 		}
 		return result;

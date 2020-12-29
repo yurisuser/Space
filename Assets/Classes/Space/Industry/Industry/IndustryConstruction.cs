@@ -9,12 +9,12 @@ public class IndustryConstruction
 	//TODO resourceDeposit доделать
 	public void SetRecipe(Data.Recipe recipe)
 	{
-		//TODO доделать
 		if (recipe == null)
 		{
-			this.recipe = recipe;
-			stageProcess = 0;
 			state = EProducingState.empty;
 		}
+		this.recipe = recipe;
+		stageProcess = 0;
+		state = EProducingState.finished;
 	}
 }

@@ -58,13 +58,13 @@ public static class IndustryCreator
 						result[index] = new GoodsStack
 						{
 							id = result[index].id,
-							quantity = result[index].quantity + (int)(industry.construction[c].recipe.perTurn[r].amount * Settings.Industry.PROCESSING_RESERV_STEPS * -1)
+							quantity = result[index].quantity + (int)(industry.construction[c].recipe.perTurn[r].amount * Settings.Industry.PROCESSING_RESERV_TURN * -1)
 						};
 						continue;
 					}
 					result.Add(new GoodsStack {
 						id = result[index].id,
-						quantity = (int)(industry.construction[c].recipe.perTurn[r].amount * Settings.Industry.PROCESSING_RESERV_STEPS * -1)
+						quantity = (int)(industry.construction[c].recipe.perTurn[r].amount * Settings.Industry.PROCESSING_RESERV_TURN * -1)
 					});
 				}
 			}

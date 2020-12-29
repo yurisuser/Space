@@ -55,6 +55,24 @@ public class Storage
 	{
 		return goodsArr;
 	}
+
+	public void AddTestResources(SubStarBody body)
+	{
+		foreach (var construction in body.industry.construction)
+		{
+			foreach (var item in construction.recipe.perTurn)
+			{
+				if (item.amount < 0)
+				{
+					Add(new GoodsStack
+					{
+						id = item.goodsId,
+						quantity = (int)(item.amount * Settings.Industry.PROCESSING_RESERV_TURN * -1)
+					}); ;
+				}
+			}
+		}
+	}
 	private void DeleteStack(int index)
 	{
 		List<GoodsStack> result = new List<GoodsStack>();
