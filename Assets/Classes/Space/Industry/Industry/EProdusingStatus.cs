@@ -3,5 +3,6 @@
 	work,
 	finished,
 	deficitRecorces,
-	pause
+	pause,
+	empty
 }

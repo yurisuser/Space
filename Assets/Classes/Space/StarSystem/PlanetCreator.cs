@@ -17,9 +17,8 @@ public static class PlanetCreator
 			orbitNumber = numberPlanet,
 			angleOnOrbit = 15 * numberPlanet
 		};
-		//planet.industry = new Industry(planet);
-		//planet.industry.construction = GetIndustrialPoints(planet);
 		planet.resourcer = GetResourcer(planet);
+		planet.industry = IndustryCreator.TestCreateFullIndustry(planet);
 		return planet;
 	}
 

@@ -9,4 +9,9 @@
 		this.resourceDeposits = resourceDeposits == null ? new ResourceDeposit[0] : resourceDeposits;
 		this.parent = parent;
 	}
+
+	public ResourceDeposit[] GetResources()
+	{
+		return resourceDeposits;
+	}
 }
