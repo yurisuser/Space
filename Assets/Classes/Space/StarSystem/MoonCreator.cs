@@ -29,6 +29,8 @@ public static class MoonCreator
 			type = GetMoonType(planet.type)
 		};
 		moon.resourcer = GetResourcer(moon);
+		moon.storage = new Storage(0, new GoodsStack[0]);
+		moon.industry = IndustryCreator.TestCreateFullIndustry(moon);
 		return moon;
 	}
 

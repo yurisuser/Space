@@ -15,8 +15,8 @@ public class Gmgr : MonoBehaviour
 		PrefabService.Init();
 		GalaxyCreator.CreateGalaxy();
 		///
-		LoadSceneGalaxy();
-		//LoadSceneStarSystem(11);
+		//LoadSceneGalaxy();
+		LoadSceneStarSystem(11);
 		///
 		Turner.TimeTrigger += TurnUpdate;
 		Turner.GoStream();

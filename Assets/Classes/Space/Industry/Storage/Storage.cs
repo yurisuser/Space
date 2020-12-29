@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public struct Storage
+public class Storage
 {
 	private GoodsStack[] goodsArr;
 	public readonly int limit;

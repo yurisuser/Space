@@ -10,29 +10,35 @@ public static class IndustryCreator
 		List<IndustryConstruction> constructions = new List<IndustryConstruction>();
 		if (body.resourcer == null)
 		{
-			industry.construction = new IndustryConstruction[] { GetIndustryConstruction(null) };
+			industry.construction = new IndustryConstruction[] { CreateIndustryConstruction(null) };
 			return industry;
 		}
 		for (int i = 0; i < body.resourcer.resourceDeposits.Length; i++)
 		{
-			constructions.Add(GetIndustryConstruction(body.resourcer.resourceDeposits[i]));
+			constructions.Add(CreateIndustryConstruction(body.resourcer.resourceDeposits[i]));
 		}
+		industry.construction = constructions.ToArray();
 		return industry;
 	}
 
-	private static IndustryConstruction GetIndustryConstruction(ResourceDeposit deposit)
+	private static IndustryConstruction CreateIndustryConstruction(ResourceDeposit deposit)
 	{
-		Recipe recipe = deposit == null ?
-			(Recipe)productRecipeArr[Random.Range(0, productRecipeArr.Length - 1)] :
-			(Recipe)miningRecipesArr[Random.Range(0, miningRecipesArr.Length - 1)];
-
-		IndustryConstruction industryConstruction = new IndustryConstruction()
+		IndustryConstruction industryConstruction = new IndustryConstruction();
+		Recipe recipe;
+		if (deposit == null)
 		{
-			resourceDeposit = deposit,
-			stageProcess = 0,
-			state = EProducingState.finished,
-			recipe = recipe
-		};
+			recipe = (Recipe)productRecipeArr[Random.Range(0, productRecipeArr.Length - 1)];
+		}
+		else
+		{
+			recipe = (Recipe)miningRecipesArr[Random.Range(0, miningRecipesArr.Length - 1)];
+			deposit.isExistConstruction = true;
+		}
+
+		industryConstruction.resourceDeposit = deposit;
+		industryConstruction.stageProcess = 0;
+		industryConstruction.state = EProducingState.finished;
+		industryConstruction.recipe = recipe;
 
 		return industryConstruction;
 	}
