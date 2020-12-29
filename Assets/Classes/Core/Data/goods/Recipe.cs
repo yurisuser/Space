@@ -26,10 +26,17 @@ public partial struct Data
 		private PerTurn[] CalcPerTurn()
 		{
 			List<PerTurn> result = new List<PerTurn>();
+
+			foreach (var item in production)
+			{
+				result.Add(new PerTurn(item.id, item.quantity / (float)duration));
+			}
+
 			foreach (var item in resources)
 			{
 				result.Add(new PerTurn(item.id, item.quantity / (float)duration * -1));
 			}
+
 			return result.ToArray();
 		}
 	}

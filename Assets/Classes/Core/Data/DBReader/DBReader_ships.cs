@@ -23,7 +23,6 @@ public partial struct Data
 				result.Add(param);
 			}
 			reader.Close();
-			Utilities.ShowMeObject(result);
 			return result.ToArray();
 		}
 	}
