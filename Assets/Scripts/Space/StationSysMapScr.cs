@@ -19,8 +19,9 @@ public class StationSysMapScr : MonoBehaviour
 	private void OnMouseDown()
 	{
         Debug.Log("-----");
-        Utilities.ShowMeObject(st.industry);
-        //Utilities.ShowMeObject(st.storage.GetStorage());
+		//Utilities.ShowMeObject(st.industry);
+		Utilities.ShowMeObject(st.storage.GetStorage());
+		Utilities.ShowMeObject(st.market);
     }
 
 	public void SetIndexes(int starIndex, int stationIndex)

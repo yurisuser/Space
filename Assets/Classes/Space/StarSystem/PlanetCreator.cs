@@ -20,6 +20,7 @@ public static class PlanetCreator
 		planet.resourcer = GetResourcer(planet);
 		planet.storage = StorageCreator.CreateStorage(null, planet);
 		planet.industry = IndustryCreator.TestCreateFullIndustry(planet);
+		planet.market = MarketCreator.CreateMarket(planet);
 		return planet;
 	}
 

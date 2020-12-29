@@ -14,6 +14,7 @@ public abstract class SubStarBody: ISystemPosition
 	public Resourcer resourcer;
 	public Industry industry;
 	public Storage storage;
+	public Market market;
 
 	public SubStarBody()
 	{

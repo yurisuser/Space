@@ -14,6 +14,7 @@ public static class StationCreator
 			st.storage = StorageCreator.CreateStorage(null, st);
 			st.industry = IndustryCreator.TestCreateFullIndustry(st);
 			st.storage.AddTestResources(st);
+			st.market = MarketCreator.CreateMarket(st);
 		result[i] = st;
 		}
 		return result;

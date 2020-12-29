@@ -31,6 +31,7 @@ public static class MoonCreator
 		moon.resourcer = GetResourcer(moon);
 		moon.storage = StorageCreator.CreateStorage(null, planet);
 		moon.industry = IndustryCreator.TestCreateFullIndustry(moon);
+		moon.market = MarketCreator.CreateMarket(moon);
 		return moon;
 	}
 
