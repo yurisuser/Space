@@ -18,7 +18,7 @@ public static class PlanetCreator
 			angleOnOrbit = 15 * numberPlanet
 		};
 		planet.resourcer = GetResourcer(planet);
-		planet.storage = new Storage(0, new GoodsStack[0]);
+		planet.storage = StorageCreator.CreateStorage(null, planet);
 		planet.industry = IndustryCreator.TestCreateFullIndustry(planet);
 		return planet;
 	}

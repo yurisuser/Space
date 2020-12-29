@@ -4,19 +4,17 @@ using System.Linq;
 
 public class Storage
 {
-	private GoodsStack[] goodsArr;
-	public readonly int limit;
+	private SubStarBody parent;
+	private GoodsStack[] goodsArr = new GoodsStack[0];
 
-	public Storage(int limit, GoodsStack[] goodsArr)
+	public Storage(SubStarBody body)
 	{
-		this.limit = limit;
-		this.goodsArr = goodsArr;
+		parent = body;
 	}
 
 	public bool Add(GoodsStack stack)
 	{
 		if (stack.quantity <= 0) return false;
-		if (!isEnoughSpace(stack.quantity)) return false;
 		if (goodsArr == null) goodsArr = new GoodsStack[0];
 		int index = Array.FindIndex(goodsArr, x => x.id == stack.id);
 		if (index >=  0)
@@ -46,13 +44,6 @@ public class Storage
 		return Array.Exists(goodsArr, x => x.id == stack.id && x.quantity >= stack.quantity);
 	}
 
-	public bool isEnoughSpace(int newValue)
-	{
-		if (limit == 0) return true;
-		int newSumm = goodsArr.Sum(x => x.quantity) + newValue;
-		if (newSumm <= limit) return true;
-		return false;
-	}
 
 	public int GetGoodsAmount(int id)
 	{
