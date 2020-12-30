@@ -2,6 +2,6 @@
 {
 	public struct Industry
 	{
-		public static readonly int PROCESSING_RESERV_TURN = 1000;
+		public static readonly int PROCESSING_RESERV_TURN = 30;
 	}
 }

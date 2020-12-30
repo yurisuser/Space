@@ -12,6 +12,8 @@ public partial struct Data
 
 	public static Goods GetGoodsById(int id)
 	{
-		return Array.Find(goodsArr, x => x.id == id);
+		int index = Array.FindIndex(goodsArr, x => x.id == id);
+		if (index == -1) throw new Exception($"Cant find goods by ID: ({id}), Data");
+		return goodsArr[index];
 	}
 }

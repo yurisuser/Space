@@ -1,54 +1,40 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 public class Market
 {
 	private SubStarBody parent;
-	public List<GoodsOffer> sellOffers = new List<GoodsOffer>();
-	public List<GoodsOffer> purchaseOffers = new List<GoodsOffer>();
 
 	public Market(SubStarBody subStarBody)
 	{
 		parent = subStarBody;
-		Init();
 	}
 
-	private void Init()
+	public GoodsOffer GetOffer(int goodsId)
 	{
-		if (parent.industry == null || parent.industry.construction == null) return;
+		var limit = Array.Find(parent.industry.stats.elements, x => x.goodsId == goodsId).limitAmount;
+		if (limit == 0) return null;
+		var amount = parent.storage.GetGoodsAmount(goodsId);
+		return new GoodsOffer(
+			goodsId: goodsId,
+			limit: limit,
+			amount: amount
+			);
 	}
 
-	public void UpdateOffer(int goodsId)
+	public GoodsOffer[] GetAllOffers()
 	{
-		int index = sellOffers.FindIndex(x => x.goodsId == goodsId);
-		if (index < 0)
+		GoodsStack[] arr = parent.storage.GetStorage();
+		var limits = parent.industry.stats.elements;
+		List<GoodsOffer> result = new List<GoodsOffer>();
+		for (int i = 0; i < limits.Length; i++)
 		{
-			index = purchaseOffers.FindIndex(x => x.goodsId == goodsId);
+			result.Add(new GoodsOffer(
+				goodsId: limits[i].goodsId,
+				limit: limits[i].limitAmount,
+				amount: Array.Find(arr, x => x.id == limits[i].goodsId).quantity
+				));
 		}
-		//////////////////////////////////////////////
-	}
-
-	public void AddSellOffer(int goodsId)
-	{
-		int index = sellOffers.FindIndex(x => x.goodsId == goodsId);
-		if (index > -1)
-		{
-			sellOffers[index].goodsAmount = parent.storage.GetGoodsAmount(goodsId);
-			return;
-		}
-		sellOffers.Add(new GoodsOffer {
-			goodsId = goodsId,
-			goodsAmount = parent.storage.GetGoodsAmount(goodsId),
-			goodsPrice = GetSellPrice(goodsId)
-		});
-	}
-
-	public void AddPurchaseOffer(int goodsId)
-	{
-
-	}
-
-	private int GetSellPrice(int goodsId)
-	{
-		return 1;
+		return result.ToArray();
 	}
 }

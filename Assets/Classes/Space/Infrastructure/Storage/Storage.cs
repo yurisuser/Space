@@ -48,7 +48,7 @@ public class Storage
 
 	public int GetGoodsAmount(int id)
 	{
-		return (Array.Find(goodsArr, x => x.id == id)).quantity;
+		return Array.Find(goodsArr, x => x.id == id).quantity;
 	}
 
 	public GoodsStack[] GetStorage()

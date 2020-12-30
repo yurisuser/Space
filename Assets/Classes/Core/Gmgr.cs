@@ -1,6 +1,4 @@
-﻿using AI;
-using System.Threading;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Gmgr : MonoBehaviour
@@ -42,7 +40,7 @@ public class Gmgr : MonoBehaviour
 		{
 			gmgr = this;
 		} else {
-			Object.Destroy(gameObject);
+			Destroy(gameObject);
 		}
 	}
 

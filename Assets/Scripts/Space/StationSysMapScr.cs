@@ -18,10 +18,15 @@ public class StationSysMapScr : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-        Debug.Log("-----");
+        Debug.Log("-----" + UnityEngine.Random.Range(0,100));
+        var orders = st.market.GetAllOffers();
+		foreach (var item in orders)
+		{
+            Debug.Log($" id {item.goodsId}  amount       {item.goodsAmount} / {item.limit} = {item.fullness}       price {item.goodsPrice}");
+		}
 		//Utilities.ShowMeObject(st.industry);
-		Utilities.ShowMeObject(st.storage.GetStorage());
-		Utilities.ShowMeObject(st.market);
+		//Utilities.ShowMeObject(st.storage.GetStorage());
+		//Utilities.ShowMeObject(st.market);
     }
 
 	public void SetIndexes(int starIndex, int stationIndex)
