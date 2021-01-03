@@ -37,7 +37,7 @@ public static class StationCreator
 			result[i] = new GoodsStack
 			{
 				id = Data.goodsArr[i].id,
-				quantity = count
+				amount = count
 			};
 		}
 		return result;

@@ -32,7 +32,7 @@ public class Market
 			result.Add(new GoodsOffer(
 				goodsId: limits[i].goodsId,
 				limit: limits[i].limitAmount,
-				amount: Array.Find(arr, x => x.id == limits[i].goodsId).quantity
+				amount: Array.Find(arr, x => x.id == limits[i].goodsId).amount
 				));
 		}
 		return result.ToArray();

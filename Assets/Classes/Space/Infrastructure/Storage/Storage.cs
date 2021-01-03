@@ -14,12 +14,12 @@ public class Storage
 
 	public bool Add(GoodsStack stack)
 	{
-		if (stack.quantity <= 0) return false;
+		if (stack.amount <= 0) return false;
 		if (goodsArr == null) goodsArr = new GoodsStack[0];
 		int index = Array.FindIndex(goodsArr, x => x.id == stack.id);
 		if (index > -1)
 		{
-			goodsArr[index].quantity += stack.quantity;
+			goodsArr[index].amount += stack.amount;
 			return true;
 		}
 		goodsArr = goodsArr.Concat(new GoodsStack[] { stack }).ToArray();
@@ -33,22 +33,22 @@ public class Storage
 		int index = Array.FindIndex(goodsArr, x => x.id == stack.id);
 		if (index < 0) 
 			return false;
-		if (goodsArr[index].quantity < stack.quantity) 
+		if (goodsArr[index].amount < stack.amount) 
 			return false;
-		goodsArr[index].quantity -= stack.quantity;
-		if (goodsArr[index].quantity == 0) DeleteStack(index);
+		goodsArr[index].amount -= stack.amount;
+		if (goodsArr[index].amount == 0) DeleteStack(index);
 		return true;
 	}
 
 	public bool isEnoughGoods(GoodsStack stack)
 	{
-		return Array.Exists(goodsArr, x => x.id == stack.id && x.quantity >= stack.quantity);
+		return Array.Exists(goodsArr, x => x.id == stack.id && x.amount >= stack.amount);
 	}
 
 
 	public int GetGoodsAmount(int id)
 	{
-		return Array.Find(goodsArr, x => x.id == id).quantity;
+		return Array.Find(goodsArr, x => x.id == id).amount;
 	}
 
 	public GoodsStack[] GetStorage()
@@ -67,7 +67,7 @@ public class Storage
 					Add(new GoodsStack
 					{
 						id = item.goodsId,
-						quantity = (int)(item.amount * Settings.Industry.PROCESSING_RESERV_TURN * -1)
+						amount = (int)(item.amount * Settings.Industry.PROCESSING_RESERV_TURN * -1)
 					}); ;
 				}
 			}

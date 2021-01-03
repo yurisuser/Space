@@ -1,5 +1,5 @@
 ﻿public struct GoodsStack 
 {
 	public int id;
-	public int quantity;
+	public int amount;
 }

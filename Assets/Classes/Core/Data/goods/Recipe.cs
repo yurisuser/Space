@@ -29,12 +29,12 @@ public partial struct Data
 
 			foreach (var item in production)
 			{
-				result.Add(new PerTurn(item.id, item.quantity / (float)duration));
+				result.Add(new PerTurn(item.id, item.amount / (float)duration));
 			}
 
 			foreach (var item in resources)
 			{
-				result.Add(new PerTurn(item.id, item.quantity / (float)duration * -1));
+				result.Add(new PerTurn(item.id, item.amount / (float)duration * -1));
 			}
 
 			return result.ToArray();

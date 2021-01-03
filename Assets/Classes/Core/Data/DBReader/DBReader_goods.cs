@@ -76,11 +76,11 @@ partial struct Data
 					if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
 					{
 						int goodsId = reader.GetInt32(i);
-						int quantity = reader.GetInt32(i + 1);
+						int amount = reader.GetInt32(i + 1);
 						prod.Add(new GoodsStack()
 						{
 							id = goodsId,
-							quantity = quantity
+							amount = amount
 						});
 					}
 
@@ -91,11 +91,11 @@ partial struct Data
 					if (!reader.IsDBNull(i) && !reader.IsDBNull(i + 1))
 					{
 						int goodId = reader.GetInt32(i);
-						int quantity = reader.GetInt32(i + 1);
+						int amount = reader.GetInt32(i + 1);
 						resources.Add(new GoodsStack()
 						{
 							id = goodId,
-							quantity = quantity
+							amount = amount
 						});
 					}
 				}
@@ -129,7 +129,7 @@ partial struct Data
 					description: reader.GetString(2),
 					duration: reader.GetInt32(3),
 					resources: new GoodsStack[0],
-					production: new GoodsStack[1] { new GoodsStack { id = reader.GetInt32(4), quantity = reader.GetInt32(5) } }
+					production: new GoodsStack[1] { new GoodsStack { id = reader.GetInt32(4), amount = reader.GetInt32(5) } }
 					);
 				result.Add(recipe);
 			}
