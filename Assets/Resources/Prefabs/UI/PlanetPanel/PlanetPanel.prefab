@@ -412,6 +412,7 @@ GameObject:
   - component: {fileID: 8541793019154753551}
   - component: {fileID: 8541793019154753550}
   - component: {fileID: 6406327935551816991}
+  - component: {fileID: 104645289408692829}
   m_Layer: 5
   m_Name: PlanetPanel
   m_TagString: Untagged
@@ -514,6 +515,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b8d871da5fb384eb1b5ff0ba74a735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!222 &104645289408692829
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8541793019154753544}
+  m_CullTransparentMesh: 0
 --- !u!1001 &264704697250108538
 PrefabInstance:
   m_ObjectHideFlags: 0

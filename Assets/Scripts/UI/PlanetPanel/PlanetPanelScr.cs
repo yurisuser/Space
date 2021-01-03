@@ -30,6 +30,8 @@ public class PlanetPanelScr : MonoBehaviour
 	{
         Transform planetPanel = transform.Find("res");
         planetPanel.GetComponent<PreviewerBuilderScr>().CreatePreview(body, transform);
-        transform.Find("res").Find("Text").GetComponent<Text>().text = $"available resource: {planetPanel.GetComponent<PreviewerBuilderScr>().GetCountResources()}";
+        transform.Find("res").Find("Text").GetComponent<Text>().text =
+            $"available resource: {planetPanel.GetComponent<PreviewerBuilderScr>().GetCountResources()}";
+
     }
 }

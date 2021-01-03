@@ -39,15 +39,6 @@ public static class Utilities
 			return cam.transform.gameObject;
 		}
 	}
-	public static bool CheckRaycastWithoutUI(Camera cam, string objectName)
-	{
-		RaycastHit hit;
-		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-		if (!Physics.Raycast(ray, out hit)) return false;
-		if (EventSystem.current.IsPointerOverGameObject()) return false;
-		if (hit.collider.gameObject.name == objectName) return true;
-		return false;
-	}
 
 	public static void ShowMe(int numstr, dynamic str)
 	{

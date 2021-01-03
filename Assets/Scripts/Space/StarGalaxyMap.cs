@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class StarGalaxyMap : MonoBehaviour
 {
@@ -13,9 +14,7 @@ public class StarGalaxyMap : MonoBehaviour
 	}
 	private void OnMouseDown()
 	{
-		if(Utilities.CheckRaycastWithoutUI(cam, gameObject.name))
-		{
-			Gmgr.gmgr.LoadSceneStarSystem(Convert.ToInt32(starsArrayIndex));
-		}
+		if (EventSystem.current.IsPointerOverGameObject()) return;
+		Gmgr.gmgr.LoadSceneStarSystem(Convert.ToInt32(starsArrayIndex));
 	}
 }

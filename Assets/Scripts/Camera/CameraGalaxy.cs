@@ -37,8 +37,9 @@ public class CameraGalaxy : MonoBehaviour
 
     void MoveCamera()
 	{
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         if (!Input.GetMouseButton(0) && !Cursor.visible) Cursor.visible = true;
-        if (Input.GetMouseButton(0) && Utilities.CheckRaycastWithoutUI(cam, BackgroundObjectName))
+        if (Input.GetMouseButton(0))
 		{
 			Cursor.visible = false;
 			transform.position += (mouseOldPosition - mousePosition)  * SpeedCamMove;
@@ -76,7 +77,7 @@ public class CameraGalaxy : MonoBehaviour
 	//}
 
 	void SetZoom()	{
-        if (Input.GetAxis("Mouse ScrollWheel") == 0 || !Utilities.CheckRaycastWithoutUI(cam, BackgroundObjectName)) return;
+        if (Input.GetAxis("Mouse ScrollWheel") == 0) return;
         if (Input.GetAxis("Mouse ScrollWheel") > 0) targetOrthographicSize 
                 += settings.STEP_ZOOM / (settings.MAX_ZOOM / (cam.orthographicSize + settings.STEP_ZOOM));
         if (Input.GetAxis("Mouse ScrollWheel") < 0) targetOrthographicSize 

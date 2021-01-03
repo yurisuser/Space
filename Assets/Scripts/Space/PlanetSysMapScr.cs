@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlanetSysMapScr : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class PlanetSysMapScr : MonoBehaviour
 
 	private void OnMouseDown()
 	{
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         Utilities.ShowMeObject(planet.storage.GetStorage());
         Utilities.ShowMeObject(planet.industry.stats);
         ShowPlanetPanel();
