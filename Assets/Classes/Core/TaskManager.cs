@@ -6,19 +6,7 @@ public static class TaskManager
 	public static bool isWorkThread = false;
 	public static float elapsedTimeWork = 0;
 
-	private static Task task;
 	private static Stopwatch watch = new Stopwatch();
-
-
-	public static bool isAllFinished
-	{
-		get
-		{
-			if (task == null) return true;
-			if (task.Status == TaskStatus.RanToCompletion) return true;
-			return false;
-		}
-	}
 
 	public static async void Tick()
 	{

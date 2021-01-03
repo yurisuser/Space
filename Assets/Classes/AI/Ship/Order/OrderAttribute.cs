@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace AI
 {
@@ -7,13 +8,15 @@ namespace AI
 		public Vector3 destinationOrder;
 		public Vector3 destinationStep;
 		public Vector3 currentPosition;
+		public Queue<Vector3> wayPoints;
 
 		public OrderAttribute Clone()
 		{
 			return new OrderAttribute {
 				destinationOrder = destinationOrder,
 				destinationStep = destinationStep,
-				currentPosition = currentPosition
+				currentPosition = currentPosition,
+				wayPoints = wayPoints,
 			};
 		}
 	}

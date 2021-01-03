@@ -14,8 +14,5 @@ public class Ship : ISystemPosition
 		get => order.attribute.currentPosition;
 		set => order.attribute.currentPosition = value;
 	}
-
-	public float speed;
-
 	public Vector3 dest;
 }
