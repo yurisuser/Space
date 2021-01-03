@@ -26,8 +26,8 @@ public static class Turner
 	{
 		if (allowedTimeSteps == 0) return;
 		elapsedTime += Time.deltaTime;
-		if (!TaskManager.isAllFinished) return;
-		
+		if (TaskManager.isWorkThread) return;
+
 		aiDelay.Stop();
 
 		if(elapsedTime > turn_length)
@@ -47,7 +47,6 @@ public static class Turner
 		if (elapsedTime * TIME_BUFFER < MIN_TURN_LENGTH) 
 			return MIN_TURN_LENGTH;
 		float aiDelaySec = aiDelay.ElapsedMilliseconds / 1000f;
-		Utilities.ShowMe(1, $"thread time: {aiDelaySec}");
 		if (aiDelaySec < MIN_TURN_LENGTH) return MIN_TURN_LENGTH;
 		return aiDelaySec * TIME_BUFFER;
 	}

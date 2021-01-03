@@ -24,7 +24,6 @@ public class Gmgr : MonoBehaviour
 	private void Update()
 	{
 		Turner.Update();
-		Utilities.ShowMe(5, TaskManager.isAllFinished);
 	}
 
 	private void TurnUpdate()
