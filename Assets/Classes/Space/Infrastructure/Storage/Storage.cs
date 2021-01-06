@@ -58,7 +58,7 @@ public class Storage
 
 	public void AddTestResources(SubStarBody body)
 	{
-		foreach (var construction in body.industry.construction)
+		foreach (var construction in body.controlCentre.industry.construction)
 		{
 			foreach (var item in construction.recipe.perTurn)
 			{

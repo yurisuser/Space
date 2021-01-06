@@ -12,7 +12,7 @@ namespace AI.AISubStar.Manufacture
 			}
 			foreach (var item in wrapper.module.recipe.resources)
 			{
-				if (!wrapper.body.storage.isEnoughGoods(item)) return EStateNode.SUCCESS;
+				if (!wrapper.body.controlCentre.storage.isEnoughGoods(item)) return EStateNode.SUCCESS;
 			}
 			return EStateNode.FAILURE;
 		}

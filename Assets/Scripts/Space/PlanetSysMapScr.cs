@@ -19,8 +19,8 @@ public class PlanetSysMapScr : MonoBehaviour
 	private void OnMouseDown()
 	{
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        Utilities.ShowMeObject(planet.storage.GetStorage());
-        Utilities.ShowMeObject(planet.industry.stats);
+        Utilities.ShowMeObject(planet.controlCentre.storage.GetStorage());
+        Utilities.ShowMeObject(planet.controlCentre.industry.stats);
         ShowPlanetPanel();
 	}
 

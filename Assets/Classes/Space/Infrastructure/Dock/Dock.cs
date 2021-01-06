@@ -1,18 +1,16 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public struct Dock
+public class Dock
 {
 	public SubStarBody parent;
 	public Ship[] dockedShips;
 	private Queue<Ship> queueDocking;
-	public string name;
 	public int limit;
-	public Dock(SubStarBody parent, int limit, string name) {
+	public Dock(SubStarBody parent, int limit) {
 		this.parent = parent;
 		dockedShips = new Ship[limit];
 		queueDocking = new Queue<Ship>();
-		this.name = name;
 		this.limit = limit;
 	}
 

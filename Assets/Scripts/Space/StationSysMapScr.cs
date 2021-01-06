@@ -19,7 +19,7 @@ public class StationSysMapScr : MonoBehaviour
 	private void OnMouseDown()
 	{
         Debug.Log("-----" + UnityEngine.Random.Range(0,100));
-        var orders = st.market.GetAllOffers();
+        var orders = st.controlCentre.market.GetAllOffers();
 		foreach (var item in orders)
 		{
             Debug.Log($" id {item.goodsId}  amount       {item.goodsAmount} / {item.limit} = {item.fullness}       price {item.goodsPrice}");
@@ -38,7 +38,7 @@ public class StationSysMapScr : MonoBehaviour
     private void Show()
     {
         st = Galaxy.StarSystemsArr[starIndex].StationArr[0];
-        int prodId = st.industry.construction[0].recipe.production[0].id;
-        int indexProd = Array.FindIndex(st.storage.GetStorage(), x => x.id == prodId);
+        int prodId = st.controlCentre.industry.construction[0].recipe.production[0].id;
+        int indexProd = Array.FindIndex(st.controlCentre.storage.GetStorage(), x => x.id == prodId);
     }
 }
