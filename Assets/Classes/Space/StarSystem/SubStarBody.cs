@@ -3,6 +3,7 @@
 public abstract class SubStarBody: ISystemPosition
 {
 	public int id;
+	public int indexStarSystem;
 	public string name;
 	public int type;
 	public ESubStarType subStarType;

@@ -142,16 +142,16 @@ public class SceneStateStarSystem : SceneState
 
 	private void DrawShips()
 	{
-		if (starSystem.ShipsArr.Length < 1) return;
+		if (starSystem.ShipsList.Count < 1) return;
 		GameObject folder = new GameObject { name = folderShipName };
-		for (int i = 0; i < starSystem.ShipsArr.Length; i++)
+		for (int i = 0; i < starSystem.ShipsList.Count; i++)
 		{
 			GameObject go = GameObject.Instantiate(
 				Resources.Load("Prefabs/Ships/TestShip") as GameObject,
-				starSystem.ShipsArr[i].position,
+				starSystem.ShipsList[i].position,
 				Quaternion.identity);
 			go.transform.SetParent(folder.transform);
-			go.GetComponent<ShipScr>().SetShip(starSystem.ShipsArr[i]);
+			go.GetComponent<ShipScr>().SetShip(starSystem.ShipsList[i]);
 		}
 	}
 

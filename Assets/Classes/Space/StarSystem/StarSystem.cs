@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class StarSystem
 {
@@ -8,6 +9,6 @@ public class StarSystem
 	public Vector3 position;
 	public Star star;
 	public PlanetSystem[] planetSystemsArray;
-	public Ship[] ShipsArr;
+	public List<Ship> ShipsList;
 	public Station[] StationArr;
 }

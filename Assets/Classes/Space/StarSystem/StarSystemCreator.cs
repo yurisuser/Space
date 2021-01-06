@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using settings = Settings.Galaxy;
@@ -9,24 +10,24 @@ public static class StarSystemCreator
 {
 	private static float currentGalaxyHandDistance;
 
-	public static StarSystem GetRandomStarSystem(int numberStar)
+	public static StarSystem GetRandomStarSystem(int indexStarSystem)
 	{
-		Star star = CreateStar();
+		Star star = CreateStar(indexStarSystem);
 		return new StarSystem
 		{
 			id = Galaxy.GetNextId(),
-			indexSystem = numberStar,
+			indexSystem = indexStarSystem,
 			star = star,
-			position = GetStarSistemPosition(numberStar),
+			position = GetStarSistemPosition(indexStarSystem),
 			planetSystemsArray = CreatePlanetSystems(star),
 			galaxyHandDistance = currentGalaxyHandDistance,
 
-			ShipsArr = ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM),
+			ShipsList = new List<Ship>(ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM, indexStarSystem)),
 			StationArr = StationCreator.CreateTestStation(Settings.TEST.TEST_STATIONS_IN_SYSTEM)
 		};
 	}
 
-	private static Star CreateStar()
+	private static Star CreateStar(int index)
 	{
 		int[] probabilitysStarsArr = new int[Data.starsArr.Length];
 		probabilitysStarsArr[0] = Data.starsArr[0].probability;
@@ -46,7 +47,7 @@ public static class StarSystemCreator
 			}
 		}
 		string name = "St" + id.ToString();
-		Star star = new Star(id, type, name);
+		Star star = new Star(id, type, name, index);
 		return star;
 	}
 

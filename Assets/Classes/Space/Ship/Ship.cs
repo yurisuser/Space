@@ -9,10 +9,11 @@ public class Ship : ISystemPosition
 	public GoodsStack cargohold;
 	public Order order;
 	public Dock homeBase;
-	public EDockingState dockingState = EDockingState.undocked;
+	public Location location;
+	public EShipState state = EShipState.inSpace;
+	public Vector3 dest;
 	public Vector3 position {
 		get => order.attribute.currentPosition;
 		set => order.attribute.currentPosition = value;
 	}
-	public Vector3 dest;
 }

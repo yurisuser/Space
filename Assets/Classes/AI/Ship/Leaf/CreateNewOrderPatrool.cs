@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AI.AIShip
 {
-	class CreateNewOrder : Leaf<Ship>
+	class CreateNewOrderPatrool : Leaf<Ship>
 	{
 		private static System.Random rnd = new System.Random();
 		public override EStateNode Tick(Ship ship)

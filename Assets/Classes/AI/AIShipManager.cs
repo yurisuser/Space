@@ -19,9 +19,9 @@ namespace AI.AIShip
 		{
 			for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 			{
-				for (int s = 0; s < Galaxy.StarSystemsArr[i].ShipsArr.Length; s++)
+				for (int s = 0; s < Galaxy.StarSystemsArr[i].ShipsList.Count; s++)
 				{
-					ShipDo(Galaxy.StarSystemsArr[i].ShipsArr[s]);
+					ShipDo(Galaxy.StarSystemsArr[i].ShipsList[s]);
 				}
 			}
 		}

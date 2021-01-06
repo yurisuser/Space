@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Dock
@@ -24,21 +25,24 @@ public class Dock
 		int indexFreeDockSlot = GetIndexFreeDockingSlot();
 		if (indexFreeDockSlot >= 0)
 		{
-			ship.dockingState = EDockingState.docked;
+			ship.state = EShipState.docked;
+			ship.location.subStarBody = parent;
 			dockedShips[indexFreeDockSlot] = ship;
+			Galaxy.StarSystemsArr[ship.location.indexStarSystem].ShipsList.Remove(ship);
 			return true;
 		}
-		ship.dockingState = EDockingState.inQueue;
+		ship.state = EShipState.inQueue;
 		queueDocking.Enqueue(ship);
 		return true;
 	}
 
-	public Ship Undocking(int index)
+	public Ship Undocking(Ship ship)
 	{
-		Ship ship = dockedShips[index];
-		dockedShips[index] = null;
-		ship.dockingState = EDockingState.undocked;
+		int index = Array.FindIndex(dockedShips, x => x.id == ship.id);
+		ship.state = EShipState.inSpace;
+		Galaxy.StarSystemsArr[ship.location.indexStarSystem].ShipsList.Add(ship);
 		ship.position = new Vector3(parent.position.x, parent.position.y, Settings.StarSystem.SYSTEM_SHIPS_LAYER);
+		dockedShips[index] = null;
 		QueueToDock();
 		return ship;
 	}

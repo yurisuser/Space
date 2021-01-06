@@ -20,6 +20,12 @@ public class ControlCentre
 		this.dock = AddDock();
 	}
 
+	public bool IsDockingEnable(Ship ship)
+	{
+		return true;
+	}
+
+	#region private
 	private Dock AddDock()
 	{
 		if (this.dock != null) return this.dock;
@@ -43,4 +49,5 @@ public class ControlCentre
 		if (this.storage != null) return this.storage;
 		return StorageCreator.CreateStorage(null, body);
 	}
+	#endregion
 }

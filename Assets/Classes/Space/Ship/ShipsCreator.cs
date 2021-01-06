@@ -3,7 +3,7 @@ using AI;
 
 public static class ShipsCreator
 {
-	public static Ship[] CreateRandomShips(int shipsAmaunt)
+	public static Ship[] CreateRandomShips(int shipsAmaunt, int indexStarsystem)
 	{
 		Ship[] shipsArr = new Ship[shipsAmaunt];
 		for (int i = 0; i < shipsAmaunt; i++)
@@ -23,7 +23,13 @@ public static class ShipsCreator
 						currentPosition = position,
 					}
 				},
-				param = Data.shipsParamArr[0]
+				param = Data.shipsParamArr[0],
+				state = EShipState.inSpace,
+				location = new Location {
+					indexStarSystem = indexStarsystem,
+					subStarBody = null
+
+				}
 			};
 
 			if (ship.id == 1018)

@@ -9,6 +9,7 @@ namespace AI
 		public Vector3 destinationStep;
 		public Vector3 currentPosition;
 		public Queue<Vector3> wayPoints;
+		public Dock dock;
 
 		public OrderAttribute Clone()
 		{
@@ -17,6 +18,7 @@ namespace AI
 				destinationStep = destinationStep,
 				currentPosition = currentPosition,
 				wayPoints = wayPoints,
+				dock = dock,
 			};
 		}
 	}

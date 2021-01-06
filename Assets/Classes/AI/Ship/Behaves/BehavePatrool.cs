@@ -7,7 +7,7 @@
 			behav = new Sequence<Ship>(
 				new Selector<Ship>(
 					new IsValidOrder(),
-					new CreateNewOrder()
+					new CreateNewOrderPatrool()
 					),
 				new NextStep()
 				);
