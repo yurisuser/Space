@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-using AI;
+using AI.AIShip;
 
 public class ShipScr : MonoBehaviour
 {

@@ -1,4 +1,4 @@
-﻿namespace AI
+﻿namespace AI.AIShip
 {
 	public class Order
 	{

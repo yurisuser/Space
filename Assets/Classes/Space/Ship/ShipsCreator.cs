@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using AI;
+using AI.AIShip;
 
 public static class ShipsCreator
 {
@@ -15,14 +15,6 @@ public static class ShipsCreator
 				dest = getRNDPosition(),
 				id = Galaxy.GetNextId(),
 				name = Random.Range(0, 100).ToString(),
-				order = new Order {
-					e_order = EOrders.DockPatrool,
-					attribute = new OrderAttribute
-					{
-						destinationOrder = destination,
-						currentPosition = position,
-					}
-				},
 				param = Data.shipsParamArr[0],
 				state = EShipState.inSpace,
 				location = new Location {
@@ -31,6 +23,7 @@ public static class ShipsCreator
 
 				}
 			};
+			ship.order = OrderCreator.CreateOrder(AI.EOrders.Patrol, ship);
 
 			if (ship.id == 1018)
 			{

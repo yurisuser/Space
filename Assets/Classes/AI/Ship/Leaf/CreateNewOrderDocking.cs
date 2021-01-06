@@ -19,7 +19,7 @@ namespace AI.AIShip
 		private Order CreateOrder(Ship ship)
 		{
 			SubStarBody body = GetRandomDock(ship);
-			Order result = OrderCreator.CreateOrder(EOrders.DockPatrool);
+			Order result = OrderCreator.CreateOrder(EOrders.DockPatrool, ship);
 			OrderAttribute attr = new OrderAttribute();
 			attr.currentPosition = ship.order.attribute.currentPosition == null ? GetNewPoint(): ship.order.attribute.currentPosition;
 			attr.destinationOrder = body.position;
