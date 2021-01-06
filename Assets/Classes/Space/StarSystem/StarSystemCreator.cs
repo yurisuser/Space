@@ -15,6 +15,7 @@ public static class StarSystemCreator
 		return new StarSystem
 		{
 			id = Galaxy.GetNextId(),
+			indexSystem = numberStar,
 			star = star,
 			position = GetStarSistemPosition(numberStar),
 			planetSystemsArray = CreatePlanetSystems(star),

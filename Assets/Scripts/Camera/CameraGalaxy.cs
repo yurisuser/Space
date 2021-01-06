@@ -4,7 +4,6 @@ using UnityEngine.EventSystems;
 using settings = Settings.CameraGalaxy;
 public class CameraGalaxy : MonoBehaviour
 {
-    private readonly string BackgroundObjectName = "BackgroundGalaxy";
     private Camera cam;
     private Vector3 position;
     private Vector3 mousePosition, mouseOldPosition, mouseZoomPosition;
