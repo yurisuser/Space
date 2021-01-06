@@ -7,7 +7,8 @@ namespace AI.AIShip
 		public static Dictionary<EOrders, AIBehaviour<Ship>> BehavioursShip = new Dictionary<EOrders, AIBehaviour<Ship>>()
 		{
 			{ EOrders.Idle, new BehavIdle() },
-			{ EOrders.Patrol, new BehavePatrool() }
+			{ EOrders.Patrol, new BehavePatrool() },
+			{ EOrders.DockPatrool, new BehaveRandomDocking() }
 		};
 
 		public static void Tick()

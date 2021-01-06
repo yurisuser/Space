@@ -12,6 +12,9 @@ namespace AI.AIShip
 				case EOrders.Patrol:
 					return Patrool();
 
+				case EOrders.DockPatrool:
+					return DockPatrool();
+
 				default:
 					throw new System.Exception("Error OrderCreator: unknown orderType");
 			}
@@ -29,6 +32,12 @@ namespace AI.AIShip
 					destinationOrder = getRNDPosition(),
 				}
 			};
+			return order;
+		}
+
+		private static Order DockPatrool()
+		{
+			Order order = new Order() { };
 			return order;
 		}
 

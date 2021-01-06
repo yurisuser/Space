@@ -26,7 +26,7 @@ public class Dock
 		if (indexFreeDockSlot >= 0)
 		{
 			ship.state = EShipState.docked;
-			ship.location.subStarBody = parent;
+			ship.location.dock = parent.controlCentre.dock;
 			dockedShips[indexFreeDockSlot] = ship;
 			Galaxy.StarSystemsArr[ship.location.indexStarSystem].ShipsList.Remove(ship);
 			return true;

@@ -16,7 +16,7 @@ public static class ShipsCreator
 				id = Galaxy.GetNextId(),
 				name = Random.Range(0, 100).ToString(),
 				order = new Order {
-					e_order = EOrders.Patrol,
+					e_order = EOrders.DockPatrool,
 					attribute = new OrderAttribute
 					{
 						destinationOrder = destination,
@@ -27,7 +27,7 @@ public static class ShipsCreator
 				state = EShipState.inSpace,
 				location = new Location {
 					indexStarSystem = indexStarsystem,
-					subStarBody = null
+					dock = null
 
 				}
 			};

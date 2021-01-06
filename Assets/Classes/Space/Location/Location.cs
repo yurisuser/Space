@@ -8,6 +8,6 @@ using UnityEngine;
 public class Location
 {
 	public int indexStarSystem;
-	public SubStarBody subStarBody;
+	public Dock dock;
 }
 
