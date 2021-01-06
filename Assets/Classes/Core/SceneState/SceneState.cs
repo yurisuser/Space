@@ -1,5 +1,5 @@
 ﻿public abstract class SceneState
 {
-	public virtual void DrawScene() { }
+	public abstract void DrawScene();
 	public void ChangeState() { }
 }

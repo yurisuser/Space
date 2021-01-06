@@ -1,5 +1,6 @@
 ﻿using AI.AIShip;
 using AI.AISubStar;
+using System.Threading;
 
 namespace AI
 {
@@ -8,7 +9,7 @@ namespace AI
 		public static void Tick()
 		{
 			AIShipManager.Tick();
-			AISubStarManager.Tick();
+			//AISubStarManager.Tick();
 		}
 	}
 }
