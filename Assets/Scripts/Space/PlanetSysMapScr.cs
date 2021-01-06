@@ -4,6 +4,8 @@ using UnityEngine.EventSystems;
 public class PlanetSysMapScr : MonoBehaviour
 {
     public SubStarBody planet;
+
+    private GameObject panel;
     void Start()
     {
 
@@ -30,12 +32,18 @@ public class PlanetSysMapScr : MonoBehaviour
             Destroy(GameObject.Find(goName));
             return;
 		}
-        GameObject panel = GameObject.Instantiate(
+        panel = GameObject.Instantiate(
             PrefabService.UI.PlanetPanel,
             Vector3.zero,
             Quaternion.identity
             );
         panel.name = goName;
         panel.GetComponent<PlanetPanelScr>().body = planet;
+        UI.Escaper.Add(PlanetPanelDestroy);
+	}
+
+    public void PlanetPanelDestroy()
+	{
+        Destroy(panel);
 	}
 }

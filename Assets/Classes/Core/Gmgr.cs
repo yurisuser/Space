@@ -23,6 +23,7 @@ public class Gmgr : MonoBehaviour
 
 	private void Update()
 	{
+		UI.Escaper.Update();
 		Turner.Update();
 	}
 
@@ -55,6 +56,7 @@ public class Gmgr : MonoBehaviour
 		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
 		SceneManager.LoadScene("StarSystem");
 		sceneState = new SceneStateStarSystem(Galaxy.StarSystemsArr[idStarSystem]);
+		UI.Escaper.Add(LoadSceneGalaxy);
 	}
 
 	private void OnDrawMapAfterLoadScene(Scene arg0, LoadSceneMode arg1)
