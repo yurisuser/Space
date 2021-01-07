@@ -27,8 +27,8 @@ public static class ShipsCreator
 
 			if (ship.id == 1018)
 			{
-				ship.order.attribute.currentPosition = new Vector3(-1000, 0, -3);
-				ship.order.attribute.destinationOrder = new Vector3(1000,0, -3);
+				ship.order.currentPosition = new Vector3(-1000, 0, -3);
+				ship.order.destinationOrder = new Vector3(1000,0, -3);
 			}
 			shipsArr[i] = ship;
 		}

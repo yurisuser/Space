@@ -4,7 +4,7 @@
 	{
 		public override EStateNode Tick(Ship ship)
 		{
-			if (ship.order == null || ship.order.attribute == null || ship.order.attribute.wayPoints == null || ship.order.attribute.wayPoints.Count == 0)
+			if (ship.order == null || ship.order.wayPoints == null || ship.order.wayPoints.Count == 0)
 			{
 				return EStateNode.FAILURE;
 			}

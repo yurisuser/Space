@@ -20,19 +20,19 @@ namespace AI.AIShip
 		{
 			SubStarBody body = GetRandomDock(ship);
 			Order result = OrderCreator.CreateOrder(EOrders.DockPatrool, ship);
-			OrderAttribute attr = new OrderAttribute();
-			attr.currentPosition = ship.order.attribute.currentPosition == null ? GetNewPoint(): ship.order.attribute.currentPosition;
-			attr.destinationOrder = body.position;
-			attr.wayPoints = CalcWayPoints(ship, attr);
+			Order order = new Order();
+			order.currentPosition = ship.order.currentPosition == null ? GetNewPoint(): ship.order.currentPosition;
+			order.destinationOrder = body.position;
+			order.wayPoints = CalcWayPoints(ship, order);
 			return result;
 		}
 
-		private Queue<Vector3> CalcWayPoints(Ship ship, OrderAttribute newAttribute)
+		private Queue<Vector3> CalcWayPoints(Ship ship, Order order)
 		{
 			Queue<Vector3> result = new Queue<Vector3>();
 
-			Vector3 heading = newAttribute.destinationOrder - ship.position;
-			float distance = Vector3.Distance(newAttribute.destinationOrder, newAttribute.currentPosition);
+			Vector3 heading = order.destinationOrder - ship.position;
+			float distance = Vector3.Distance(order.destinationOrder, order.currentPosition);
 			var direction = heading / distance;
 
 			float nextDistance = 0;
@@ -40,11 +40,11 @@ namespace AI.AIShip
 			while (distance - nextDistance >= ship.param.maxSpeed)
 			{
 				nextDistance += ship.param.maxSpeed;
-				Vector3 vec = newAttribute.currentPosition + direction * nextDistance;
+				Vector3 vec = order.currentPosition + direction * nextDistance;
 				vec.z = Settings.StarSystem.SYSTEM_SHIPS_LAYER;
 				result.Enqueue(vec);
 			}
-			result.Enqueue(newAttribute.destinationOrder);
+			result.Enqueue(order.destinationOrder);
 			return result;
 		}
 		private Vector3 GetNewPoint()

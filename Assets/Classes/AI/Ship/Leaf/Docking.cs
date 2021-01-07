@@ -10,7 +10,7 @@ namespace AI.AIShip
 	{
 		public override EStateNode Tick(Ship ship)
 		{
-			ship.order.attribute.dock.ToDocking(ship);
+			ship.order.dock.ToDocking(ship);
 			return EStateNode.SUCCESS;
 		}
 	}

@@ -49,27 +49,27 @@ public class ShipScr : MonoBehaviour
 	{
 		destOrder = GameObject.Instantiate(
 				Resources.Load("Prefabs/Ships/ordDest") as GameObject,
-				order.attribute.destinationOrder,
+				order.destinationOrder,
 				Quaternion.identity);
 
 		destStep = GameObject.Instantiate(
 		Resources.Load("Prefabs/Ships/TestShipOrderDest") as GameObject,
-		order.attribute.destinationOrder,
+		order.destinationOrder,
 		Quaternion.identity);
 		destStep.transform.localScale *= 50;
 	}
 	private void Move()
 	{
-		transform.position = order.attribute.currentPosition;
-		transform.position = Vector3.Lerp(order.attribute.currentPosition, order.attribute.destinationStep, progress);
+		transform.position = order.currentPosition;
+		transform.position = Vector3.Lerp(order.currentPosition, order.destinationStep, progress);
 		progress += Time.deltaTime / Turner.turn_length;
 	}
 
 	private void MoveNavigationPoints()
 	{
-		if (destOrder.transform.position != order.attribute.destinationOrder)
-			destOrder.transform.position = order.attribute.destinationOrder;
-		if (destStep.transform.position != order.attribute.destinationStep)
-			destStep.transform.position = order.attribute.destinationStep;
+		if (destOrder.transform.position != order.destinationOrder)
+			destOrder.transform.position = order.destinationOrder;
+		if (destStep.transform.position != order.destinationStep)
+			destStep.transform.position = order.destinationStep;
 	}
 }

@@ -13,7 +13,7 @@ public class Ship : ISystemPosition
 	public EShipState state = EShipState.inSpace;
 	public Vector3 dest;
 	public Vector3 position {
-		get => order.attribute.currentPosition;
-		set => order.attribute.currentPosition = value;
+		get => order.currentPosition;
+		set => order.currentPosition = value;
 	}
 }

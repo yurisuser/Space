@@ -9,7 +9,7 @@ namespace AI.AIShip {
 	{
 		public override EStateNode Tick(Ship ship)
 		{
-			if (ship.order.attribute.dock.parent.position == ship.position)
+			if (ship.order.dock.parent.position == ship.position)
 			{
 				return EStateNode.SUCCESS;
 			}

@@ -14,10 +14,10 @@ namespace AI.AIShip
 		
 		private Order CreateOrder(Ship ship)
 		{
-			ship.order.attribute.currentPosition = ship.order.attribute.destinationStep;
+			ship.order.currentPosition = ship.order.destinationStep;
 			Order order = ship.order.Clone();
-			order.attribute.destinationOrder = GetNewPoint();
-			order.attribute.wayPoints = CalcWayPoints(ship, order.attribute);
+			order.destinationOrder = GetNewPoint();
+			order.wayPoints = CalcWayPoints(ship, order);
 			return order;			
 		}
 
@@ -30,12 +30,12 @@ namespace AI.AIShip
 				);
 		}
 
-		private Queue<Vector3> CalcWayPoints(Ship ship, OrderAttribute newAttribute)
+		private Queue<Vector3> CalcWayPoints(Ship ship, Order order)
 		{
 			Queue<Vector3> result = new Queue<Vector3>();
 
-			Vector3 heading = newAttribute.destinationOrder - ship.position;
-			float distance = Vector3.Distance(newAttribute.destinationOrder, newAttribute.currentPosition);
+			Vector3 heading = order.destinationOrder - ship.position;
+			float distance = Vector3.Distance(order.destinationOrder, order.currentPosition);
 			var direction = heading / distance;
 
 			float nextDistance = 0;
@@ -43,11 +43,11 @@ namespace AI.AIShip
 			while (distance - nextDistance >= ship.param.maxSpeed)
 			{
 				nextDistance += ship.param.maxSpeed;
-				Vector3 vec = newAttribute.currentPosition + direction * nextDistance;
+				Vector3 vec = order.currentPosition + direction * nextDistance;
 				vec.z = Settings.StarSystem.SYSTEM_SHIPS_LAYER;
 				result.Enqueue(vec);
 			}
-			result.Enqueue(newAttribute.destinationOrder);
+			result.Enqueue(order.destinationOrder);
 			return result;
 		}
 	}
