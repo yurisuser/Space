@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace AI.AIShip
 {
-	class BehaveRandomDocking : AIBehaviour<Ship>
+	class BehaveDockingTest : AIBehaviour<Ship>
 	{
-		public BehaveRandomDocking()
+		public BehaveDockingTest()
 		{
 			behav = new Sequence<Ship>(
 				new Selector<Ship>(
-					new Invertor<Ship> ( new isDockDesigned()),
+					new Invertor<Ship>(new isDockDesigned()),
 					new Docking()
 					),
-				new Selector<Ship> (
+				new Selector<Ship>(
 					new IsValidOrder(),
-					new CreateNewOrderDocking()					
-					)
+					new CreateNewOrder(EOrders.DockingTest)
+					),
+				new NextStep()
+
 				);
 		}
 	}

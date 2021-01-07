@@ -8,7 +8,7 @@ namespace AI.AIShip
 		{
 			{ EOrders.Idle, new BehavIdle() },
 			{ EOrders.Patrol, new BehavePatrool() },
-			{ EOrders.DockPatrool, new BehaveRandomDocking() }
+			{ EOrders.DockingTest, new BehaveDockingTest() }
 		};
 
 		public static void Tick()
@@ -20,17 +20,12 @@ namespace AI.AIShip
 		{
 			for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 			{
-				for (int s = 0; s < Galaxy.StarSystemsArr[i].ShipsList.Count; s++)
+				if (Galaxy.StarSystemsArr[i].ShipsList == null) continue;
+				for (int s = Galaxy.StarSystemsArr[i].ShipsList.Count - 1; s >= 0; s--)
 				{
-					ShipDo(Galaxy.StarSystemsArr[i].ShipsList[s]);
+					BehavioursShip[Galaxy.StarSystemsArr[i].ShipsList[s].order.e_order].Tick(Galaxy.StarSystemsArr[i].ShipsList[s]);
 				}
 			}
 		}
-
-		private static void ShipDo(Ship ship)
-		{
-			BehavioursShip[ship.order.e_order].Tick(ship);
-		}
-
 	}
 }

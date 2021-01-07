@@ -6,8 +6,8 @@ using AI.AIShip;
 public class ShipScr : MonoBehaviour
 {
 	private Order order;
-	private GameObject destOrder;
-	private GameObject destStep;
+	private GameObject destOrderBeacon;
+	private GameObject destStepBeacon;
 	private int currentTurn;
 	private float progress = 0;
 	private Ship ship;
@@ -39,6 +39,7 @@ public class ShipScr : MonoBehaviour
 	{
 		if (currentTurn != Turner.GetCurrentTime())
 		{
+			if (ship.state != EShipState.inSpace) DestroyGO();
 			progress = 0;
 			currentTurn = Turner.GetCurrentTime();
 			order = ship.order.Clone();
@@ -47,16 +48,16 @@ public class ShipScr : MonoBehaviour
 
 	private void DrawDestinations()
 	{
-		destOrder = GameObject.Instantiate(
+		destOrderBeacon = GameObject.Instantiate(
 				Resources.Load("Prefabs/Ships/ordDest") as GameObject,
 				order.destinationOrder,
 				Quaternion.identity);
 
-		destStep = GameObject.Instantiate(
+		destStepBeacon = GameObject.Instantiate(
 		Resources.Load("Prefabs/Ships/TestShipOrderDest") as GameObject,
 		order.destinationOrder,
 		Quaternion.identity);
-		destStep.transform.localScale *= 50;
+		destStepBeacon.transform.localScale *= 50;
 	}
 	private void Move()
 	{
@@ -67,9 +68,16 @@ public class ShipScr : MonoBehaviour
 
 	private void MoveNavigationPoints()
 	{
-		if (destOrder.transform.position != order.destinationOrder)
-			destOrder.transform.position = order.destinationOrder;
-		if (destStep.transform.position != order.destinationStep)
-			destStep.transform.position = order.destinationStep;
+		if (destOrderBeacon.transform.position != order.destinationOrder)
+			destOrderBeacon.transform.position = order.destinationOrder;
+		if (destStepBeacon.transform.position != order.destinationStep)
+			destStepBeacon.transform.position = order.destinationStep;
+	}
+
+	private void DestroyGO()
+	{
+		Destroy(destStepBeacon);
+		Destroy(destOrderBeacon);
+		Destroy(gameObject);
 	}
 }

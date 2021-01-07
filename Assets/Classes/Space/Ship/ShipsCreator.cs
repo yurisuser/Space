@@ -23,7 +23,7 @@ public static class ShipsCreator
 
 				}
 			};
-			ship.order = OrderCreator.CreateOrder(AI.EOrders.Patrol, ship);
+			ship.order = OrderCreator.CreateOrder(AI.EOrders.DockingTest, ship);
 
 			if (ship.id == 1018)
 			{

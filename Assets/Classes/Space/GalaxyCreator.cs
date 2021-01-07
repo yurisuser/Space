@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using UnityEngine;
 using settings = Settings.Galaxy;
 
@@ -13,12 +13,19 @@ public static class GalaxyCreator
 			Galaxy.StarSystemsArr[i] = StarSystemCreator.GetRandomStarSystem(i);
 		}
 		Galaxy.Distances = CalculateStarsDistances();
+		AddShips();
+	}
+
+	private static void AddShips()
+	{
+		//for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
+		//{
+			Galaxy.StarSystemsArr[11].ShipsList = new List<Ship>(ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM, 11));
+		//}
 	}
 
 	private static StarDistance[][] CalculateStarsDistances()
 	{
-		Stopwatch s = new Stopwatch();
-		s.Start();
 		StarDistance[][] result = new StarDistance[settings.STARS_AMMOUNT][];
 		for (int i = 0; i < settings.STARS_AMMOUNT; i++)
 		{
@@ -37,8 +44,6 @@ public static class GalaxyCreator
 				});
 			result[i] = subArr;
 		}
-		s.Stop();
-			UnityEngine.Debug.Log(s.ElapsedMilliseconds);
 		return result;
 	}
 }

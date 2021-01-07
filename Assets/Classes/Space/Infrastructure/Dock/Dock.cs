@@ -19,7 +19,7 @@ public class Dock
 	{
 		return true;
 	}
-	public bool ToDocking(Ship ship)
+	public bool AddToDock(Ship ship)
 	{
 		if (!isDockEnabled()) return false;
 		int indexFreeDockSlot = GetIndexFreeDockingSlot();
@@ -28,7 +28,7 @@ public class Dock
 			ship.state = EShipState.docked;
 			ship.location.dock = parent.controlCentre.dock;
 			dockedShips[indexFreeDockSlot] = ship;
-			Galaxy.StarSystemsArr[ship.location.indexStarSystem].ShipsList.Remove(ship);
+			 if (!Galaxy.StarSystemsArr[ship.location.indexStarSystem].ShipsList.Remove(ship)) throw new Exception();
 			return true;
 		}
 		ship.state = EShipState.inQueue;
@@ -36,7 +36,7 @@ public class Dock
 		return true;
 	}
 
-	public Ship Undocking(Ship ship)
+	public Ship RemoveFromDockToSpace(Ship ship)
 	{
 		int index = Array.FindIndex(dockedShips, x => x.id == ship.id);
 		ship.state = EShipState.inSpace;
@@ -51,7 +51,7 @@ public class Dock
 	{
 		for (int i = 0; i < dockedShips.Length; i++)
 		{
-			if (dockedShips[i] == null) return i;
+			if (dockedShips[i] == default) return i;
 		}
 		return -1;
 	}

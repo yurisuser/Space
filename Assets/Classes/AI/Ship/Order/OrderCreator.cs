@@ -13,8 +13,8 @@ namespace AI.AIShip
 				case EOrders.Patrol:
 					return Patrool(ship);
 
-				case EOrders.DockPatrool:
-					return DockPatrool();
+				case EOrders.DockingTest:
+					return DockTest(ship);
 
 				default:
 					throw new System.Exception("Error OrderCreator: unknown orderType");
@@ -45,9 +45,30 @@ namespace AI.AIShip
 			return order;
 		}
 
-		private static Order DockPatrool()
+		private static Order DockTest(Ship ship)
 		{
-			Order order = new Order() { };
+			Order order;
+			if (ship.order == null)
+			{
+				order = new Order
+				{
+					e_order = EOrders.DockingTest,
+					currentPosition = getRNDPosition(),
+					dock = GetRandomDock(ship).controlCentre.dock,
+				};
+				order.wayPoints = CalcWayPoints(ship, order);
+				order.destinationStep = order.wayPoints.Dequeue();
+			}
+			else
+			{
+				order = ship.order.Clone();
+				order.e_order = EOrders.DockingTest;
+				order.currentPosition = ship.order.currentPosition == default ? getRNDPosition() : ship.order.currentPosition;
+				order.dock = GetRandomDock(ship).controlCentre.dock;
+			}
+			order.destinationOrder = order.dock.parent.position;
+			order.wayPoints = CalcWayPoints(ship, order);
+			order.destinationStep = order.wayPoints.Dequeue();
 			return order;
 		}
 
@@ -79,6 +100,23 @@ namespace AI.AIShip
 			}
 			result.Enqueue(order.destinationOrder);
 			return result;
+		}
+
+		private static SubStarBody GetRandomDock(Ship ship)
+		{
+			List<SubStarBody> list = new List<SubStarBody>();
+			for (int i = 0; i < Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray.Length; i++)
+			{
+				if (Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].planet.controlCentre != null)
+					list.Add(Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].planet);
+				for (int u = 0; u < Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray.Length; u++)
+				{
+					if (Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray[u].controlCentre != null)
+						list.Add(Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray[u]);
+				}
+			}
+			int index = rnd.Next(0, list.Count);
+			return list[index];
 		}
 	}
 }

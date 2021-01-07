@@ -11,6 +11,10 @@ namespace AI.AIShip
 		public override EStateNode Tick(Ship ship)
 		{
 			ship.order.currentPosition = ship.order.destinationStep;
+			if (ship.order.wayPoints.Count == 0) 
+			{
+				return EStateNode.SUCCESS;
+			}
 			ship.order.destinationStep = ship.order.wayPoints.Dequeue();
 			return EStateNode.SUCCESS;
 		}

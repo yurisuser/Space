@@ -22,7 +22,6 @@ public static class StarSystemCreator
 			planetSystemsArray = CreatePlanetSystems(star),
 			galaxyHandDistance = currentGalaxyHandDistance,
 
-			ShipsList = new List<Ship>(ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM, indexStarSystem)),
 			StationArr = StationCreator.CreateTestStation(Settings.TEST.TEST_STATIONS_IN_SYSTEM)
 		};
 	}

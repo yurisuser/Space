@@ -5,6 +5,6 @@
 		Idle,
 		Patrol,
 		MoveToPosition,
-		DockPatrool
+		DockingTest
 	}
 }

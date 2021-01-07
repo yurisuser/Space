@@ -13,12 +13,12 @@ public class Gmgr : MonoBehaviour
 		PrefabService.Init();
 		GalaxyCreator.CreateGalaxy();
 		///
-		LoadSceneGalaxy();
-		//LoadSceneStarSystem(11);
+		//LoadSceneGalaxy();
+		LoadSceneStarSystem(11);
 		///
 		Turner.TimeTrigger += TurnUpdate;
 		Turner.GoStream();
-		TaskManager.Tick();// initial tick
+		//TaskManager.Tick();// initial tick
 	}
 
 	private void Update()
