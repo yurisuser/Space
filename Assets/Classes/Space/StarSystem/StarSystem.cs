@@ -9,6 +9,6 @@ public class StarSystem
 	public Vector3 position;
 	public Star star;
 	public PlanetSystem[] planetSystemsArray;
-	public List<Ship> shipsList;
+	public List<Ship> shipsList = new List<Ship>();
 	public Station[] StationArr;
 }

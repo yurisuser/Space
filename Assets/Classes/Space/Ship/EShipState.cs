@@ -4,4 +4,5 @@
 	docked,
 	docking,
 	undocking,
+	undocked
 }

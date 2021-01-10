@@ -18,10 +18,10 @@ public static class GalaxyCreator
 
 	private static void AddShips()
 	{
-		//for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
-		//{
-			Galaxy.StarSystemsArr[11].shipsList = new List<Ship>(ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM, 11));
-		//}
+		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
+		{
+			Galaxy.StarSystemsArr[i].shipsList = new List<Ship>(ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM, i));
+		}
 	}
 
 	private static StarDistance[][] CalculateStarsDistances()
