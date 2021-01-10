@@ -4,6 +4,9 @@ using UnityEngine.SceneManagement;
 public class Gmgr : MonoBehaviour
 {
 	public static Gmgr gmgr;
+	public static int currentSystemIndex = 0;
+	public EScene currentScene;
+
 	private SceneState sceneState;
 
 	void Start()
@@ -48,14 +51,17 @@ public class Gmgr : MonoBehaviour
 	{
 		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
 		SceneManager.LoadScene("Galaxy");
+		currentScene = EScene.galaxy;
 		sceneState = new SceneStateGalaxy();
 	}
 
-	public void LoadSceneStarSystem(int idStarSystem)
+	public void LoadSceneStarSystem(int indexStarSystem)
 	{
+		currentSystemIndex = indexStarSystem;
 		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
 		SceneManager.LoadScene("StarSystem");
-		sceneState = new SceneStateStarSystem(Galaxy.StarSystemsArr[idStarSystem]);
+		currentScene = EScene.starSystem;
+		sceneState = new SceneStateStarSystem(Galaxy.StarSystemsArr[indexStarSystem]);
 		UI.Escaper.Add(LoadSceneGalaxy);
 	}
 

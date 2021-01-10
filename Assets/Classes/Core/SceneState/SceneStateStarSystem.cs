@@ -1,15 +1,18 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class SceneStateStarSystem : SceneState
 {
-	private readonly string folderSystemObjectName = "StarSystemObjects";
+	private readonly string folderRoot = "ROOT";
 	private readonly string folderShipName = "Ships";
 	private readonly string folderStationName = "Stations";
 	private readonly string folderOrbits = "Orbits";
+	private readonly string folderPlanets = "Planets";
+	private readonly string folderMoons = "Moons";
 	private StarSystem starSystem;
 	private int StarSystemIndexInArr;
 	private Camera cam;
-
+	private GameObject root;
 	public SceneStateStarSystem(StarSystem starSystem)
 	{
 		this.starSystem = starSystem;
@@ -18,7 +21,9 @@ public class SceneStateStarSystem : SceneState
 	{
 		cam = GameObject.Find("Camera").GetComponent<Camera>();
 		cam.orthographicSize = Settings.CameraStarSystem.MAX_ZOOM;
-		new GameObject { name = folderOrbits };
+		root = new GameObject { name = folderRoot };
+		new GameObject {name = folderOrbits}.transform.SetParent(root.transform);
+
 		DrawStar();
 		DrawPlanetsSystem();
 		DrawShips();
@@ -26,13 +31,13 @@ public class SceneStateStarSystem : SceneState
 	}
 
 	private void DrawStar()
-	{
-		GameObject folder = new GameObject { name = folderSystemObjectName };
+	{		
 		GameObject star = GameObject.Instantiate(
 			PrefabService.StarsSystemMap[starSystem.star.type],
 			new Vector3(0, 0, Settings.StarSystem.SYSTEM_SHIPS_LAYER),
 			Quaternion.identity);
-		star.transform.SetParent(folder.transform);
+		star.transform.SetParent(root.transform);
+		star.name = "Star";
 	}
 
 	private void DrawPlanetsSystem()
@@ -44,7 +49,7 @@ public class SceneStateStarSystem : SceneState
 	private void DrawPlanets()
 	{
 
-		GameObject folder = GameObject.Find(folderSystemObjectName);
+		GameObject folder = new GameObject(folderPlanets);
 		for (int i = 0; i < starSystem.planetSystemsArray.Length; i++)
 		{
 			Planet planet = starSystem.planetSystemsArray[i].planet;
@@ -58,6 +63,7 @@ public class SceneStateStarSystem : SceneState
 				planet.mass * Settings.StarSystem.PLANET_SCALE,
 				planet.mass * Settings.StarSystem.PLANET_SCALE);
 			go.transform.SetParent(folder.transform);
+			folder.transform.SetParent(root.transform);
 			DrawMoons(starSystem.planetSystemsArray[i]);
 			DrawMoonsOrbit(starSystem.planetSystemsArray[i]);
 		}
@@ -93,7 +99,8 @@ public class SceneStateStarSystem : SceneState
 
 	private void DrawMoons(PlanetSystem planetSystem)
 	{
-		GameObject folder = GameObject.Find(folderSystemObjectName);
+		var existingFolder = GameObject.Find(folderMoons);
+		GameObject folder = existingFolder == null ? new GameObject(folderMoons) : existingFolder;
 		GameObject obj;
 		Moon moon;
 		for (int i = 0; i < planetSystem.moonsArray.Length; i++)
@@ -108,6 +115,7 @@ public class SceneStateStarSystem : SceneState
 				moon.mass * Settings.StarSystem.MOON_SCALE);
 			obj.transform.SetParent(folder.transform);
 			obj.GetComponent<PlanetSysMapScr>().planet = moon;
+			folder.transform.SetParent(root.transform);
 		}
 	}
 
@@ -146,12 +154,8 @@ public class SceneStateStarSystem : SceneState
 		GameObject folder = new GameObject { name = folderShipName };
 		for (int i = 0; i < starSystem.shipsList.Count; i++)
 		{
-			GameObject go = GameObject.Instantiate(
-				Resources.Load("Prefabs/Ships/TestShip") as GameObject,
-				starSystem.shipsList[i].position,
-				Quaternion.identity);
-			go.transform.SetParent(folder.transform);
-			go.GetComponent<ShipScr>().SetShip(starSystem.shipsList[i]);
+			SceneInstantiator.AddShip(starSystem.shipsList[i], folder.transform);
+			folder.transform.SetParent(root.transform);
 		}
 	}
 
@@ -166,6 +170,7 @@ public class SceneStateStarSystem : SceneState
 				starSystem.StationArr[i].position,
 				Quaternion.identity);
 			go.transform.SetParent(folder.transform);
+			folder.transform.SetParent(root.transform);
 			go.GetComponent<StationSysMapScr>().SetIndexes(StarSystemIndexInArr, i);
 		}
 	}
