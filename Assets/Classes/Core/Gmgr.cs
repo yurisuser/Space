@@ -5,7 +5,7 @@ public class Gmgr : MonoBehaviour
 {
 	public static Gmgr gmgr;
 	public static int currentSystemIndex = 0;
-	public EScene currentScene;
+	public static EScene currentScene;
 
 	private SceneState sceneState;
 
@@ -27,12 +27,14 @@ public class Gmgr : MonoBehaviour
 	private void Update()
 	{
 		UI.Escaper.Update();
+		sceneState.Update();
 		Turner.Update();
 	}
 
 	private void TurnUpdate()
 	{
 		Debug.Log("Turner update tick");
+		sceneState.Tick();
 		TaskManager.Tick();
 	}
 

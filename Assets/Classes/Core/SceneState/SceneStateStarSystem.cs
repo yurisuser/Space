@@ -13,6 +13,7 @@ public class SceneStateStarSystem : SceneState
 	private int StarSystemIndexInArr;
 	private Camera cam;
 	private GameObject root;
+	private GameObject ShipsFolder;
 	public SceneStateStarSystem(StarSystem starSystem)
 	{
 		this.starSystem = starSystem;
@@ -28,6 +29,11 @@ public class SceneStateStarSystem : SceneState
 		DrawPlanetsSystem();
 		DrawShips();
 		DrawStations();
+	}
+
+	public override void Tick()
+	{
+		AddAddingShip();
 	}
 
 	private void DrawStar()
@@ -151,12 +157,32 @@ public class SceneStateStarSystem : SceneState
 	private void DrawShips()
 	{
 		if (starSystem.shipsList.Count < 1) return;
-		GameObject folder = new GameObject { name = folderShipName };
+		ShipsFolder = new GameObject { name = folderShipName };
 		for (int i = 0; i < starSystem.shipsList.Count; i++)
 		{
-			SceneInstantiator.AddShip(starSystem.shipsList[i], folder.transform);
-			folder.transform.SetParent(root.transform);
+			DrawShip(starSystem.shipsList[i]);
+			ShipsFolder.transform.SetParent(root.transform);
 		}
+	}
+
+	public void DrawShip(Ship ship)
+	{
+		GameObject go = GameObject.Instantiate(
+				Resources.Load("Prefabs/Ships/TestShip") as GameObject,
+				ship.position,
+				Quaternion.identity);
+		go.transform.SetParent(ShipsFolder.transform);
+		go.GetComponent<ShipScr>().SetShip(ship);
+	}
+
+	private void AddAddingShip()
+	{
+		for (int i = 0; i < Docker.addingShipToSystemMapScene.Count; i++)
+		{
+			if (Docker.addingShipToSystemMapScene[i].location.indexStarSystem != Gmgr.currentSystemIndex) continue;
+			DrawShip(Docker.addingShipToSystemMapScene[i]);
+		}
+		Docker.addingShipToSystemMapScene.Clear();
 	}
 
 	private void DrawStations()

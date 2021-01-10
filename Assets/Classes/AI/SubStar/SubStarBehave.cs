@@ -5,8 +5,9 @@
 		
 		public SubStarBehave()
 		{
-			behav = new Selector<SubStarBody>(
-				new WorkProducingConstruction()
+			behav = new Sequence<SubStarBody>(
+				new WorkProducingConstruction(),
+				new WorkDock()
 				);
 		}
 

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public static class Docker
 {
+	public static List<Ship> addingShipToSystemMapScene = new List<Ship>();
 	public static void ToDock(Ship ship)
 	{
 		ship.location.dock = ship.order.dock;
@@ -16,5 +18,11 @@ public static class Docker
 		ship.state = EShipState.undocking;
 		Galaxy.StarSystemsArr[ship.location.indexStarSystem].shipsList.Add(ship);
 		ship.order.dock.RemoveFromDock(ship);
+		if (Gmgr.currentScene == EScene.starSystem && ship.location.indexStarSystem == Gmgr.currentSystemIndex) AddToScene(ship);
+	}
+
+	private static void AddToScene(Ship ship) 
+	{
+		addingShipToSystemMapScene.Add(ship);
 	}
 }
