@@ -20,10 +20,10 @@ namespace AI.AIShip
 		{
 			for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 			{
-				if (Galaxy.StarSystemsArr[i].ShipsList == null) continue;
-				for (int s = Galaxy.StarSystemsArr[i].ShipsList.Count - 1; s >= 0; s--)
+				if (Galaxy.StarSystemsArr[i].shipsList == null) continue;
+				for (int s = Galaxy.StarSystemsArr[i].shipsList.Count - 1; s >= 0; s--)
 				{
-					BehavioursShip[Galaxy.StarSystemsArr[i].ShipsList[s].order.e_order].Tick(Galaxy.StarSystemsArr[i].ShipsList[s]);
+					BehavioursShip[Galaxy.StarSystemsArr[i].shipsList[s].order.e_order].Tick(Galaxy.StarSystemsArr[i].shipsList[s]);
 				}
 			}
 		}

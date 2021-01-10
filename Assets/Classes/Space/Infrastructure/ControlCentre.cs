@@ -29,7 +29,7 @@ public class ControlCentre
 	private Dock AddDock()
 	{
 		if (this.dock != null) return this.dock;
-		return new Dock(body, 100);
+		return new Dock(body);
 	}
 
 	private Market AddMarket()

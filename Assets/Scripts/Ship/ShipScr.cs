@@ -5,13 +5,14 @@ using AI.AIShip;
 
 public class ShipScr : MonoBehaviour
 {
+	public int shipId; //for scene
+
 	private Order order;
 	private GameObject destOrderBeacon;
 	private GameObject destStepBeacon;
 	private int currentTurn;
 	private float progress = 0;
 	private Ship ship;
-	public int shipId; //for scene
 	void Start()
 	{
 
@@ -30,16 +31,16 @@ public class ShipScr : MonoBehaviour
 	}
 	void Update()
 	{
-		CheckEndTurn();
+		CheckNextTurn();
 		Move();
-		MoveNavigationPoints();
+		MoveNavigationPoints();		
 	}
 
-	private void CheckEndTurn()
+	private void CheckNextTurn()
 	{
 		if (currentTurn != Turner.GetCurrentTime())
 		{
-			if (ship.state != EShipState.inSpace) DestroyGO();
+			if (ship.state != EShipState.inSpace) GameObject.Destroy(gameObject);
 			progress = 0;
 			currentTurn = Turner.GetCurrentTime();
 			order = ship.order.Clone();
@@ -74,10 +75,9 @@ public class ShipScr : MonoBehaviour
 			destStepBeacon.transform.position = order.destinationStep;
 	}
 
-	private void DestroyGO()
+	private void OnDestroy()
 	{
 		Destroy(destStepBeacon);
 		Destroy(destOrderBeacon);
-		Destroy(gameObject);
 	}
 }

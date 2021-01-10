@@ -1,7 +1,7 @@
 ﻿public enum EShipState
 {
-	docked,
-	inQueue,
-	aborted,
 	inSpace,
+	docked,
+	docking,
+	undocking,
 }

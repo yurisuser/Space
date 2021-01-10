@@ -20,7 +20,7 @@ public static class GalaxyCreator
 	{
 		//for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 		//{
-			Galaxy.StarSystemsArr[11].ShipsList = new List<Ship>(ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM, 11));
+			Galaxy.StarSystemsArr[11].shipsList = new List<Ship>(ShipsCreator.CreateRandomShips(Settings.TEST.TEST_SHIPS_IN_SYSTEM, 11));
 		//}
 	}
 
