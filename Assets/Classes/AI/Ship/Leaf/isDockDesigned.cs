@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AI.AIShip { 
-	class isDockDesigned : Condition<Ship>
+﻿namespace AI.AIShip { 
+	class IsDockDesigned : Condition<Ship>
 	{
 		public override EStateNode Tick(Ship ship)
 		{

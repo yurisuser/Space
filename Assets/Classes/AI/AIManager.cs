@@ -8,8 +8,8 @@ namespace AI
 	{
 		public static void Tick()
 		{
+			AISubStarManager.Tick(); //должен быть первым. За время его работы gameObjects кораблей должны успеть покешировать Orders ИИ.
 			AIShipManager.Tick();
-			AISubStarManager.Tick();
 		}
 	}
 }

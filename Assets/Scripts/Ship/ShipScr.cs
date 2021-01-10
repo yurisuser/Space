@@ -40,7 +40,7 @@ public class ShipScr : MonoBehaviour
 	{
 		if (currentTurn != Turner.GetCurrentTime())
 		{
-			if (ship.state != EShipState.inSpace) GameObject.Destroy(gameObject);
+			if (ship.state == EShipState.docked) GameObject.Destroy(gameObject);
 			progress = 0;
 			currentTurn = Turner.GetCurrentTime();
 			order = ship.order.Clone();
