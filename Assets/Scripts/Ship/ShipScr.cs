@@ -34,6 +34,7 @@ public class ShipScr : MonoBehaviour
 	{
 		if (EventSystem.current.IsPointerOverGameObject()) return;
 		Debug.Log($"Ship id {ship.id} currSys {ship.location.indexStarSystem} destSys {ship.order.destinationSystemIndex}");
+		Debug.Log($"locSys {ship.location.indexStarSystem} ");
 	}
 	private void CheckNextTurn()
 	{

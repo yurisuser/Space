@@ -148,7 +148,7 @@ namespace AI.AIShip
 
 		private static int GetRandomNearSystem(Ship ship)
 		{
-			 return Galaxy.Distances[ship.location.indexStarSystem][3].index;
+			 return Galaxy.Distances[ship.location.indexStarSystem][1].index;
 		}
 	}
 }

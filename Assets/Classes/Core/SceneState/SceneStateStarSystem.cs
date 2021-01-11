@@ -13,13 +13,14 @@ public class SceneStateStarSystem : SceneState
 	private int StarSystemIndexInArr;
 	private Camera cam;
 	private GameObject root;
-	private GameObject ShipsFolder;
+	private GameObject ShipsFolder ;
 	public SceneStateStarSystem(StarSystem starSystem)
 	{
 		this.starSystem = starSystem;
 	}
 	public override void DrawScene()
 	{
+		ShipsFolder = new GameObject { name = folderShipName };
 		cam = GameObject.Find("Camera").GetComponent<Camera>();
 		cam.orthographicSize = Settings.CameraStarSystem.MAX_ZOOM;
 		root = new GameObject { name = folderRoot };
