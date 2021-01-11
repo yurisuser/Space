@@ -24,11 +24,12 @@ public class Gmgr : MonoBehaviour
 		//TaskManager.Tick();// initial tick
 	}
 
-	private void Update()
+	private void LateUpdate()
 	{
-		UI.Escaper.Update();
-		sceneState.Update();
-		Turner.Update();
+		//все дожно считаться после того, как отработала сцена
+		UI.Escaper.LateUpdate();
+		sceneState.LateUpdate();
+		Turner.LateUpdate();
 	}
 
 	private void TurnUpdate()
@@ -36,6 +37,7 @@ public class Gmgr : MonoBehaviour
 		Debug.Log("Turner update tick");
 		sceneState.Tick();
 		TaskManager.Tick();
+		Utilities.ShowMe(3, $"cur sys {currentSystemIndex}");
 	}
 
 	void Awake()

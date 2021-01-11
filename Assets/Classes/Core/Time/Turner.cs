@@ -17,7 +17,7 @@ public static class Turner
 		 return _currentTime;
 	}
 
-	public static void Update()
+	public static void LateUpdate()
 	{
 		InnerClock();
 	}

@@ -4,5 +4,5 @@
 
 	public virtual void Tick() { }
 
-	public virtual void Update() { }
+	public virtual void LateUpdate() { }
 }

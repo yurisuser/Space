@@ -12,7 +12,7 @@ namespace UI
 		public delegate void function();
 
 		private static Stack<function> stack = new Stack<function>();
-		public static void Update()
+		public static void LateUpdate()
 		{
 			if (stack.Count < 1) return;
 			if (Input.GetKeyUp("escape"))
