@@ -14,12 +14,18 @@ public static class TaskManager
 		watch.Restart();
 		isWorkThread = true;
 		
-		await Task.Run(AI.AIManager.Tick);
+		await Task.Run(Tasks);
 
 		isWorkThread = false;
 		watch.Stop();
 		elapsedTimeWork = watch.ElapsedMilliseconds;
 		Utilities.ShowMe(2, "finish");
 		Utilities.ShowMe(1, $"Task Work: {elapsedTimeWork} ms.");
+	}
+
+	private static void Tasks()
+	{
+		AI.AIManager.Tick();
+		HyperSpace.Tick();
 	}
 }

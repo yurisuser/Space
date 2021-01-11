@@ -12,7 +12,6 @@ public static class ShipsCreator
 			Vector3 destination = getRNDPosition();
 			Ship ship = new Ship
 			{
-				dest = getRNDPosition(),
 				id = Galaxy.GetNextId(),
 				name = Random.Range(0, 100).ToString(),
 				param = Data.shipsParamArr[0],
@@ -20,16 +19,9 @@ public static class ShipsCreator
 				location = new Location {
 					indexStarSystem = indexStarsystem,
 					dock = null
-
 				}
 			};
-			ship.order = OrderCreator.CreateOrder(AI.EOrders.DockingTest, ship);
-
-			if (ship.id == 1018)
-			{
-				ship.order.currentPosition = new Vector3(-1000, 0, -3);
-				ship.order.destinationOrder = new Vector3(1000,0, -3);
-			}
+			ship.order = OrderCreator.CreateOrder(AI.EOrders.JumpToSystem, ship);
 			shipsArr[i] = ship;
 		}
 		return shipsArr;

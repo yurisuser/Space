@@ -2,7 +2,7 @@
 
 public struct StarDistance
 {
-	public int id;
+	public int index;
 	public float distance;
 	public Vector3 direction;
 }

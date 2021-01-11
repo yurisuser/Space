@@ -16,6 +16,9 @@ namespace AI.AIShip
 				case EOrders.DockingTest:
 					return DockTest(ship);
 
+				case EOrders.JumpToSystem:
+					return JumpToSystem(ship);
+
 				default:
 					throw new System.Exception("Error OrderCreator: unknown orderType");
 			}
@@ -72,6 +75,30 @@ namespace AI.AIShip
 			return order;
 		}
 
+		public static Order JumpToSystem(Ship ship)
+		{
+			Order order;
+			if (ship.order == null)
+			{
+				order = new Order
+				{
+					e_order = EOrders.JumpToSystem,
+					currentPosition = getRNDPosition(),
+				};
+			}
+			else
+			{
+				order = ship.order.Clone();
+				order.currentPosition = ship.order.currentPosition == default ? getRNDPosition() : ship.order.currentPosition;
+			}
+			order.destinationSystemIndex = GetRandomNearSystem(ship);
+			order.destinationOrder = Galaxy.Distances[ship.location.indexStarSystem][order.destinationSystemIndex].direction
+				* Settings.StarSystem.RADIUS_HYPER_ENTRANCE;
+			order.wayPoints = CalcWayPoints(ship, order);
+			order.destinationStep = order.wayPoints.Dequeue();
+			return order;
+		}
+
 		private static Vector3 getRNDPosition()
 		{
 			return new Vector3(
@@ -117,6 +144,11 @@ namespace AI.AIShip
 			}
 			int index = rnd.Next(0, list.Count);
 			return list[index];
+		}
+
+		private static int GetRandomNearSystem(Ship ship)
+		{
+			 return Galaxy.Distances[ship.location.indexStarSystem][3].index;
 		}
 	}
 }

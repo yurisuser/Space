@@ -11,7 +11,6 @@ public class Ship : ISystemPosition
 	public Dock homeBase;
 	public Location location;
 	public EShipState state = EShipState.inSpace;
-	public Vector3 dest;
 	public Vector3 position {
 		get => order.currentPosition;
 		set => order.currentPosition = value;

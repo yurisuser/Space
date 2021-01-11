@@ -2,6 +2,7 @@
 {
 	public struct StarSystem
 	{
+		public readonly static int RADIUS_HYPER_ENTRANCE = 6000;
 		public readonly static int MAX_RADIUS_STAR_SYSTEM = 5000;
 		public readonly static int RADIUS_PLANET_ORBIT = 500;
 		public readonly static int RADIUS_MOON_ORBIT = 30;

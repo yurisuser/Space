@@ -8,6 +8,7 @@ namespace AI.AIShip
 		public EOrders e_order;
 		public Vector3 destinationOrder;
 		public Vector3 destinationStep;
+		public int destinationSystemIndex;
 		public Vector3 currentPosition;
 		public Queue<Vector3> wayPoints;
 		public Dock dock;
@@ -19,6 +20,7 @@ namespace AI.AIShip
 				e_order = e_order,
 				destinationOrder = destinationOrder,
 				destinationStep = destinationStep,
+				destinationSystemIndex = destinationSystemIndex,
 				currentPosition = currentPosition,
 				wayPoints =  new Queue<Vector3>(wayPoints),
 				dock = dock

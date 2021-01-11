@@ -34,7 +34,7 @@ public static class GalaxyCreator
 			{
 				subArr[u] = new StarDistance
 				{
-					id = u,
+					index = u,
 					distance = Vector3.Distance(Galaxy.StarSystemsArr[i].position, Galaxy.StarSystemsArr[u].position),
 					direction = (Galaxy.StarSystemsArr[i].position - Galaxy.StarSystemsArr[u].position).normalized
 				};

@@ -4,5 +4,8 @@
 	docked,
 	docking,
 	undocking,
-	undocked
+	undocked,
+	hypering,
+	inHyper,
+	unHypering
 }

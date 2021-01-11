@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using AI.AIShip;
+using UnityEngine.EventSystems;
 
 public class ShipScr : MonoBehaviour
 {
@@ -13,14 +14,7 @@ public class ShipScr : MonoBehaviour
 	private int currentTurn;
 	private float progress = 0;
 	private Ship ship;
-	void Start()
-	{
-
-		if (ship.id == 1018)
-		{
-			gameObject.GetComponent<Renderer>().material.color = Color.cyan;
-		}
-	}
+	void Start(){}
 
 	public void SetShip(Ship ship)
 	{
@@ -36,11 +30,16 @@ public class ShipScr : MonoBehaviour
 		MoveNavigationPoints();		
 	}
 
+	private void OnMouseUp()
+	{
+		if (EventSystem.current.IsPointerOverGameObject()) return;
+		Debug.Log($"Ship id {ship.id} currSys {ship.location.indexStarSystem} destSys {ship.order.destinationSystemIndex}");
+	}
 	private void CheckNextTurn()
 	{
 		if (currentTurn != Turner.GetCurrentTime())
 		{
-			if (ship.state == EShipState.docked) GameObject.Destroy(gameObject);
+			if (ship.state == EShipState.docked || ship.state == EShipState.inHyper) GameObject.Destroy(gameObject);
 			progress = 0;
 			currentTurn = Turner.GetCurrentTime();
 			order = ship.order.Clone();

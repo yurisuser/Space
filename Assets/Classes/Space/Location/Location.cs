@@ -8,6 +8,7 @@ using UnityEngine;
 public class Location
 {
 	public int indexStarSystem;
-	public Dock dock;
+	public Dock dock = null;
+	public bool hyper = false;
 }
 

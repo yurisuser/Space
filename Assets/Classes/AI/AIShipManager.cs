@@ -8,7 +8,8 @@ namespace AI.AIShip
 		{
 			{ EOrders.Idle, new BehavIdle() },
 			{ EOrders.Patrol, new BehavePatrool() },
-			{ EOrders.DockingTest, new BehaveDockingTest() }
+			{ EOrders.DockingTest, new BehaveDockingTest() },
+			{ EOrders.JumpToSystem, new BehaveJumpToSystem() }
 		};
 
 		public static void Tick()
