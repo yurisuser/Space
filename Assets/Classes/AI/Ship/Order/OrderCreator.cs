@@ -91,9 +91,12 @@ namespace AI.AIShip
 				order = ship.order.Clone();
 				order.currentPosition = ship.order.currentPosition == default ? getRNDPosition() : ship.order.currentPosition;
 			}
-			order.destinationSystemIndex = GetRandomNearSystem(ship);
-			order.destinationOrder = Galaxy.Distances[ship.location.indexStarSystem][order.destinationSystemIndex].direction
+			int distancesIndexDestination = rnd.Next(1, 3);
+			order.destinationSystemIndex = Galaxy.DistancesSortedNear[ship.location.indexStarSystem][distancesIndexDestination].index;
+
+			order.destinationOrder = Galaxy.DistancesSortedNear[ship.location.indexStarSystem][distancesIndexDestination].direction
 				* Settings.StarSystem.RADIUS_HYPER_ENTRANCE;
+
 			order.wayPoints = CalcWayPoints(ship, order);
 			order.destinationStep = order.wayPoints.Dequeue();
 			return order;
@@ -144,11 +147,6 @@ namespace AI.AIShip
 			}
 			int index = rnd.Next(0, list.Count);
 			return list[index];
-		}
-
-		private static int GetRandomNearSystem(Ship ship)
-		{
-			 return Galaxy.Distances[ship.location.indexStarSystem][1].index;
 		}
 	}
 }

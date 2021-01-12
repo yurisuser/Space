@@ -37,6 +37,7 @@ public static class Docker
 		ship.location.indexStarSystem = ship.order.destinationSystemIndex;
 		ship.order.currentPosition = GetRandomPoints();
 		ship.order.destinationStep = ship.order.currentPosition;
+		ship.order.destinationOrder = ship.order.currentPosition;
 		ship.state = EShipState.unHypering;
 
 		Galaxy.StarSystemsArr[ship.order.destinationSystemIndex].shipsList.Add(ship);
