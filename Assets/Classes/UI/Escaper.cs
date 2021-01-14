@@ -19,7 +19,8 @@ namespace UI
 			{
 				function f = stack.Pop();
 				if (f == null) return;
-				f();			}
+				f();			
+			}
 		}
 
 		public static void Add(function function)

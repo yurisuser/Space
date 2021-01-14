@@ -22,7 +22,12 @@ public class CameraGalaxy : MonoBehaviour
     void Start()
     {
         cam = GetComponent<Camera>();
-        targetOrthographicSize = cam.orthographicSize;
+        targetOrthographicSize = cam.orthographicSize = Glob.CameraGalaxyZoom;
+        cam.transform.position = new Vector3(
+            Galaxy.StarSystemsArr[Glob.currentSystemIndex].position.x,
+            Galaxy.StarSystemsArr[Glob.currentSystemIndex].position.y,
+            settings.CAMERA_LAYER
+            );
     }
     void Update()
     {
@@ -84,6 +89,7 @@ public class CameraGalaxy : MonoBehaviour
         targetOrthographicSize = Mathf.Clamp(targetOrthographicSize, settings.MIN_ZOOM, settings.MAX_ZOOM);
         focusWorldCoordinates = Utilities.ToWoldCoordinates(mousePosition, cam);
         mouseZoomPosition = mousePosition;
+        Glob.CameraGalaxyZoom = targetOrthographicSize;
     }
 
     void SmoothZoom()
