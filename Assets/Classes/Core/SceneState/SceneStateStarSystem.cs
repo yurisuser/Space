@@ -180,7 +180,7 @@ public class SceneStateStarSystem : SceneState
 	{
 		for (int i = 0; i < Docker.addingShipToSystemMapScene.Count; i++)
 		{
-			if (Docker.addingShipToSystemMapScene[i].location.indexStarSystem != Gmgr.currentSystemIndex) continue;
+			if (Docker.addingShipToSystemMapScene[i].location.indexStarSystem != Glob.currentSystemIndex) continue;
 			DrawShip(Docker.addingShipToSystemMapScene[i]);
 		}
 		Docker.addingShipToSystemMapScene.Clear();

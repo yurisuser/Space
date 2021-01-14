@@ -20,7 +20,7 @@ public static class Docker
 		ship.state = EShipState.undocking;
 		Galaxy.StarSystemsArr[ship.location.indexStarSystem].shipsList.Add(ship);
 		ship.order.dock.RemoveFromDock(ship);
-		if (Gmgr.currentScene == EScene.starSystem && ship.location.indexStarSystem == Gmgr.currentSystemIndex) AddToScene(ship);
+		if (Glob.currentScene == EScene.starSystem && ship.location.indexStarSystem == Glob.currentSystemIndex) AddToScene(ship);
 	}
 
 	public static void ToHyper(Ship ship)
@@ -42,7 +42,7 @@ public static class Docker
 
 		Galaxy.StarSystemsArr[ship.order.destinationSystemIndex].shipsList.Add(ship);
 
-		if (Gmgr.currentScene == EScene.starSystem && ship.location.indexStarSystem == Gmgr.currentSystemIndex)
+		if (Glob.currentScene == EScene.starSystem && ship.location.indexStarSystem == Glob.currentSystemIndex)
 		{
 			Debug.Log($"cur {ship.location.indexStarSystem} dest {ship.order.destinationSystemIndex}");
 			AddToScene(ship);
