@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,10 +12,16 @@ public class test_path_find_scr : MonoBehaviour
 		var from = System.Int32.Parse(transform.GetChild(0).GetComponent<InputField>().text);
 		var to = System.Int32.Parse(transform.GetChild(1).GetComponent<InputField>().text);
 		var range = System.Int32.Parse(transform.GetChild(2).GetComponent<InputField>().text);
-		//Debug.Log($"{from} {to} {range}");
+		var sort = System.Int32.Parse(transform.GetChild(3).GetComponent<InputField>().text);
+		var t = transform.GetChild(4).GetComponent<Text>();
+
 		way = new int[] { 13, 24, 719, 1011 };
-		way = AI.AlgorithmA.GalaxyPathFinder(from, to, 20);
-		Utilities.ShowMeObject(way);
+		Stopwatch s = new Stopwatch();
+		s.Start();
+		way = AI.AlgorithmA.GalaxyPathFinder(from, to, range, sort);
+		s.Stop();
+		t.text = s.ElapsedMilliseconds.ToString();
+		UnityEngine.Debug.Log($"WAYPOINTS {way.Length}");
 		DrawLine();
 	}
 
@@ -35,13 +42,13 @@ public class test_path_find_scr : MonoBehaviour
 
 	private void DrawLine()
 	{
-		if (way.Length < 1)
-		{
-			Debug.Log("NO WAY!");
-			return;
-		}
 		var wayGO = GameObject.Find("way");
 		if (wayGO != null) Destroy(wayGO);
+		if (way.Length < 1)
+		{
+			UnityEngine.Debug.Log("NO WAY!");
+			return;
+		}
 		GameObject folder = new GameObject { name = "way" };
 
 

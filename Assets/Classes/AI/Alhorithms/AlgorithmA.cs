@@ -15,13 +15,16 @@ namespace AI
 		private static int goalId;
 		private static int startId;
 		private static float _range;
-		public static int[] GalaxyPathFinder(int start_Id, int goal_Id, float range)
+		private static int _sort;
+		public static int[] GalaxyPathFinder(int start_Id, int goal_Id, float range, int sort)
 		{
 			closedSet = new List<PathNode>();
 			openSet = new List<PathNode>();
 			goalId = goal_Id;
 			startId = start_Id;
 			_range = range;
+			_sort = sort;
+
 			startNode = new PathNode
 			{
 				idStar = start_Id,
@@ -36,13 +39,17 @@ namespace AI
 			{
 				var currentNode = openSet.OrderBy(node => node.estimateFullPathLength).First();
 				if (currentNode.idStar == Galaxy.StarSystemsArr[goal_Id].id) return GetPathForNode(currentNode).ToArray();
+
 				openSet.Remove(currentNode);
 				closedSet.Add(currentNode);
 
-				foreach (var neighbourNode in GetNeighbour(currentNode))
+				var collection = GetNeighbour(currentNode);
+				foreach (var neighbourNode in collection)
 				{
 					if (closedSet.Count(node => node.idStar == neighbourNode.idStar) > 0) continue;
+
 					var openNode = openSet.FirstOrDefault(node => node.idStar == neighbourNode.idStar);
+
 					if (openNode == null)
 					{
 						openSet.Add(neighbourNode);
@@ -74,23 +81,35 @@ namespace AI
 		private static List<PathNode> GetNeighbour(PathNode pathNode)
 		{
 			var result = new List<PathNode>();
-			for (int i = 0; i < 1000000000; i++)
+			for (int i = 1; i < Settings.Galaxy.STARS_AMMOUNT - 1; i++)
 			{
-				if (Galaxy.DistancesSortedNear[pathNode.idStar][i].distance > _range) break;
-					var NeibourNode = new PathNode
-					{
-						idStar = Galaxy.DistancesSortedNear[pathNode.idStar][i].index,
-						cameFrom = pathNode,
-						pathLengthFromStart = pathNode.pathLengthFromStart + Galaxy.Distances[pathNode.idStar][Galaxy.DistancesSortedNear[pathNode.idStar][i].index].distance, //глюк может быть тут
-						heuristicEstimatePathLength = Galaxy.Distances[pathNode.idStar][goalId].distance
-					};
+				var neibour = Galaxy.DistancesSortedNear[pathNode.idStar][i];
+				if (neibour.distance > _range)
+				{
+					break;
+				}
+
+				var NeibourNode = new PathNode
+				{
+					idStar = Galaxy.DistancesSortedNear[pathNode.idStar][i].index,
+					cameFrom = pathNode,
+					pathLengthFromStart = pathNode.pathLengthFromStart
+						+ GetDistanceBetween(pathNode.idStar, Galaxy.DistancesSortedNear[pathNode.idStar][i].index), //глюк может быть тут
+					heuristicEstimatePathLength = Galaxy.Distances[neibour.index][goalId].distance
+				};
 				result.Add(NeibourNode);
+			}
+			if (_sort == 1) 
+			{
+				Debug.Log("sort");
+				result.Sort((a, b) => a.heuristicEstimatePathLength >= b.heuristicEstimatePathLength ? 1 : -1); 
 			}
 			return result;
 		}
 
-		private static int GetDistanceBetween()
+		private static float GetDistanceBetween(int a, int b)
 		{
+			//return Galaxy.Distances[a][b].distance;
 			return 1;
 		}
 
