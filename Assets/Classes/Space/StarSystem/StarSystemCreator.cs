@@ -15,7 +15,7 @@ public static class StarSystemCreator
 		Star star = CreateStar(indexStarSystem);
 		return new StarSystem
 		{
-			id = Galaxy.GetNextId(),
+			id = indexStarSystem,
 			indexSystem = indexStarSystem,
 			star = star,
 			position = GetStarSistemPosition(indexStarSystem),
@@ -46,6 +46,10 @@ public static class StarSystemCreator
 			}
 		}
 		string name = "St" + id.ToString();
+		if (index == 0)
+		{
+			type = Array.Find(Data.starsArr, x => x.type == 5).type;
+		}
 		Star star = new Star(id, type, name, index);
 		return star;
 	}
@@ -61,14 +65,20 @@ public static class StarSystemCreator
 		return arr;
 	}
 
-	private static Vector3 GetStarSistemPosition(int numberStar)
+	private static Vector3 GetStarSistemPosition(int indexStar)
 	{
 		Vector3 coord = GenerateStarsNoGausssianDistr();
-		for (int i = 0; i < numberStar; i++)
+		float k = 1;
+		if (indexStar == 0)
 		{
-			if (Vector3.Distance(coord, Galaxy.StarSystemsArr[i].position) < settings.MIN_STAR_INTERVAL)
+			return new Vector3(0, 0, settings.GALAXY_STAR_LAYER);
+		}
+		for (int i = 0; i < indexStar; i++)
+		{
+			k = i == 0 ? settings.CENTRAL_BLACK_HOLE_INTERVAL_K : 1;
+			if (Vector3.Distance(coord, Galaxy.StarSystemsArr[i].position) < (settings.MIN_STAR_INTERVAL * k))
 			{
-				coord = GetStarSistemPosition(numberStar);
+				coord = GetStarSistemPosition(indexStar);
 			}
 		}
 		return coord;

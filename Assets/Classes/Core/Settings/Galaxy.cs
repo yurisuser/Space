@@ -14,5 +14,7 @@
 		public readonly static int DENSITY_ARMS = 3;
 		//Ширина рукава
 		public readonly static float WIDTH_ARMS = 30f;
+		//Пустое пространство вокруг центральной черной дырыб коэфициент
+		public readonly static float CENTRAL_BLACK_HOLE_INTERVAL_K = 3.5f;
 	}
 }
