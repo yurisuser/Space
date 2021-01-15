@@ -14,6 +14,7 @@ public static class GalaxyCreator
 		}
 		Galaxy.Distances = CalculateStarsDistances();
 		Galaxy.DistancesSortedNear = SortDistanceArr(Galaxy.Distances);
+		Galaxy.NetworkNodes = SpaceNetworkCreator.Create();
 		AddShips();
 	}
 

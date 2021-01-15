@@ -11,4 +11,5 @@ public class StarSystem
 	public PlanetSystem[] planetSystemsArray;
 	public List<Ship> shipsList = new List<Ship>();
 	public Station[] StationArr;
+	public int idSector;
 }
