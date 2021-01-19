@@ -13,7 +13,7 @@ public static class GalaxyCreator
 			Galaxy.StarSystemsArr[i] = StarSystemCreator.GetRandomStarSystem(i);
 		}
 		Galaxy.Distances = CalculateStarsDistances();
-		Galaxy.DistancesSortedNear = SortDistanceArr(Galaxy.Distances);
+		Galaxy.DistancesSortedNear = SortDistanceArr();
 		Galaxy.NetworkNodes = SpaceNetworkCreator.Create();
 		AddShips();
 	}
@@ -46,14 +46,24 @@ public static class GalaxyCreator
 		return result;
 	}
 
-	private static StarDistance[][] SortDistanceArr(StarDistance[][] arr)
+	private static StarDistance[][] SortDistanceArr()
 	{
-		for (int i = 0; i < arr.Length; i++)
+		var list = new List<StarDistance[]>();
+		for (int i = 0; i < Galaxy.Distances.Length; i++)
 		{
-			Array.Sort(arr[i], (x, y) => {
+			var subList = new StarDistance[Galaxy.Distances[i].Length];
+			for (int j = 0; j < subList.Length; j++)
+			{
+				subList[j] = Galaxy.Distances[i][j];
+			}
+
+			Array.Sort(subList, (x, y) =>
+			{
 				return x.distance >= y.distance ? 1 : -1;
 			});
+			list.Add(subList);
 		}
-		return arr;
+
+		return list.ToArray();
 	}
 }

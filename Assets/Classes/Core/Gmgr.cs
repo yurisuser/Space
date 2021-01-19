@@ -32,7 +32,6 @@ public class Gmgr : MonoBehaviour
 
 	private void TurnUpdate()
 	{
-		Debug.Log("Turner update tick");
 		sceneState.Tick();
 		TaskManager.Tick();
 		Utilities.ShowMe(3, $"cur sys {Glob.currentSystemIndex}");

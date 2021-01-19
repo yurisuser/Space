@@ -5,7 +5,8 @@ public class StarSystem
 {
 	public int id;
 	public int indexSystem;
-	public float galaxyHandDistance;
+	public float oldX;
+	public float oldY;
 	public Vector3 position;
 	public Star star;
 	public PlanetSystem[] planetSystemsArray;

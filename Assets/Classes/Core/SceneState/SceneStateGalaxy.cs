@@ -16,7 +16,7 @@ public class SceneStateGalaxy : SceneState
 				Quaternion.identity);
 			star.name = i.ToString();
 			star.transform.SetParent(folder.transform);
-			star.GetComponent<StarGalaxyMap>().dist = Galaxy.StarSystemsArr[i].galaxyHandDistance;
+			star.GetComponent<StarGalaxyMap>().dist = Galaxy.StarSystemsArr[i].oldX;
 			star.GetComponent<StarGalaxyMap>().starsArrayIndex = i;
 		}
 		DrawLine();
@@ -34,6 +34,7 @@ public class SceneStateGalaxy : SceneState
 		{
 			for (int q = 0; q < Galaxy.NetworkNodes[i].Length; q++)
 			{
+				if (i > Galaxy.NetworkNodes[i][q]) continue; //drop duble lines
 				var go = new GameObject();
 				go.transform.position = Galaxy.StarSystemsArr[Galaxy.NetworkNodes[i][q]].position;
 				go.AddComponent<LineRenderer>();

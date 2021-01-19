@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
+using Delaunator;
 
 public static class SpaceNetworkCreator
 {
-	private static int maxDistance = 40;
+	private static int maxDistance = 70;
 	private static int minSectorSize = 10;
 	private static int maxSectorSize = 20;
-	private static int maxNeibours = 3;
+	private static int maxNeibours = 4;
 
 	private static List<List<int>> nodeList;
 	private static Sector[] sectorsArr;
@@ -14,47 +16,94 @@ public static class SpaceNetworkCreator
 
 	public static int[][] Create()
 	{
-		Init();
-		bool key = true;
-		while (key)
+		List<double> list = new List<double>();
+		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 		{
-			for (int i = 1; i < sectorsArr.Length; i++)
-			{
-				key = false;
-				if (!sectorsArr[i].isActive) continue;
-				ExpansionSector(i);
-			}
+			list.Add(Galaxy.StarSystemsArr[i].position.x);
+			list.Add(Galaxy.StarSystemsArr[i].position.y);
 		}
+		Triangulation tr = new Triangulation(list);
+
+		nodeList = new List<List<int>>();
+		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
+		{
+			nodeList.Add( new List<int>());
+		}
+
+		for (int i = 0; i < tr.triangles.Count -3; i += 3)
+		{
+			if (!nodeList[tr.triangles[i]].Contains(tr.triangles[i + 1]))
+				nodeList[tr.triangles[i]].Add(tr.triangles[i + 1]);
+			if (!nodeList[tr.triangles[i + 1]].Contains(tr.triangles[i + 2]))
+				nodeList[tr.triangles[i + 1]].Add(tr.triangles[i + 2]);
+			if (!nodeList[tr.triangles[i + 2]].Contains(tr.triangles[i]))
+				nodeList[tr.triangles[i + 2]].Add(tr.triangles[i]);
+		}
+
+		//Init();
+		//bool key = true;
+		//while (key)
+		//{
+		//	for (int i = 1; i < sectorsArr.Length; i++)
+		//	{
+		//		key = false;
+		//		if (!sectorsArr[i].isActive) continue;
+		//		ExpansionSector(sectorsArr[i]);
+		//	}
+		//}
+		////DeleteIntersections();
+		DeleteUnhanding();
 		return GetResultArray();
 	}
 
-	private static void ExpansionSector(int idSector)
+	private static void DeleteUnhanding()
 	{
-		for (int i = 0; i < sectorsArr[idSector].members.Count; i++)
+		DeleteLinks(0);
+		for (int i = 0; i < nodeList.Count; i++)
 		{
-			if (!sectorsArr[idSector].members[i].isOpen) continue;
-			int newId = GetValidNearSystem(sectorsArr[idSector].members[i]);
-			if (newId == 0) continue;
-			AddToSector(newId, idSector);
-			AddConnection(newId, sectorsArr[idSector].members[i].idSystem);
-			sectorsArr[idSector].members[i].isOpen = ValidationMember(sectorsArr[idSector].members[i]);
+			//float e = Settings.Galaxy.GALAXY_RADIUS / Galaxy.StarSystemsArr[i].galaxyHandDistance / 5;
+			//if (Galaxy.StarSystemsArr[i].galaxyHandDistance > Settings.Galaxy.WIDTH_ARMS + (Settings.Galaxy.WIDTH_ARMS * e)) DeleteLinks(i);
+			//if (Galaxy.Distances[0][i].distance > 490) DeleteLinks(i);
+
 		}
 	}
 
-	private static int GetValidNearSystem(MemberSector member)
+	private static void DeleteLinks(int idStar)
 	{
-		for (int i = 1; i < Galaxy.DistancesSortedNear.Length; i++)
+		for (int i = 0; i < nodeList[idStar].Count; i++)
 		{
-			if (Galaxy.DistancesSortedNear[member.idSystem][i].distance > maxDistance) break;
-			if (!ValidToAdding(Galaxy.DistancesSortedNear[member.idSystem][i].index, member)) continue;
-			return Galaxy.DistancesSortedNear[member.idSystem][i].index;
+			nodeList[nodeList[idStar][i]].Remove(idStar);
+			nodeList[idStar].Remove(nodeList[idStar][i]);
 		}
-		return 0;
+		nodeList[idStar].Clear();
+	}
+
+	private static void ExpansionSector(Sector sector)
+	{
+		for (int i = 0; i < sector.members.Count; i++)
+		{
+			if (!sector.members[i].isOpen) continue;
+
+			int newId = GetValidNearSystem(sector.members[i]);
+			if (newId == 0) continue; //not central black hole
+
+			if (Galaxy.StarSystemsArr[newId].idSector == 0)
+			{
+			}
+				var newMember = CreateNewMember(newId, sector.id);
+				sector.members.Add(newMember);
+			AddConnection(newId, sector.members[i].idSystem);
+
+			if (GetPossibleConnections(sector.members[i]) <= 0)
+				sector.members[i].isOpen = false;
+		}
 	}
 
 	private static void Init()
 	{
-		sectorsArr = new Sector[Galaxy.StarSystemsArr.Length / rnd.Next(minSectorSize, maxSectorSize) + 1];
+		int SectorsAmount = Galaxy.StarSystemsArr.Length / rnd.Next(minSectorSize, maxSectorSize) + 1;
+		SectorsAmount = 50;
+		sectorsArr = new Sector[SectorsAmount];
 		//initial connectArr
 		nodeList = new List<List<int>>();
 		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
@@ -81,7 +130,7 @@ public static class SpaceNetworkCreator
 		}
 	}
 
-	private static void AddToSector(int idSystem, int idSector)
+	private static MemberSector CreateNewMember(int idSystem, int idSector)
 	{
 		Galaxy.StarSystemsArr[idSystem].idSector = idSector;
 		MemberSector member = new MemberSector
@@ -90,7 +139,7 @@ public static class SpaceNetworkCreator
 			idSystem = idSystem,
 			isOpen = true
 		};
-		sectorsArr[idSector].members.Add(member);
+		return member;
 	}
 
 	private static void AddConnection(int idA, int idB)
@@ -99,16 +148,36 @@ public static class SpaceNetworkCreator
 		nodeList[idB].Add(idA);
 	}
 
-	private static bool ValidationMember(MemberSector member)
+	private static int GetValidNearSystem(MemberSector member)
 	{
-		if (nodeList[member.idSector].Count >= maxNeibours) return false;
-		return true;
+		for (int i = 1; i < Galaxy.DistancesSortedNear.Length; i++)
+		{
+			if (Galaxy.DistancesSortedNear[member.idSystem][i].distance > maxDistance) break;
+			if (!ValidToAdding(Galaxy.DistancesSortedNear[member.idSystem][i].index, member)) continue;
+			return Galaxy.DistancesSortedNear[member.idSystem][i].index;
+		}
+		return 0;
+	}
+
+	private static int GetPossibleConnections(MemberSector member)
+	{
+		if (nodeList[member.idSystem].Count >= maxNeibours) return 0;
+
+		int possibleLines = 0;
+		for (int i = 0; i < maxNeibours; i++)
+		{
+			if (Galaxy.DistancesSortedNear[member.idSystem][i].distance > maxDistance) break;
+			possibleLines++;
+		}
+		if (possibleLines - nodeList[member.idSystem].Count < 0) throw new System.Exception();
+		return possibleLines - nodeList[member.idSystem].Count;
 	}
 
 	private static bool ValidToAdding(int idSystem, MemberSector member)
 	{
 		if (Galaxy.StarSystemsArr[idSystem].idSector == 0) return true;
-		if (Galaxy.StarSystemsArr[idSystem].idSector == member.idSector && nodeList[idSystem].Count < maxNeibours)
+		if (Galaxy.StarSystemsArr[idSystem].idSector != member.idSector) return false;
+		if (Galaxy.StarSystemsArr[idSystem].idSector == member.idSector && GetPossibleConnections(member) > 0)
 		{
 			if (!IsConnectExist(idSystem, member.idSystem))
 			{
@@ -119,7 +188,7 @@ public static class SpaceNetworkCreator
 	}
 	private static bool IsConnectExist(int idA, int idB)
 	{
-		if (nodeList[idA].Contains(idB) || nodeList[idB].Contains(idB)) return true;
+		if (nodeList[idA].Contains(idB) || nodeList[idB].Contains(idA)) return true;
 		return false;
 	}
 
@@ -130,7 +199,6 @@ public static class SpaceNetworkCreator
 		{
 			result[i] = nodeList[i].ToArray();
 		}
-		Utilities.ShowMeObject(result);
 		return result;
 	}
 
@@ -155,5 +223,56 @@ public static class SpaceNetworkCreator
 		public int idSystem;
 		public int idSector;
 		public bool isOpen;
+	}
+
+	private static void DeleteIntersections()
+	{
+		int positive = 0;
+		int negative = 0;
+		for (int curIndex = nodeList.Count - 1; curIndex >= 0; curIndex--)
+		{//sysId = curindex
+
+			for (int neibIndex = nodeList[curIndex].Count - 1; neibIndex >= 0; neibIndex--)
+			{//current nodelist[curIndex][neibourIndex]
+				int idNeibour = nodeList[curIndex][neibIndex];
+
+				for (int neibNeibIndex = nodeList[idNeibour].Count - 1; neibNeibIndex >= 0; neibNeibIndex--)
+				{ //line from[currSys] to [neibSys] intersect  from [neibSys] to [neibNeibSys]
+					int idNeibourNeibour = nodeList[idNeibour][neibNeibIndex];
+					bool result = LineLineIntersection(
+						Galaxy.StarSystemsArr[curIndex].position,
+						Galaxy.StarSystemsArr[idNeibour].position,
+						Galaxy.StarSystemsArr[idNeibour].position,
+						Galaxy.StarSystemsArr[idNeibourNeibour].position
+						);
+					if (result) positive++; else negative++;
+					if (result)
+					{
+						nodeList[idNeibour].Remove(idNeibourNeibour);
+						//nodeList[idNeibourNeibour].Remove(idNeibour);
+					}
+				}
+			}
+		}
+		Debug.Log($"+ {positive} - {negative}");
+	}
+
+	public static bool LineLineIntersection( Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2)
+	{
+
+		Vector3 lineVec3 = linePoint2 - linePoint1;
+		Vector3 crossVec1and2 = Vector3.Cross(lineVec1, lineVec2);
+
+		float planarFactor = Vector3.Dot(lineVec3, crossVec1and2);
+
+		//is coplanar, and not parrallel
+		if (Mathf.Abs(planarFactor) < 0.0001f && crossVec1and2.sqrMagnitude > 0.0001f)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 }

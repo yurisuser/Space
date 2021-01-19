@@ -13,8 +13,10 @@
 		//плотность галактического рукава 1-5
 		public readonly static int DENSITY_ARMS = 3;
 		//Ширина рукава
-		public readonly static float WIDTH_ARMS = 30f;
+		public readonly static float WIDTH_ARMS = 100f;
+		//Длина одного рукава от размера галактики (0 - .5)
+		public readonly static float LENGTH_ARMS = .4f;
 		//Пустое пространство вокруг центральной черной дырыб коэфициент
-		public readonly static float CENTRAL_BLACK_HOLE_INTERVAL_K = 3.5f;
+		public readonly static float CENTRAL_BLACK_HOLE_INTERVAL_K = 8.5f;
 	}
 }

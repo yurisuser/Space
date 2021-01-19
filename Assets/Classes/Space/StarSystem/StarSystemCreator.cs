@@ -8,7 +8,8 @@ using settings = Settings.Galaxy;
 
 public static class StarSystemCreator
 {
-	private static float currentGalaxyHandDistance;
+	private static float oldX;
+	private static float oldY;
 
 	public static StarSystem GetRandomStarSystem(int indexStarSystem)
 	{
@@ -20,7 +21,8 @@ public static class StarSystemCreator
 			star = star,
 			position = GetStarSistemPosition(indexStarSystem),
 			planetSystemsArray = CreatePlanetSystems(star),
-			galaxyHandDistance = currentGalaxyHandDistance,
+			oldX = oldX,
+			oldY = oldY,
 
 			StationArr = StationCreator.CreateTestStation(Settings.TEST.TEST_STATIONS_IN_SYSTEM)
 		};
@@ -95,7 +97,8 @@ public static class StarSystemCreator
 		x *= Random.Range(0f, 1f) > .5 ? 1 : -1;
 		float z = settings.GALAXY_STAR_LAYER;
 		var rrr = new Vector3(x, y, z);
-		currentGalaxyHandDistance = x;
+		oldX = x;
+		oldY = y;
 		return TwistCoordinates(rrr);
 	}
 

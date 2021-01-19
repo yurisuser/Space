@@ -33,6 +33,6 @@ public class StarGalaxyMap : MonoBehaviour
 
 	private void ShowSystemIndex()
 	{
-		Debug.Log(starsArrayIndex);
+		Debug.Log($"{starsArrayIndex}  id sector: {Galaxy.StarSystemsArr[starsArrayIndex].idSector}");
 	}
 }
