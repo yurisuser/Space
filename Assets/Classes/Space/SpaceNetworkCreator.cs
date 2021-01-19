@@ -32,39 +32,25 @@ public static class SpaceNetworkCreator
 
 		for (int i = 0; i < tr.triangles.Count -3; i += 3)
 		{
-			if (!nodeList[tr.triangles[i]].Contains(tr.triangles[i + 1]))
-				nodeList[tr.triangles[i]].Add(tr.triangles[i + 1]);
-			if (!nodeList[tr.triangles[i + 1]].Contains(tr.triangles[i + 2]))
-				nodeList[tr.triangles[i + 1]].Add(tr.triangles[i + 2]);
-			if (!nodeList[tr.triangles[i + 2]].Contains(tr.triangles[i]))
-				nodeList[tr.triangles[i + 2]].Add(tr.triangles[i]);
+			AddConnection(tr.triangles[i], tr.triangles[i + 1]);
+			AddConnection(tr.triangles[i + 1], tr.triangles[i + 2]);
+			AddConnection(tr.triangles[i + 2], tr.triangles[i]);
 		}
 
-		//Init();
-		//bool key = true;
-		//while (key)
-		//{
-		//	for (int i = 1; i < sectorsArr.Length; i++)
-		//	{
-		//		key = false;
-		//		if (!sectorsArr[i].isActive) continue;
-		//		ExpansionSector(sectorsArr[i]);
-		//	}
-		//}
-		////DeleteIntersections();
 		DeleteUnhanding();
+		LinkUnlinkedPereferal();
+
 		return GetResultArray();
 	}
 
 	private static void DeleteUnhanding()
 	{
 		DeleteLinks(0);
-		for (int i = 0; i < nodeList.Count; i++)
-		{
-			//float e = Settings.Galaxy.GALAXY_RADIUS / Galaxy.StarSystemsArr[i].galaxyHandDistance / 5;
-			//if (Galaxy.StarSystemsArr[i].galaxyHandDistance > Settings.Galaxy.WIDTH_ARMS + (Settings.Galaxy.WIDTH_ARMS * e)) DeleteLinks(i);
-			//if (Galaxy.Distances[0][i].distance > 490) DeleteLinks(i);
 
+		for (int i = 1; i < Galaxy.StarSystemsArr.Length; i++)
+		{
+			if (Galaxy.Distances[0][i].distance > Settings.Galaxy.GALAXY_RADIUS)
+				DeleteLinks(i);
 		}
 	}
 
@@ -72,10 +58,41 @@ public static class SpaceNetworkCreator
 	{
 		for (int i = 0; i < nodeList[idStar].Count; i++)
 		{
-			nodeList[nodeList[idStar][i]].Remove(idStar);
-			nodeList[idStar].Remove(nodeList[idStar][i]);
+			var idNear = nodeList[idStar][i];
+			if( !nodeList[idNear].Remove(idStar))
+			{
+				throw new System.Exception();
+			}
 		}
 		nodeList[idStar].Clear();
+	}
+
+	private static void LinkUnlinkedPereferal()
+	{
+		for (int i = 0; i < Galaxy.DistancesSortedNear[0].Length; i++)
+		{
+			if (Galaxy.DistancesSortedNear[0][i].distance < Settings.Galaxy.GALAXY_RADIUS) continue;
+			//if (nodeList[i].Count > 0) continue;
+			AddOnceForClear(Galaxy.DistancesSortedNear[0][i].index);
+		}
+	}
+	private static void AddOnceForClear(int id)
+	{
+
+		for (int i = 1; i < Galaxy.DistancesSortedNear[id].Length; i++)
+		{
+			int idNeib = Galaxy.DistancesSortedNear[id][i].index;
+			if (nodeList[idNeib].Count > 0)
+			{
+				AddConnection(id, idNeib);
+				break;
+			}
+			if (Galaxy.Distances[0][idNeib].distance <= Settings.Galaxy.GALAXY_RADIUS)
+			{
+				AddConnection(id, Galaxy.DistancesSortedNear[id][i].index);
+				break;
+			}
+		}
 	}
 
 	private static void ExpansionSector(Sector sector)
@@ -144,8 +161,10 @@ public static class SpaceNetworkCreator
 
 	private static void AddConnection(int idA, int idB)
 	{
-		nodeList[idA].Add(idB);
-		nodeList[idB].Add(idA);
+		if (!nodeList[idA].Contains(idB))
+			nodeList[idA].Add(idB);
+		if (!nodeList[idB].Contains(idA))
+			nodeList[idB].Add(idA);
 	}
 
 	private static int GetValidNearSystem(MemberSector member)
