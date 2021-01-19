@@ -4,17 +4,43 @@ using Delaunator;
 
 public static class SpaceNetworkCreator
 {
-	private static int maxDistance = 70;
-	private static int minSectorSize = 10;
-	private static int maxSectorSize = 20;
-	private static int maxNeibours = 4;
+	private static int minSectorSize = 5;
+	private static int maxSectorSize = 10;
+	private static int sectorsAmount = Settings.Galaxy.STARS_AMMOUNT / ((minSectorSize + maxSectorSize) / 2);
 
-	private static List<List<int>> nodeList;
+	private static List<List<int>> hypersList;
 	private static Sector[] sectorsArr;
 
 	private static System.Random rnd = new System.Random();
 
 	public static int[][] Create()
+	{
+		CreateHypers();
+		UnlinkPeriphery();
+		LinkPeriphery();
+		InitSectors();
+		Expansion();
+		CheckTest();
+		RemoveInterSectorConnection();
+		//RemoveIntesectorConnection();
+		return GetResultArray();
+	}
+
+	private static void CheckTest()
+	{
+		for (int i = 0; i < hypersList.Count; i++)
+		{
+			for (int j = 0; j < hypersList[i].Count; j++)
+			{
+				var e = hypersList[i].FindAll(x => x == hypersList[i][j]);
+				if (e.Count > 1) {
+					throw new System.Exception();
+				}
+			}
+		}
+	}
+
+	private static void CreateHypers()
 	{
 		List<double> list = new List<double>();
 		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
@@ -24,50 +50,32 @@ public static class SpaceNetworkCreator
 		}
 		Triangulation tr = new Triangulation(list);
 
-		nodeList = new List<List<int>>();
+		hypersList = new List<List<int>>();
 		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 		{
-			nodeList.Add( new List<int>());
+			hypersList.Add(new List<int>());
 		}
 
-		for (int i = 0; i < tr.triangles.Count -3; i += 3)
+		for (int i = 0; i < tr.triangles.Count - 3; i += 3)
 		{
 			AddConnection(tr.triangles[i], tr.triangles[i + 1]);
 			AddConnection(tr.triangles[i + 1], tr.triangles[i + 2]);
 			AddConnection(tr.triangles[i + 2], tr.triangles[i]);
 		}
-
-		DeleteUnhanding();
-		LinkUnlinkedPereferal();
-
-		return GetResultArray();
 	}
 
-	private static void DeleteUnhanding()
+	private static void UnlinkPeriphery()
 	{
-		DeleteLinks(0);
+		RemoveAllConnections(0);
 
 		for (int i = 1; i < Galaxy.StarSystemsArr.Length; i++)
 		{
 			if (Galaxy.Distances[0][i].distance > Settings.Galaxy.GALAXY_RADIUS)
-				DeleteLinks(i);
+				RemoveAllConnections(i);
 		}
 	}
 
-	private static void DeleteLinks(int idStar)
-	{
-		for (int i = 0; i < nodeList[idStar].Count; i++)
-		{
-			var idNear = nodeList[idStar][i];
-			if( !nodeList[idNear].Remove(idStar))
-			{
-				throw new System.Exception();
-			}
-		}
-		nodeList[idStar].Clear();
-	}
-
-	private static void LinkUnlinkedPereferal()
+	private static void LinkPeriphery()
 	{
 		for (int i = 0; i < Galaxy.DistancesSortedNear[0].Length; i++)
 		{
@@ -76,13 +84,14 @@ public static class SpaceNetworkCreator
 			AddOnceForClear(Galaxy.DistancesSortedNear[0][i].index);
 		}
 	}
+
 	private static void AddOnceForClear(int id)
 	{
 
 		for (int i = 1; i < Galaxy.DistancesSortedNear[id].Length; i++)
 		{
 			int idNeib = Galaxy.DistancesSortedNear[id][i].index;
-			if (nodeList[idNeib].Count > 0)
+			if (hypersList[idNeib].Count > 0)
 			{
 				AddConnection(id, idNeib);
 				break;
@@ -95,57 +104,78 @@ public static class SpaceNetworkCreator
 		}
 	}
 
-	private static void ExpansionSector(Sector sector)
+	private static void InitSectors()
 	{
-		for (int i = 0; i < sector.members.Count; i++)
-		{
-			if (!sector.members[i].isOpen) continue;
-
-			int newId = GetValidNearSystem(sector.members[i]);
-			if (newId == 0) continue; //not central black hole
-
-			if (Galaxy.StarSystemsArr[newId].idSector == 0)
-			{
-			}
-				var newMember = CreateNewMember(newId, sector.id);
-				sector.members.Add(newMember);
-			AddConnection(newId, sector.members[i].idSystem);
-
-			if (GetPossibleConnections(sector.members[i]) <= 0)
-				sector.members[i].isOpen = false;
-		}
-	}
-
-	private static void Init()
-	{
-		int SectorsAmount = Galaxy.StarSystemsArr.Length / rnd.Next(minSectorSize, maxSectorSize) + 1;
-		SectorsAmount = 50;
-		sectorsArr = new Sector[SectorsAmount];
-		//initial connectArr
-		nodeList = new List<List<int>>();
-		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
-		{
-			nodeList.Add(new List<int>());
-		}
+		sectorsArr = new Sector[sectorsAmount];
 		//initial sectorArr
 		for (int i = 1; i < sectorsArr.Length; i++)
 		{
 			Sector sector = new Sector
 			{
 				id = i,
-				isActive = true,
+				isOpen = true,
 				members = new List<MemberSector>()
 			};
 			MemberSector member = new MemberSector
 			{
 				idSector = i,
-				idSystem = GetRandomNobodySystem(),
+				idSystem = i,
 				isOpen = true
 			};
+			Galaxy.StarSystemsArr[member.idSystem].idSector = member.idSector;
 			sector.members.Add(member);
 			sectorsArr[i] = sector;
 		}
 	}
+
+	private static void Expansion()
+	{
+		bool key = true;
+		while (key)
+		{
+			key = false;
+			for (int i = 1; i < sectorsArr.Length; i++)
+			{
+				if (!sectorsArr[i].isOpen) continue;
+				ExpansionSector(sectorsArr[i]);
+				key = true;
+			}
+		}
+	}
+
+	private static void ExpansionSector(Sector sector)
+	{
+		for (int i = 0; i < sector.members.Count; i++)
+		{
+			if (!sector.members[i].isOpen) continue;
+			int idNewMember = GetNewSystem(sector.members[i]);
+			if (idNewMember == 0)
+			{
+				sector.members[i].isOpen = false;
+				continue;
+			}
+			sector.members.Add(CreateNewMember(idNewMember, sector.id));
+			//if (sector.members.Count >= maxSectorSize)
+			//{
+			//	sector.isOpen = false;
+			//}
+			return;
+		}
+		sector.isOpen = false;
+	}
+
+	private static int GetNewSystem(MemberSector member)
+	{
+		for (int i = 0; i < hypersList[member.idSystem].Count; i++)
+		{
+			int neibourId = hypersList[member.idSystem][i];
+			if (Galaxy.StarSystemsArr[neibourId].idSector == 0)
+			{
+				return neibourId;
+			}
+		}
+		return 0;
+	}	
 
 	private static MemberSector CreateNewMember(int idSystem, int idSector)
 	{
@@ -161,81 +191,64 @@ public static class SpaceNetworkCreator
 
 	private static void AddConnection(int idA, int idB)
 	{
-		if (!nodeList[idA].Contains(idB))
-			nodeList[idA].Add(idB);
-		if (!nodeList[idB].Contains(idA))
-			nodeList[idB].Add(idA);
+		if (!hypersList[idA].Contains(idB))
+			hypersList[idA].Add(idB);
+		if (!hypersList[idB].Contains(idA))
+			hypersList[idB].Add(idA);
 	}
 
-	private static int GetValidNearSystem(MemberSector member)
+	private static void RemoveConnection(int idA, int idB)
 	{
-		for (int i = 1; i < Galaxy.DistancesSortedNear.Length; i++)
-		{
-			if (Galaxy.DistancesSortedNear[member.idSystem][i].distance > maxDistance) break;
-			if (!ValidToAdding(Galaxy.DistancesSortedNear[member.idSystem][i].index, member)) continue;
-			return Galaxy.DistancesSortedNear[member.idSystem][i].index;
-		}
-		return 0;
+		if (hypersList[idA].FindAll(x => x == idB).Count > 1) throw new System.Exception();
+		if (hypersList[idB].FindAll(x => x == idA).Count > 1) throw new System.Exception();
+		if (!hypersList[idA].Remove(idB)) throw new System.Exception();
+		if (!hypersList[idB].Remove(idA)) throw new System.Exception();
+		if (hypersList[idA].FindAll(x => x == idB).Count > 0) throw new System.Exception();
+		if (hypersList[idB].FindAll(x => x == idA).Count > 0) throw new System.Exception();
 	}
 
-	private static int GetPossibleConnections(MemberSector member)
+	private static void RemoveAllConnections(int id)
 	{
-		if (nodeList[member.idSystem].Count >= maxNeibours) return 0;
-
-		int possibleLines = 0;
-		for (int i = 0; i < maxNeibours; i++)
+		for (int i = 0; i < hypersList[id].Count; i++)
 		{
-			if (Galaxy.DistancesSortedNear[member.idSystem][i].distance > maxDistance) break;
-			possibleLines++;
-		}
-		if (possibleLines - nodeList[member.idSystem].Count < 0) throw new System.Exception();
-		return possibleLines - nodeList[member.idSystem].Count;
-	}
-
-	private static bool ValidToAdding(int idSystem, MemberSector member)
-	{
-		if (Galaxy.StarSystemsArr[idSystem].idSector == 0) return true;
-		if (Galaxy.StarSystemsArr[idSystem].idSector != member.idSector) return false;
-		if (Galaxy.StarSystemsArr[idSystem].idSector == member.idSector && GetPossibleConnections(member) > 0)
-		{
-			if (!IsConnectExist(idSystem, member.idSystem))
+			var idNear = hypersList[id][i];
+			if (!hypersList[idNear].Remove(id))
 			{
-				return true;
+				throw new System.Exception();
 			}
 		}
-		return false;
+		hypersList[id].Clear();
 	}
-	private static bool IsConnectExist(int idA, int idB)
+
+	private static void RemoveInterSectorConnection()
 	{
-		if (nodeList[idA].Contains(idB) || nodeList[idB].Contains(idA)) return true;
-		return false;
+		for (int i = 0; i < hypersList.Count; i++)
+		{
+			for (int k = hypersList[i].Count - 1; k >= 0; k--)
+
+			{
+				int targetId = hypersList[i][k];
+				if (Galaxy.StarSystemsArr[i].idSector != Galaxy.StarSystemsArr[targetId].idSector) RemoveConnection(i, targetId);
+			}
+			if (Galaxy.StarSystemsArr[i].idSector == 0) RemoveAllConnections(i);
+		}
 	}
 
 	private static int[][] GetResultArray()
 	{
-		int[][] result = new int[nodeList.Count][];
-		for (int i = 0; i < nodeList.Count; i++)
+		int[][] result = new int[hypersList.Count][];
+		for (int i = 0; i < hypersList.Count; i++)
 		{
-			result[i] = nodeList[i].ToArray();
+			result[i] = hypersList[i].ToArray();
 		}
 		return result;
-	}
-
-	private static int GetRandomNobodySystem()
-	{
-		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
-		{
-			var sys = Galaxy.StarSystemsArr[rnd.Next(1, Galaxy.StarSystemsArr.Length - 1)];
-			if (sys.idSector == 0) return sys.id;
-		}
-		return 0;
 	}
 
 	private class Sector
 	{
 		public int id;
 		public List<MemberSector> members;
-		public bool isActive;
+		public bool isOpen;
 	}
 	private class MemberSector
 	{
@@ -248,16 +261,16 @@ public static class SpaceNetworkCreator
 	{
 		int positive = 0;
 		int negative = 0;
-		for (int curIndex = nodeList.Count - 1; curIndex >= 0; curIndex--)
+		for (int curIndex = hypersList.Count - 1; curIndex >= 0; curIndex--)
 		{//sysId = curindex
 
-			for (int neibIndex = nodeList[curIndex].Count - 1; neibIndex >= 0; neibIndex--)
+			for (int neibIndex = hypersList[curIndex].Count - 1; neibIndex >= 0; neibIndex--)
 			{//current nodelist[curIndex][neibourIndex]
-				int idNeibour = nodeList[curIndex][neibIndex];
+				int idNeibour = hypersList[curIndex][neibIndex];
 
-				for (int neibNeibIndex = nodeList[idNeibour].Count - 1; neibNeibIndex >= 0; neibNeibIndex--)
+				for (int neibNeibIndex = hypersList[idNeibour].Count - 1; neibNeibIndex >= 0; neibNeibIndex--)
 				{ //line from[currSys] to [neibSys] intersect  from [neibSys] to [neibNeibSys]
-					int idNeibourNeibour = nodeList[idNeibour][neibNeibIndex];
+					int idNeibourNeibour = hypersList[idNeibour][neibNeibIndex];
 					bool result = LineLineIntersection(
 						Galaxy.StarSystemsArr[curIndex].position,
 						Galaxy.StarSystemsArr[idNeibour].position,
@@ -267,7 +280,7 @@ public static class SpaceNetworkCreator
 					if (result) positive++; else negative++;
 					if (result)
 					{
-						nodeList[idNeibour].Remove(idNeibourNeibour);
+						hypersList[idNeibour].Remove(idNeibourNeibour);
 						//nodeList[idNeibourNeibour].Remove(idNeibour);
 					}
 				}

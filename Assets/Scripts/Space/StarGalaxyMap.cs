@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 public class StarGalaxyMap : MonoBehaviour
 {
-	public int starsArrayIndex = 0;
+	public int idSystem = 0;
 	public float dist;
 
 	private float mouseOverTime = 0;
@@ -15,8 +15,8 @@ public class StarGalaxyMap : MonoBehaviour
 	private void OnMouseDown()
 	{
 		if (EventSystem.current.IsPointerOverGameObject()) return;
-		Debug.Log($"Enter to {starsArrayIndex} system");
-		Gmgr.gmgr.LoadSceneStarSystem(Convert.ToInt32(starsArrayIndex));
+		Debug.Log($"Enter to {idSystem} system");
+		Gmgr.gmgr.LoadSceneStarSystem(Convert.ToInt32(idSystem));
 	}
 	private void OnMouseOver()
 	{
@@ -33,6 +33,6 @@ public class StarGalaxyMap : MonoBehaviour
 
 	private void ShowSystemIndex()
 	{
-		Debug.Log($"{starsArrayIndex}  id sector: {Galaxy.StarSystemsArr[starsArrayIndex].idSector}");
+		Debug.Log($"{idSystem}  id sector: {Galaxy.StarSystemsArr[idSystem].idSector}");
 	}
 }
