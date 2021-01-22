@@ -12,13 +12,13 @@ public class test_path_find_scr : MonoBehaviour
 		var from = System.Int32.Parse(transform.GetChild(0).GetComponent<InputField>().text);
 		var to = System.Int32.Parse(transform.GetChild(1).GetComponent<InputField>().text);
 		var range = System.Int32.Parse(transform.GetChild(2).GetComponent<InputField>().text);
-		var sort = System.Int32.Parse(transform.GetChild(3).GetComponent<InputField>().text);
+		var isJump = transform.GetChild(3).GetComponent<Toggle>().isOn;
 		var t = transform.GetChild(4).GetComponent<Text>();
 
 		way = new int[] { 13, 24, 719, 1011 };
 		Stopwatch s = new Stopwatch();
 		s.Start();
-		way = AI.AlgorithmA.GalaxyPathFinder(from, to, range, sort);
+		way = AI.AlgorithmA.GalaxyPathFinder(from, to, range, isJump);
 		s.Stop();
 		t.text = s.ElapsedMilliseconds.ToString();
 		UnityEngine.Debug.Log($"WAYPOINTS {way.Length}");
@@ -38,6 +38,7 @@ public class test_path_find_scr : MonoBehaviour
 			float distance = Galaxy.DistancesSortedNear[start][i].distance;
 			if (distance > range) break;
 		}
+		
 	}
 
 	private void DrawLine()
@@ -60,8 +61,8 @@ public class test_path_find_scr : MonoBehaviour
 			lines[i].AddComponent<LineRenderer>();
 			LineRenderer lr = lines[i].GetComponent<LineRenderer>();
 			lr.material = new Material(Shader.Find("Legacy Shaders/Particles/Additive"));
-			lr.startColor = lr.endColor = Color.green;
-			lr.startWidth = lr.endWidth = 0.5f;
+			lr.startColor = lr.endColor = new Color(1f, 0, 0, .5f);
+			lr.startWidth = lr.endWidth = 0.8f;
 			lr.SetPosition(0, Galaxy.StarSystemsArr[way[i]].position);
 			lr.SetPosition(1, Galaxy.StarSystemsArr[way[i + 1]].position);
 			lines[i].transform.SetParent(folder.transform);

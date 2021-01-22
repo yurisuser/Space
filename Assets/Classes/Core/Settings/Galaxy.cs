@@ -1,4 +1,6 @@
-﻿namespace Settings
+﻿using UnityEngine;
+
+namespace Settings
 {
 	public struct Galaxy
 	{
@@ -18,5 +20,9 @@
 		public readonly static float WIDTH_ARMS = 100f;
 		//Пустое пространство вокруг центральной черной дырыб коэфициент
 		public readonly static float CENTRAL_BLACK_HOLE_INTERVAL_K = 3.5f;
+		//Цвет линий гипертуннелей
+		public readonly static Color COLOR_HYPER_TUNNEL = new Color(.3f, .6f, .2f, .8f);
+		//Цвет линий маршрутов
+		public readonly static Color COLOR_WAY = new Color(.1f, 0, 0, .8f);
 	}
 }

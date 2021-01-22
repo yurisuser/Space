@@ -5,7 +5,7 @@
 	public static StarSystem[] StarSystemsArr;
 	public static StarDistance[][] Distances; //[from id system][to id system]
 	public static StarDistance[][] DistancesSortedNear; //[from id system][id near system], [][0] - self
-	public static int[][] NetworkNodes; //[from id system][to id system]
+	public static int[][] HyperTunnels; //[from id system][to id system]
 
 	public static int GetNextId()
 	{
