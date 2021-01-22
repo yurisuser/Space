@@ -1,17 +1,13 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using Delaunator;
+//https://github.com/wolktocs/delaunator-csharp
 
 public static class SpaceNetworkCreator
 {
-	private static int minSectorSize = 5;
-	private static int maxSectorSize = 10;
-	private static int sectorsAmount = Settings.Galaxy.STARS_AMMOUNT / ((minSectorSize + maxSectorSize) / 2);
+	private static int sectorsAmount = Settings.Galaxy.CONSTELLATION_AMMOUNT;
 
 	private static List<List<int>> hypersList;
 	private static Sector[] sectorsArr;
-
-	private static System.Random rnd = new System.Random();
 
 	public static int[][] Create()
 	{
@@ -20,24 +16,9 @@ public static class SpaceNetworkCreator
 		LinkPeriphery();
 		InitSectors();
 		Expansion();
-		CheckTest();
 		RemoveInterSectorConnection();
-		//RemoveIntesectorConnection();
+		AddIntersectorConnection();
 		return GetResultArray();
-	}
-
-	private static void CheckTest()
-	{
-		for (int i = 0; i < hypersList.Count; i++)
-		{
-			for (int j = 0; j < hypersList[i].Count; j++)
-			{
-				var e = hypersList[i].FindAll(x => x == hypersList[i][j]);
-				if (e.Count > 1) {
-					throw new System.Exception();
-				}
-			}
-		}
 	}
 
 	private static void CreateHypers()
@@ -80,14 +61,12 @@ public static class SpaceNetworkCreator
 		for (int i = 0; i < Galaxy.DistancesSortedNear[0].Length; i++)
 		{
 			if (Galaxy.DistancesSortedNear[0][i].distance < Settings.Galaxy.GALAXY_RADIUS) continue;
-			//if (nodeList[i].Count > 0) continue;
 			AddOnceForClear(Galaxy.DistancesSortedNear[0][i].index);
 		}
 	}
 
 	private static void AddOnceForClear(int id)
 	{
-
 		for (int i = 1; i < Galaxy.DistancesSortedNear[id].Length; i++)
 		{
 			int idNeib = Galaxy.DistancesSortedNear[id][i].index;
@@ -107,7 +86,6 @@ public static class SpaceNetworkCreator
 	private static void InitSectors()
 	{
 		sectorsArr = new Sector[sectorsAmount];
-		//initial sectorArr
 		for (int i = 1; i < sectorsArr.Length; i++)
 		{
 			Sector sector = new Sector
@@ -155,10 +133,6 @@ public static class SpaceNetworkCreator
 				continue;
 			}
 			sector.members.Add(CreateNewMember(idNewMember, sector.id));
-			//if (sector.members.Count >= maxSectorSize)
-			//{
-			//	sector.isOpen = false;
-			//}
 			return;
 		}
 		sector.isOpen = false;
@@ -197,6 +171,20 @@ public static class SpaceNetworkCreator
 			hypersList[idB].Add(idA);
 	}
 
+	private static void AddIntersectorConnection()
+	{
+		for (int i = 1; i < sectorsArr.Length; i++)
+		{
+			for (int k = 0; k < sectorsArr[i].bestNeibourSectorMembersList.Count; k++)
+			{
+				AddConnection(
+					sectorsArr[i].bestNeibourSectorMembersList[k].idOwnSys,
+					sectorsArr[i].bestNeibourSectorMembersList[k].idExternSys
+					);
+			}			
+		}
+	}
+
 	private static void RemoveConnection(int idA, int idB)
 	{
 		if (hypersList[idA].FindAll(x => x == idB).Count > 1) throw new System.Exception();
@@ -225,13 +213,25 @@ public static class SpaceNetworkCreator
 		for (int i = 0; i < hypersList.Count; i++)
 		{
 			for (int k = hypersList[i].Count - 1; k >= 0; k--)
-
 			{
 				int targetId = hypersList[i][k];
-				if (Galaxy.StarSystemsArr[i].idSector != Galaxy.StarSystemsArr[targetId].idSector) RemoveConnection(i, targetId);
+				if (Galaxy.StarSystemsArr[i].idSector != Galaxy.StarSystemsArr[targetId].idSector)
+				{
+					SaveBestConnection(i, targetId);
+					RemoveConnection(i, targetId);
+				}
 			}
 			if (Galaxy.StarSystemsArr[i].idSector == 0) RemoveAllConnections(i);
 		}
+	}
+
+	private static void SaveBestConnection(int idSysA, int idSysB)
+	{
+		Sector secA = sectorsArr[Galaxy.StarSystemsArr[idSysA].idSector];
+		Sector secB = sectorsArr[Galaxy.StarSystemsArr[idSysB].idSector];
+
+		secA.AddBest(idSysA, idSysB);
+		secB.AddBest(idSysB, idSysA);
 	}
 
 	private static int[][] GetResultArray()
@@ -249,6 +249,28 @@ public static class SpaceNetworkCreator
 		public int id;
 		public List<MemberSector> members;
 		public bool isOpen;
+		public List<BestNeibourSectorMember> bestNeibourSectorMembersList = new List<BestNeibourSectorMember>();
+
+		public void AddBest(int idOwn, int idExtern)
+		{
+			int oldIndex = bestNeibourSectorMembersList.FindIndex(x => x.idNeibourSector == Galaxy.StarSystemsArr[idExtern].idSector);
+			var addingBest = new BestNeibourSectorMember()
+			{
+				idNeibourSector = Galaxy.StarSystemsArr[idExtern].idSector,
+				idOwnSys = idOwn,
+				idExternSys = idExtern,
+				distance = Galaxy.Distances[idOwn][idExtern].distance
+			};
+			if (oldIndex < 0)
+			{
+				bestNeibourSectorMembersList.Add(addingBest);
+				return;
+			}
+			if (bestNeibourSectorMembersList[oldIndex].distance > Galaxy.Distances[idOwn][idExtern].distance)
+			{
+				bestNeibourSectorMembersList[oldIndex] = addingBest;
+			}
+		}
 	}
 	private class MemberSector
 	{
@@ -257,54 +279,11 @@ public static class SpaceNetworkCreator
 		public bool isOpen;
 	}
 
-	private static void DeleteIntersections()
+	private struct BestNeibourSectorMember
 	{
-		int positive = 0;
-		int negative = 0;
-		for (int curIndex = hypersList.Count - 1; curIndex >= 0; curIndex--)
-		{//sysId = curindex
-
-			for (int neibIndex = hypersList[curIndex].Count - 1; neibIndex >= 0; neibIndex--)
-			{//current nodelist[curIndex][neibourIndex]
-				int idNeibour = hypersList[curIndex][neibIndex];
-
-				for (int neibNeibIndex = hypersList[idNeibour].Count - 1; neibNeibIndex >= 0; neibNeibIndex--)
-				{ //line from[currSys] to [neibSys] intersect  from [neibSys] to [neibNeibSys]
-					int idNeibourNeibour = hypersList[idNeibour][neibNeibIndex];
-					bool result = LineLineIntersection(
-						Galaxy.StarSystemsArr[curIndex].position,
-						Galaxy.StarSystemsArr[idNeibour].position,
-						Galaxy.StarSystemsArr[idNeibour].position,
-						Galaxy.StarSystemsArr[idNeibourNeibour].position
-						);
-					if (result) positive++; else negative++;
-					if (result)
-					{
-						hypersList[idNeibour].Remove(idNeibourNeibour);
-						//nodeList[idNeibourNeibour].Remove(idNeibour);
-					}
-				}
-			}
-		}
-		Debug.Log($"+ {positive} - {negative}");
-	}
-
-	public static bool LineLineIntersection( Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2)
-	{
-
-		Vector3 lineVec3 = linePoint2 - linePoint1;
-		Vector3 crossVec1and2 = Vector3.Cross(lineVec1, lineVec2);
-
-		float planarFactor = Vector3.Dot(lineVec3, crossVec1and2);
-
-		//is coplanar, and not parrallel
-		if (Mathf.Abs(planarFactor) < 0.0001f && crossVec1and2.sqrMagnitude > 0.0001f)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
+		public int idNeibourSector;
+		public int idOwnSys;
+		public int idExternSys;
+		public float distance;
 	}
 }
