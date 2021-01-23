@@ -36,7 +36,7 @@ public static class PlanetCreator
 			rangeProbabilityes[i] = rangeProbabilityes[i - 1] + probabilityesForStarType[i];
 		}
 		int type = 0;
-		int rnd = Random.Range(0, rangeProbabilityes[rangeProbabilityes.Length - 1]);
+		int rnd = Rnd.Next(0, rangeProbabilityes[rangeProbabilityes.Length - 1]);
 		for (int i = 0; i < rangeProbabilityes.Length; i++)
 		{
 			if (rnd <= rangeProbabilityes[i])
@@ -50,7 +50,7 @@ public static class PlanetCreator
 
 	private static Resourcer GetResourcer(Planet planet)
 	{
-		var result = new ResourceDeposit[Random.Range(0, (int)(planet.mass * 10))];
+		var result = new ResourceDeposit[Rnd.Next(0, (int)(planet.mass * 10))];
 		List<int> idsRes = new List<int>();
 		List<int> probabRes = new List<int>();
 		for (int i = 0; i < Data.planetaryResourcesProbabilityArr.Length; i++)
@@ -70,7 +70,7 @@ public static class PlanetCreator
 
 		for (int i = 0; i < result.Length; i++)
 		{
-			int rnd = Random.Range(0, rangeProbab[rangeProbab.Length - 1]);
+			int rnd = Rnd.Next(0, rangeProbab[rangeProbab.Length - 1]);
 			for (int j = 0; j < rangeProbab.Length; j++)
 			{
 				if (rnd < rangeProbab[j])
@@ -78,7 +78,7 @@ public static class PlanetCreator
 					ResourceDeposit res = new ResourceDeposit
 					{
 						idResource = idsRes[j],
-						extraction = Random.Range(10, 50),
+						extraction = Rnd.Next(10, 50),
 					};
 					result[i] = res;
 					break;

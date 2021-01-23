@@ -4,7 +4,6 @@ using UnityEngine;
 
 public static class Docker
 {
-	private static System.Random rnd = new System.Random();
 	public static List<Ship> addingShipToSystemMapScene = new List<Ship>();
 	public static void ToDock(Ship ship)
 	{
@@ -57,8 +56,8 @@ public static class Docker
 	private static Vector3 GetRandomPoints()
 	{
 		return new Vector3(
-				rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
-				rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
+				Rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
+				Rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
 				Settings.StarSystem.SYSTEM_SHIPS_LAYER
 				);
 	}

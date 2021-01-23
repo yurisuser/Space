@@ -25,7 +25,7 @@ public static class MoonCreator
 			orbitNumber = numberMoon,
 			orbitSpeed = 50,
 			rotateSpeed = 5,
-			mass = Random.Range(.05f, planet.mass / 2),
+			mass = Rnd.Next(.05f, planet.mass / 2),
 			type = GetMoonType(planet.type)
 		};
 		moon.resourcer = GetResourcer(moon);
@@ -50,7 +50,7 @@ public static class MoonCreator
 		}
 
 		int type = 0;
-		int rnd = Random.Range(0, rangeProbabilityes[rangeProbabilityes.Length - 1]);
+		int rnd = Rnd.Next(0, rangeProbabilityes[rangeProbabilityes.Length - 1]);
 
 		for (int i = 0; i < rangeProbabilityes.Length; i++)
 		{
@@ -65,7 +65,7 @@ public static class MoonCreator
 
 	private static Resourcer GetResourcer(Moon moon)
 	{
-		var result = new ResourceDeposit[Random.Range(0, (int)(moon.mass * 10))];
+		var result = new ResourceDeposit[Rnd.Next(0, (int)(moon.mass * 10))];
 		List<int> idsRes = new List<int>();
 		List<int> probabRes = new List<int>();
 		for (int i = 0; i < Data.planetaryResourcesProbabilityArr.Length; i++)
@@ -85,7 +85,7 @@ public static class MoonCreator
 
 		for (int i = 0; i < result.Length; i++)
 		{
-			int rnd = Random.Range(0, rangeProbab[rangeProbab.Length - 1]);
+			int rnd = Rnd.Next(0, rangeProbab[rangeProbab.Length - 1]);
 			for (int j = 0; j < rangeProbab.Length; j++)
 			{
 				if (rnd < rangeProbab[j])
@@ -93,7 +93,7 @@ public static class MoonCreator
 					ResourceDeposit res = new ResourceDeposit
 					{
 						idResource = idsRes[j],
-						extraction = Random.Range(10, 50),
+						extraction = Rnd.Next(10, 50),
 					};
 					result[i] = res;
 					break;

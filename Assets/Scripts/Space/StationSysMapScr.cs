@@ -18,7 +18,7 @@ public class StationSysMapScr : MonoBehaviour
 
 	private void OnMouseDown()
 	{
-        Debug.Log("-----" + UnityEngine.Random.Range(0,100));
+        Debug.Log("-----" + Rnd.Next(0,100));
         var orders = st.controlCentre.market.GetAllOffers();
 		foreach (var item in orders)
 		{

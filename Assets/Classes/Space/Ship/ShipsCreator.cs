@@ -13,7 +13,7 @@ public static class ShipsCreator
 			Ship ship = new Ship
 			{
 				id = Galaxy.GetNextId(),
-				name = Random.Range(0, 100).ToString(),
+				name = Rnd.Next(0, 100).ToString(),
 				param = Data.shipsParamArr[0],
 				state = EShipState.inSpace,
 				location = new Location {
@@ -30,8 +30,8 @@ public static class ShipsCreator
 	private static Vector3 getRNDPosition()
 	{
 		return new Vector3(
-			Random.Range(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
-			Random.Range(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
+			Rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
+			Rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
 			Settings.StarSystem.SYSTEM_SHIPS_LAYER
 			);
 	}

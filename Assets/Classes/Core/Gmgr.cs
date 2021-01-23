@@ -19,7 +19,6 @@ public class Gmgr : MonoBehaviour
 		///
 		Turner.TimeTrigger += TurnUpdate;
 		Turner.GoStream();
-		//TaskManager.Tick();// initial tick
 	}
 
 	private void LateUpdate()

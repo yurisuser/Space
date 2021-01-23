@@ -1,7 +1,4 @@
-﻿using System;
-using Random = UnityEngine.Random;
-
-public class PlanetSystemCreator
+﻿public class PlanetSystemCreator
 {
 	public static PlanetSystem GetRandomPlanetSystem(int numberPlanet, Star motherStar)
 	{

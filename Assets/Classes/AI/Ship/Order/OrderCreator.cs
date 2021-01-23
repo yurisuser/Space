@@ -5,7 +5,6 @@ namespace AI.AIShip
 {
 	public static class OrderCreator
 	{
-		private static System.Random rnd = new System.Random();
 		public static Order CreateOrder(EOrders order, Ship ship)
 		{
 			switch (order)
@@ -91,7 +90,7 @@ namespace AI.AIShip
 				order = ship.order.Clone();
 				order.currentPosition = ship.order.currentPosition == default ? getRNDPosition() : ship.order.currentPosition;
 			}
-			int distancesIndexDestination = rnd.Next(1, 3);
+			int distancesIndexDestination = Rnd.Next(1, 3);
 			order.destinationSystemIndex = Galaxy.DistancesSortedNear[ship.location.indexStarSystem][distancesIndexDestination].index;
 
 			order.destinationOrder = Galaxy.DistancesSortedNear[ship.location.indexStarSystem][distancesIndexDestination].direction
@@ -105,8 +104,8 @@ namespace AI.AIShip
 		private static Vector3 getRNDPosition()
 		{
 			return new Vector3(
-				rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
-				rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
+				Rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
+				Rnd.Next(-Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM, Settings.StarSystem.MAX_RADIUS_STAR_SYSTEM),
 				Settings.StarSystem.SYSTEM_SHIPS_LAYER
 				);
 		}
@@ -145,7 +144,7 @@ namespace AI.AIShip
 						list.Add(Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray[u]);
 				}
 			}
-			int index = rnd.Next(0, list.Count);
+			int index = Rnd.Next(0, list.Count);
 			return list[index];
 		}
 	}

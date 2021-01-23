@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 using settings = Settings.Galaxy;
 
 public static class StarSystemCreator
@@ -36,7 +35,7 @@ public static class StarSystemCreator
 		{
 			probabilitysStarsArr[i] = probabilitysStarsArr[i - 1] + Data.starsArr[i].probability;
 		}
-		int rnd = Random.Range(0, probabilitysStarsArr[probabilitysStarsArr.Length - 1]);
+		int rnd = Rnd.Next(0, probabilitysStarsArr[probabilitysStarsArr.Length - 1]);
 		int id = Galaxy.GetNextId();
 		int type = 0;
 		for (int i = 0; i < probabilitysStarsArr.Length; i++)
@@ -58,7 +57,7 @@ public static class StarSystemCreator
 
 	private static PlanetSystem[] CreatePlanetSystems(Star star)
 	{
-		int planetCount = Random.Range(2, 10);
+		int planetCount = Rnd.Next(2, 10);
 		PlanetSystem[] arr = new PlanetSystem[10];
 		for (int i = 0; i < 10; i++)
 		{
@@ -88,13 +87,13 @@ public static class StarSystemCreator
 
 	private static Vector3 GenerateStarsNoGausssianDistr()
 	{
-		float x = Random.Range(-1f, 1f);
+		float x = Rnd.Next(-1f, 1f);
 		if (x == 0) x = 0.0001f;
-		float y = Random.Range(-settings.GALAXY_RADIUS, settings.GALAXY_RADIUS);
+		float y = Rnd.Next(-settings.GALAXY_RADIUS, settings.GALAXY_RADIUS);
 		x = (float)Math.Pow(x, settings.DENSITY_ARMS) 
 			* settings.GALAXY_RADIUS 
-			+ Random.Range(-settings.WIDTH_ARMS, settings.WIDTH_ARMS);
-		x *= Random.Range(0f, 1f) > .5 ? 1 : -1;
+			+ Rnd.Next(-settings.WIDTH_ARMS, settings.WIDTH_ARMS);
+		x *= Rnd.Next(0f, 1f) > .5 ? 1 : -1;
 		float z = settings.GALAXY_STAR_LAYER;
 		var rrr = new Vector3(x, y, z);
 		oldX = x;

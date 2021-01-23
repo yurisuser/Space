@@ -29,7 +29,7 @@ public static class IndustryCreator
 		Recipe recipe;
 		if (deposit == null)
 		{
-			recipe = (Recipe)productRecipeArr[Random.Range(0, productRecipeArr.Length - 1)];
+			recipe = (Recipe)productRecipeArr[Rnd.Next(0, productRecipeArr.Length - 1)];
 		}
 		else
 		{
