@@ -18,7 +18,7 @@ public static class PlanetCreator
 			angleOnOrbit = 15 * numberPlanet
 		};
 		planet.resourcer = GetResourcer(planet);
-		planet.controlCentre = new ControlCentre(planet);
+		planet.controlCentre = new Hub(planet);
 		return planet;
 	}
 

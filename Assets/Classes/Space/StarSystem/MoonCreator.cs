@@ -29,7 +29,7 @@ public static class MoonCreator
 			type = GetMoonType(planet.type)
 		};
 		moon.resourcer = GetResourcer(moon);
-		moon.controlCentre = new ControlCentre(moon);
+		moon.controlCentre = new Hub(moon);
 		return moon;
 	}
 

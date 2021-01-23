@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class ControlCentre
+public class Hub
 {
 	public SubStarBody body;
 
@@ -10,7 +10,7 @@ public class ControlCentre
 	public Storage storage;
 	public Market market;
 
-	public ControlCentre(SubStarBody body)
+	public Hub(SubStarBody body)
 	{
 		if (body == null) throw new System.Exception();
 		this.body = body;
