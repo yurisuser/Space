@@ -16,7 +16,8 @@ public class StarGalaxyMap : MonoBehaviour
 	{
 		if (EventSystem.current.IsPointerOverGameObject()) return;
 		Debug.Log($"Enter to {idSystem} system");
-		Gmgr.gmgr.LoadSceneStarSystem(Convert.ToInt32(idSystem));
+		Glob.currentStarSystemIndex = Convert.ToInt32(idSystem);
+		Gmgr.gmgr.LoadSceneStarSystem();
 	}
 	private void OnMouseOver()
 	{

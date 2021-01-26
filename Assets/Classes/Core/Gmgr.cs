@@ -15,7 +15,8 @@ public class Gmgr : MonoBehaviour
 		GalaxyCreator.CreateGalaxy();
 		///
 		LoadSceneGalaxy();
-		//LoadSceneStarSystem(11);
+		//Glob.currentSystemIndex = 11;
+		//LoadSceneStarSystem();
 		///
 		Turner.TimeTrigger += TurnUpdate;
 		Turner.GoStream();
@@ -33,7 +34,7 @@ public class Gmgr : MonoBehaviour
 	{
 		sceneState.Tick();
 		TaskManager.Tick();
-		Utilities.ShowMe(3, $"cur sys {Glob.currentSystemIndex}");
+		Utilities.ShowMe(3, $"cur sys {Glob.currentStarSystemIndex}");
 	}
 
 	void Awake()
@@ -55,14 +56,24 @@ public class Gmgr : MonoBehaviour
 		sceneState = new SceneStateGalaxy();
 	}
 
-	public void LoadSceneStarSystem(int indexStarSystem)
+	public void LoadSceneStarSystem()
 	{
-		Glob.currentSystemIndex = indexStarSystem;
 		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
 		SceneManager.LoadScene("StarSystem");
 		Glob.currentScene = EScene.starSystem;
-		sceneState = new SceneStateStarSystem(Galaxy.StarSystemsArr[indexStarSystem]);
+		sceneState = new SceneStateStarSystem(Galaxy.StarSystemsArr[Glob.currentStarSystemIndex]);
 		UI.Escaper.Add(LoadSceneGalaxy);
+	}
+
+	public void LoadScenePlanet(Location location)
+	{
+		Glob.currentPlanetSystemIndex = location.indexPlanetSystem;
+		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
+		SceneManager.LoadScene("PlanetScene");
+		Glob.currentScene = EScene.planetScene;
+		sceneState = new SceneStatePlanet(location);
+		UI.Escaper.Add(LoadSceneStarSystem);
+
 	}
 
 	private void OnDrawMapAfterLoadScene(Scene arg0, LoadSceneMode arg1)

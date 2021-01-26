@@ -19,12 +19,12 @@ public static class Docker
 		ship.state = EShipState.undocking;
 		Galaxy.StarSystemsArr[ship.location.indexStarSystem].shipsList.Add(ship);
 		ship.order.dock.RemoveFromDock(ship);
-		if (Glob.currentScene == EScene.starSystem && ship.location.indexStarSystem == Glob.currentSystemIndex) AddToScene(ship);
+		if (Glob.currentScene == EScene.starSystem && ship.location.indexStarSystem == Glob.currentStarSystemIndex) AddToScene(ship);
 	}
 
 	public static void ToHyper(Ship ship)
 	{
-		ship.location.hyper = true;
+		ship.location.elocation = ELocation.hyper;
 		ship.state = EShipState.inHyper;
 		if (!Galaxy.StarSystemsArr[ship.location.indexStarSystem].shipsList.Remove(ship)) throw new Exception();
 		HyperSpace.AddToHyperSpace(ship);
@@ -32,7 +32,7 @@ public static class Docker
 
 	public static void ToUnHyper(Ship ship)
 	{
-		ship.location.hyper = false;
+		ship.location.elocation = ELocation.space;
 		ship.location.indexStarSystem = ship.order.destinationSystemIndex;
 		ship.order.currentPosition = GetRandomPoints();
 		ship.order.destinationStep = ship.order.currentPosition;
@@ -41,7 +41,7 @@ public static class Docker
 
 		Galaxy.StarSystemsArr[ship.order.destinationSystemIndex].shipsList.Add(ship);
 
-		if (Glob.currentScene == EScene.starSystem && ship.location.indexStarSystem == Glob.currentSystemIndex)
+		if (Glob.currentScene == EScene.starSystem && ship.location.indexStarSystem == Glob.currentStarSystemIndex)
 		{
 			Debug.Log($"cur {ship.location.indexStarSystem} dest {ship.order.destinationSystemIndex}");
 			AddToScene(ship);

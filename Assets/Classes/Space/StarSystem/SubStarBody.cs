@@ -3,7 +3,6 @@
 public abstract class SubStarBody: ISystemPosition
 {
 	public int id;
-	public int indexStarSystem;
 	public string name;
 	public int type;
 	public ESubStarType subStarType;
@@ -12,6 +11,7 @@ public abstract class SubStarBody: ISystemPosition
 	public float orbitSpeed;
 	public float rotateSpeed;
 	public float angleOnOrbit;
+	public SubStarBody parent;
 	public Resourcer resourcer;
 	public Hub controlCentre;
 

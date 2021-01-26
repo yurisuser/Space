@@ -24,8 +24,8 @@ public class CameraGalaxy : MonoBehaviour
         cam = GetComponent<Camera>();
         targetOrthographicSize = cam.orthographicSize = Glob.CameraGalaxyZoom;
         cam.transform.position = new Vector3(
-            Galaxy.StarSystemsArr[Glob.currentSystemIndex].position.x,
-            Galaxy.StarSystemsArr[Glob.currentSystemIndex].position.y,
+            Galaxy.StarSystemsArr[Glob.currentStarSystemIndex].position.x,
+            Galaxy.StarSystemsArr[Glob.currentStarSystemIndex].position.y,
             settings.CAMERA_LAYER
             );
     }

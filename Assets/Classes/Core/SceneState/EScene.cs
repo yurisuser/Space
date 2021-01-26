@@ -3,5 +3,6 @@
 	none,
 	main,
 	galaxy,
-	starSystem
+	starSystem,
+	planetScene
 }

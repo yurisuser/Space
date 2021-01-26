@@ -8,7 +8,10 @@ using UnityEngine;
 public class Location
 {
 	public int indexStarSystem;
+	public int indexPlanetSystem;
+	public int indexMoon;
+	public int indexStation;
+	public ELocation elocation;
 	public Dock dock = null;
-	public bool hyper = false;
 }
 

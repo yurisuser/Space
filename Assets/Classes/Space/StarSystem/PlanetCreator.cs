@@ -15,7 +15,8 @@ public static class PlanetCreator
 			orbitSpeed = 100,
 			mass = 1,
 			orbitNumber = numberPlanet,
-			angleOnOrbit = 15 * numberPlanet
+			angleOnOrbit = 15 * numberPlanet,
+			parent = null
 		};
 		planet.resourcer = GetResourcer(planet);
 		planet.controlCentre = new Hub(planet);

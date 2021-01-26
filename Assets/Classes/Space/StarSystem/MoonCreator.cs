@@ -26,7 +26,9 @@ public static class MoonCreator
 			orbitSpeed = 50,
 			rotateSpeed = 5,
 			mass = Rnd.Next(.05f, planet.mass / 2),
-			type = GetMoonType(planet.type)
+			type = GetMoonType(planet.type),
+			parent = planet,
+			subStarType = ESubStarType.moon
 		};
 		moon.resourcer = GetResourcer(moon);
 		moon.controlCentre = new Hub(moon);

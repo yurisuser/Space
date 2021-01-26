@@ -64,7 +64,7 @@ public class SceneStateStarSystem : SceneState
 				PrefabService.PlanetSystemMap[planet.type],
 				planet.position,
 				Quaternion.identity);
-			go.GetComponent<PlanetSysMapScr>().planet = starSystem.planetSystemsArray[i].planet;
+			go.GetComponent<PlanetSysMapScr>().body = starSystem.planetSystemsArray[i].planet;
 			go.transform.localScale += new Vector3(
 				planet.mass * Settings.StarSystem.PLANET_SCALE,
 				planet.mass * Settings.StarSystem.PLANET_SCALE,
@@ -121,7 +121,7 @@ public class SceneStateStarSystem : SceneState
 				moon.mass * Settings.StarSystem.MOON_SCALE, 
 				moon.mass * Settings.StarSystem.MOON_SCALE);
 			obj.transform.SetParent(folder.transform);
-			obj.GetComponent<PlanetSysMapScr>().planet = moon;
+			obj.GetComponent<PlanetSysMapScr>().body = moon;
 			folder.transform.SetParent(root.transform);
 		}
 	}
@@ -180,7 +180,7 @@ public class SceneStateStarSystem : SceneState
 	{
 		for (int i = 0; i < Docker.addingShipToSystemMapScene.Count; i++)
 		{
-			if (Docker.addingShipToSystemMapScene[i].location.indexStarSystem != Glob.currentSystemIndex) continue;
+			if (Docker.addingShipToSystemMapScene[i].location.indexStarSystem != Glob.currentStarSystemIndex) continue;
 			DrawShip(Docker.addingShipToSystemMapScene[i]);
 		}
 		Docker.addingShipToSystemMapScene.Clear();
