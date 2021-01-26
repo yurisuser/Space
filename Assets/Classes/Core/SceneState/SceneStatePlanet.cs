@@ -19,6 +19,7 @@ class SceneStatePlanet : SceneState
 	public override void DrawScene()
 	{
 		DrawSystem();
+		DrawOrbits();
 	}
 	private void DrawSystem()
 	{
@@ -32,7 +33,7 @@ class SceneStatePlanet : SceneState
 			planet.mass * Settings.StarSystem.PLANET_SCALE,
 			planet.mass * Settings.StarSystem.PLANET_SCALE,
 			planet.mass * Settings.StarSystem.PLANET_SCALE);
-		go.transform.SetParent(folder.transform);
+		//go.transform.SetParent(folder.transform);
 		go.AddComponent<RotatorPlanetScene>().SetOrbit(0);
 
 		for (int i = 0; i <planetSystem.moonsArray.Length; i++)
@@ -50,6 +51,34 @@ class SceneStatePlanet : SceneState
 			obj.AddComponent<RotatorPlanetScene>().SetOrbit(i + 1);
 		}
 
-		folder.transform.Rotate(90f, 0, 0);
+		folder.transform.Rotate(0, 0, 90f);
+	}
+
+	private void DrawOrbits()
+	{
+		GameObject orbitFolder = new GameObject();
+		float PointStep = (Mathf.PI * 2 / Settings.LineOrbit.CIRCLES_POINS);
+		float ROrbit;
+		for (int m = 0; m < planetSystem.moonsArray.Length; m++)
+		{
+			Moon moon = planetSystem.moonsArray[m];
+			ROrbit = (moon.orbitNumber + Settings.LineOrbit.EMPTY_PLANET_ORBITS_COUNT) * Settings.LineOrbit.ORBIT_MOON_SIZE;
+			Vector3[] vec3arr = new Vector3[Settings.LineOrbit.CIRCLES_POINS + 1];
+			GameObject lineOrbit = new GameObject();
+			for (int i = 0; i < Settings.LineOrbit.CIRCLES_POINS; i++)
+			{
+				vec3arr[i] = new Vector3((int)ROrbit * Mathf.Cos(i * PointStep), (int)ROrbit * Mathf.Sin(i * PointStep), 0);
+			}
+			vec3arr[vec3arr.Length - 1] = vec3arr[0];
+			lineOrbit.name = "orbit moon" + moon.name;
+			lineOrbit.AddComponent<LineRenderer>();
+			LineRenderer lineRender = lineOrbit.GetComponent<LineRenderer>();
+			lineRender.positionCount = Settings.LineOrbit.CIRCLES_POINS + 1;
+			lineRender.SetPositions(vec3arr);
+			lineRender.startColor = lineRender.endColor = Settings.LineOrbit.COLOR;
+			lineRender.material = new Material(Shader.Find("Legacy Shaders/Particles/Additive"));
+			lineRender.transform.SetParent(orbitFolder.transform);
+			lineRender.startWidth = lineRender.endWidth = .25f;
+		}
 	}
 }

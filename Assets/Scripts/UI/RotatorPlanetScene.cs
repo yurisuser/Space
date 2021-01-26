@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class RotatorPlanetScene : MonoBehaviour
 {
-    private int orbit = 0;
-    private float Krotate = 5f;
-    // Start is called before the first frame update
+    private int orbit = 0; // if 0 this is planet
+    private float Krotate = 10f;
     void Start()
     {
         
@@ -17,8 +16,8 @@ public class RotatorPlanetScene : MonoBehaviour
     {
         if (orbit > 0)
 		{
-            Quaternion angle = new Quaternion(0f, 0f, 0f, 0f);
-            transform.position = RotateAround(transform.position, Vector3.zero, Quaternion.Euler(0, 1f * Time.deltaTime, 0));
+            Quaternion angle = Quaternion.Euler(0, 0, 10f * Time.deltaTime);
+            transform.position = RotateAround(transform.position, Vector3.zero, angle);
 		}
         Rotate();
     }
@@ -34,6 +33,11 @@ public class RotatorPlanetScene : MonoBehaviour
     }
     private void Rotate()
 	{
-        transform.Rotate(0, 0, (Krotate * orbit + Krotate) * Time.deltaTime);
-	}
+        if (orbit > 0)
+		{
+            transform.Rotate(0, 0, (Krotate * orbit + Krotate) * Time.deltaTime);
+            return;
+		}
+        transform.Rotate(0, 0, -(Krotate * orbit + Krotate) * Time.deltaTime);
+    }
 }
