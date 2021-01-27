@@ -8,8 +8,8 @@ public static class PrefabService
 	private static readonly string pathStarsSystemMap = "Prefabs/StarsSystemMap/";
 	private static readonly string pathPlanetsSystemMap = "Prefabs/PlanetsSystemMap/";
 
-	public static Dictionary<int, GameObject> StarsGalaxyMap = new Dictionary<int, GameObject>();
-	public static Dictionary<int, GameObject> StarsSystemMap = new Dictionary<int, GameObject>();
+	public static Dictionary<string, GameObject> StarsGalaxyMap = new Dictionary<string, GameObject>();
+	public static Dictionary<string, GameObject> StarsSystemMap = new Dictionary<string, GameObject>();
 	public static Dictionary<int, GameObject> PlanetSystemMap = new Dictionary<int, GameObject>();
 	public static Dictionary<EMoonTypes, GameObject> MoonSystemMap = new Dictionary<EMoonTypes, GameObject>();
 	public static UIPrefab UI = new UIPrefab();
@@ -42,13 +42,13 @@ public static class PrefabService
 	{
 		for (int i = 0; i < Data.starsArr.Length; i++)
 		{
-			StarsGalaxyMap.Add(i, Resources.Load<GameObject>(pathStarsGalaxyMap + Data.starsArr[i].prefabGalaxyMap));
-			StarsSystemMap.Add(i, Resources.Load<GameObject>(pathStarsSystemMap + Data.starsArr[i].prefabSystemMap));
+			StarsGalaxyMap.Add(Data.starsArr[i].starClass, Resources.Load<GameObject>(pathStarsGalaxyMap + Data.starsArr[i].starClass));
+			StarsSystemMap.Add(Data.starsArr[i].starClass, Resources.Load<GameObject>(pathStarsSystemMap + Data.starsArr[i].starClass));
 		}
 	}
 	private static void LoadPlanetSystemMap()
 	{
-		for (int i = 0; i < Data.starsArr.Length; i++)
+		for (int i = 0; i < Data.planetsArr.Length; i++)
 		{
 			PlanetSystemMap.Add(i, Resources.Load<GameObject>(pathPlanetsSystemMap + Data.planetsArr[i].prefabSystemMap));
 		}

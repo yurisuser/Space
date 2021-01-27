@@ -12,7 +12,7 @@ public class SceneStateGalaxy : SceneState
 		for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 		{
 			GameObject star = GameObject.Instantiate(
-				PrefabService.StarsGalaxyMap[Galaxy.StarSystemsArr[i].star.type],
+				PrefabService.StarsGalaxyMap[Galaxy.StarSystemsArr[i].star.starClass],
 				Galaxy.StarSystemsArr[i].position,
 				Quaternion.identity);
 			star.name = i.ToString();

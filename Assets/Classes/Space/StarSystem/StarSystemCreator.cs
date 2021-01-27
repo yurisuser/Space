@@ -37,21 +37,35 @@ public static class StarSystemCreator
 		}
 		int rnd = Rnd.Next(0, probabilitysStarsArr[probabilitysStarsArr.Length - 1]);
 		int id = Galaxy.GetNextId();
-		int type = 0;
+		string starClass = null;
+		int numInDataStarArr = 0;
 		for (int i = 0; i < probabilitysStarsArr.Length; i++)
 		{
 			if ( rnd <= probabilitysStarsArr[i])
 			{
-				type = i;
+				starClass = Data.starsArr[i].starClass;
+				numInDataStarArr = i;
 				break;
 			}
 		}
 		string name = "St" + id.ToString();
-		if (index == 0)
+
+		if (index == 0)         //Cental black hole
 		{
-			type = Array.Find(Data.starsArr, x => x.type == 5).type;
+			starClass = Array.Find(Data.starsArr, x => x.starClass == "BH").starClass;
 		}
-		Star star = new Star(id, type, name, index);
+
+		Star star = new Star(
+			id: id, 
+			name: name, 
+			indexSystem: index,
+			starClass: starClass,
+			colorName: Data.starsArr[numInDataStarArr].colorName,
+			temperature: Rnd.Next(Data.starsArr[numInDataStarArr].temperature_min, Data.starsArr[numInDataStarArr].temperature_max),
+			mass: Rnd.Next(Data.starsArr[numInDataStarArr].mass_min, Data.starsArr[numInDataStarArr].mass_max),
+			radius: Rnd.Next(Data.starsArr[numInDataStarArr].radius_min, Data.starsArr[numInDataStarArr].radius_max),
+			luminosity: Rnd.Next(Data.starsArr[numInDataStarArr].luminosity_min, Data.starsArr[numInDataStarArr].luminosity_max)
+			);
 		return star;
 	}
 

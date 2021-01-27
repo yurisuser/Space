@@ -6,6 +6,7 @@
 
 		public static void Tick()
 		{
+
 			for (int i = 0; i < Galaxy.StarSystemsArr.Length; i++)
 			{
 				//station

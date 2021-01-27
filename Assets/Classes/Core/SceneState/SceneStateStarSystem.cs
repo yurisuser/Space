@@ -40,7 +40,7 @@ public class SceneStateStarSystem : SceneState
 	private void DrawStar()
 	{		
 		GameObject star = GameObject.Instantiate(
-			PrefabService.StarsSystemMap[starSystem.star.type],
+			PrefabService.StarsSystemMap[starSystem.star.starClass],
 			new Vector3(0, 0, Settings.StarSystem.SYSTEM_SHIPS_LAYER),
 			Quaternion.identity);
 		star.transform.SetParent(root.transform);

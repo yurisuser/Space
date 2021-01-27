@@ -13,13 +13,20 @@ public partial struct Data
 
 			while (reader.Read())
 			{
-				Star star;
+				Star star = new Star();
 				star.id = reader.GetInt32(0);
-				star.type = reader.GetInt32(1);
-				star.name = reader.GetString(2);
-				star.probability = reader.GetInt32(3);
-				star.prefabSystemMap = reader.GetString(4);
-				star.prefabGalaxyMap = reader.GetString(5);
+				star.starClass = reader.GetString(1);
+				star.colorName = reader.GetString(2);
+				star.temperature_min = reader.GetInt32(3);
+				star.temperature_max = reader.GetInt32(4);
+				star.mass_min = reader.GetFloat(5);
+				star.mass_max = reader.GetFloat(6);
+				star.radius_min = reader.GetFloat(7);
+				star.radius_max = reader.GetFloat(8);
+				star.luminosity_min = reader.GetFloat(9);
+				star.luminosity_max = reader.GetFloat(10);
+				star.probability = reader.GetInt32(11);
+
 				result.Add(star);
 			}
 			reader.Close();

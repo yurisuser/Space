@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class PlanetCreator
@@ -9,7 +10,7 @@ public static class PlanetCreator
 		{
 			id = Galaxy.GetNextId(),
 			motherStar = motherStar,
-			type = GetPlanetType(motherStar.type),
+			type = GetPlanetType(motherStar.starClass),
 			name = motherStar.name + " " + (char)(numberPlanet + 65),
 			rotateSpeed = 10,
 			orbitSpeed = 100,
@@ -23,13 +24,14 @@ public static class PlanetCreator
 		return planet;
 	}
 
-	private static int GetPlanetType(int starType)
+	private static int GetPlanetType(string starClass)
 	{
 		int[] probabilityesForStarType = new int[Data.planetsArr.Length];
 		int[] rangeProbabilityes = new int[probabilityesForStarType.Length];
 		for (int i = 0; i < probabilityesForStarType.Length; i++)
 		{
-			probabilityesForStarType[i] = Data.planetsOfStarProbabilityArr[i].probability[starType];
+			int probabilityIndex = Array.FindIndex(Data.starsArr, x => x.starClass == starClass);
+			probabilityesForStarType[i] = Data.planetsOfStarProbabilityArr[i].probability[probabilityIndex];
 		}
 		rangeProbabilityes[0] = probabilityesForStarType[0];
 		for (int i = 1; i < probabilityesForStarType.Length; i++)

@@ -9,7 +9,7 @@ public partial struct Data
 	{
 		private static readonly string spaceDBName = "space.db";
 		//Space
-		private static readonly string starTableName = "star";
+		private static readonly string starTableName = "stars";
 		private static readonly string planetTableName = "planet";
 		private static readonly string moonTableName = "moons";
 		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";

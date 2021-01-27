@@ -34,7 +34,6 @@ public class Gmgr : MonoBehaviour
 	{
 		sceneState.Tick();
 		TaskManager.Tick();
-		Utilities.ShowMe(3, $"cur sys {Glob.currentStarSystemIndex}");
 	}
 
 	void Awake()
