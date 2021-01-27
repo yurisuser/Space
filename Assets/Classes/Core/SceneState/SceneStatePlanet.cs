@@ -34,11 +34,11 @@ class SceneStatePlanet : SceneState
 			planet.mass * Settings.StarSystem.PLANET_SCALE,
 			planet.mass * Settings.StarSystem.PLANET_SCALE);
 		//go.transform.SetParent(folder.transform);
-		go.AddComponent<RotatorPlanetScene>().SetOrbit(0);
+		go.AddComponent<RotatorPlanetScene>().SetMoon(null, planetSystem.moonsArray.Length );
 
 		for (int i = 0; i <planetSystem.moonsArray.Length; i++)
 		{
-			 var moon = planetSystem.moonsArray[i];
+			Moon moon = planetSystem.moonsArray[i];
 			Vector3 moonposition = planet.position - planetSystem.moonsArray[i].position;
 			moonposition.z = 0;
 			GameObject obj = GameObject.Instantiate(PrefabService.PlanetSystemMap[moon.type], moonposition, Quaternion.identity);
@@ -48,7 +48,7 @@ class SceneStatePlanet : SceneState
 				moon.mass * Settings.StarSystem.MOON_SCALE,
 				moon.mass * Settings.StarSystem.MOON_SCALE);
 			obj.transform.SetParent(folder.transform);
-			obj.AddComponent<RotatorPlanetScene>().SetOrbit(i + 1);
+			obj.AddComponent<RotatorPlanetScene>().SetMoon(moon, planetSystem.moonsArray.Length);
 		}
 
 		folder.transform.Rotate(0, 0, 90f);

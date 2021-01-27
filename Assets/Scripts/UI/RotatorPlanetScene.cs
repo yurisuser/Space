@@ -4,40 +4,40 @@ using UnityEngine;
 
 public class RotatorPlanetScene : MonoBehaviour
 {
-    private int orbit = 0; // if 0 this is planet
-    private float Krotate = 10f;
-    void Start()
-    {
-        
-    }
+    private float rotateSelfSpeed = 2f;
+    private float rotateOrbitSpeed = 10f;
+    private int moonsCount = 0;
+    private Moon moon;
 
-    // Update is called once per frame
     void Update()
     {
-        if (orbit > 0)
+        if (moon != null)
 		{
-            Quaternion angle = Quaternion.Euler(0, 0, 10f * Time.deltaTime);
-            transform.position = RotateAround(transform.position, Vector3.zero, angle);
+            var radius = (moon.orbitNumber + Settings.StarSystem.EMPTY_MOON_ORBIT) * Settings.StarSystem.RADIUS_MOON_ORBIT;
+            Quaternion angle = Quaternion.Euler(0, 0, rotateOrbitSpeed / (moon.orbitNumber * 5 + 1) * Time.deltaTime);
+			transform.position = RotateAround(transform.position, Vector3.zero, angle, radius);
 		}
         Rotate();
     }
 
-    public void SetOrbit(int orbit)
+    public void SetMoon(Moon moon, int moonsCount)
 	{
-        this.orbit = orbit;
+        this.moon = moon;
+        this.moonsCount = moonsCount;
 	}
 
-    private Vector3 RotateAround(Vector3 point, Vector3 pivot, Quaternion angle)
+	private Vector3 RotateAround(Vector3 point, Vector3 pivot, Quaternion angle, float radius)
 	{
-        return angle * (point - pivot) + pivot;
-    }
-    private void Rotate()
+        return angle * (point - pivot).normalized * radius + pivot;
+	}
+
+	private void Rotate()
 	{
-        if (orbit > 0)
+        if (moon != null)
 		{
-            transform.Rotate(0, 0, (Krotate * orbit + Krotate) * Time.deltaTime);
+            transform.Rotate(0, 0, (rotateSelfSpeed * moon.orbitNumber + rotateSelfSpeed) * Time.deltaTime);
             return;
 		}
-        transform.Rotate(0, 0, -(Krotate * orbit + Krotate) * Time.deltaTime);
+        transform.Rotate(0, 0, rotateSelfSpeed * Time.deltaTime);
     }
 }
