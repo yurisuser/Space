@@ -25,11 +25,16 @@ public class SceneStateStarSystem : SceneState
 		cam.orthographicSize = Settings.CameraStarSystem.MAX_ZOOM;
 		root = new GameObject { name = folderRoot };
 		new GameObject {name = folderOrbits}.transform.SetParent(root.transform);
-
+		SetHeadLocation();
 		DrawStar();
 		DrawPlanetsSystem();
 		DrawShips();
 		DrawStations();
+	}
+
+	private void SetHeadLocation()
+	{
+		GameObject.Find("LocationName").GetComponent<TMPro.TextMeshProUGUI>().text = $"System: {starSystem.star.name}";
 	}
 
 	public override void Tick()

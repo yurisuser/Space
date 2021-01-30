@@ -85,7 +85,7 @@ public static class GalaxyCreator
 					for (int m = 0; m < Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray.Length; m++)
 					{
 						Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray[m].name =
-							$"{Data.greekLetters[i]} {constellNameArr[s]}{Data.smallletters[ps + 1]}{Data.romeIntegers[m]}";
+							$"{Data.greekLetters[i]} {constellNameArr[s]} {Data.smallletters[ps + 1]} {Data.romeIntegers[m]}";
 					}
 				}
 			}

@@ -7,16 +7,6 @@ public class PlanetSysMapScr : MonoBehaviour
     public SubStarBody body;
 
     private GameObject panel;
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
-    }
-
 	private void OnMouseDown()
 	{
         if (EventSystem.current.IsPointerOverGameObject()) return;

@@ -1,26 +1,44 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
-class SceneStatePlanet : SceneState
+class SceneStatePlanetView : SceneState
 {
 	private StarSystem starSystem;
 	private PlanetSystem planetSystem;
 	private GameObject folder;
-	public SceneStatePlanet(Location location)
+	private Location location;
+	public SceneStatePlanetView(Location location)
 	{
 		starSystem = Galaxy.StarSystemsArr[location.indexStarSystem];
 		planetSystem = starSystem.planetSystemsArray[location.indexPlanetSystem];
+		this.location = location;
 	}
 
 	public override void DrawScene()
 	{
+		HeadText(location);
 		DrawSystem();
 		DrawOrbits();
 	}
+
+	private void HeadText(Location location)
+	{
+		string str = null;
+		switch (location.elocation)
+		{
+			case ELocation.planet:
+				str = Galaxy.StarSystemsArr[location.indexStarSystem].planetSystemsArray[location.indexPlanetSystem].planet.name;
+				break;
+			case ELocation.moon:
+				str = Galaxy.StarSystemsArr[location.indexStarSystem].planetSystemsArray[location.indexPlanetSystem].moonsArray[location.indexMoon].name;
+				break;
+			case ELocation.station:
+				break;
+			default:
+				break;
+		}
+		GameObject.Find("LocationName").GetComponent<TMPro.TextMeshProUGUI>().text = str;
+	}
+
 	private void DrawSystem()
 	{
 		folder = new GameObject("sys");
@@ -33,7 +51,6 @@ class SceneStatePlanet : SceneState
 			planet.mass * Settings.StarSystem.PLANET_SCALE,
 			planet.mass * Settings.StarSystem.PLANET_SCALE,
 			planet.mass * Settings.StarSystem.PLANET_SCALE);
-		//go.transform.SetParent(folder.transform);
 		go.AddComponent<RotatorPlanetScene>().SetMoon(null, planetSystem.moonsArray.Length );
 
 		for (int i = 0; i <planetSystem.moonsArray.Length; i++)

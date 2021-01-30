@@ -70,7 +70,7 @@ public class Gmgr : MonoBehaviour
 		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
 		SceneManager.LoadScene("PlanetScene");
 		Glob.currentScene = EScene.planetScene;
-		sceneState = new SceneStatePlanet(location);
+		sceneState = new SceneStatePlanetView(location);
 		UI.Escaper.Add(LoadSceneStarSystem);
 
 	}
