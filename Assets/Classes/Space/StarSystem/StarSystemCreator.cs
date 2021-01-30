@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using settings = Settings.Galaxy;
 
@@ -12,7 +9,7 @@ public static class StarSystemCreator
 
 	public static StarSystem GetRandomStarSystem(int indexStarSystem)
 	{
-		Star star = CreateStar(indexStarSystem);
+		Star star = StarCreator.CreateStar(indexStarSystem);
 		return new StarSystem
 		{
 			id = indexStarSystem,
@@ -25,49 +22,7 @@ public static class StarSystemCreator
 
 			StationArr = StationCreator.CreateTestStation(Settings.TEST.TEST_STATIONS_IN_SYSTEM)
 		};
-	}
-
-	private static Star CreateStar(int index)
-	{
-		int[] probabilitysStarsArr = new int[Data.starsArr.Length];
-		probabilitysStarsArr[0] = Data.starsArr[0].probability;
-		for (int i = 1; i < Data.starsArr.Length; i++)
-		{
-			probabilitysStarsArr[i] = probabilitysStarsArr[i - 1] + Data.starsArr[i].probability;
-		}
-		int rnd = Rnd.Next(0, probabilitysStarsArr[probabilitysStarsArr.Length - 1]);
-		int id = Galaxy.GetNextId();
-		string starClass = null;
-		int numInDataStarArr = 0;
-		for (int i = 0; i < probabilitysStarsArr.Length; i++)
-		{
-			if ( rnd <= probabilitysStarsArr[i])
-			{
-				starClass = Data.starsArr[i].starClass;
-				numInDataStarArr = i;
-				break;
-			}
-		}
-		string name = "St" + id.ToString();
-
-		if (index == 0)         //Cental black hole
-		{
-			starClass = Array.Find(Data.starsArr, x => x.starClass == "BH").starClass;
-		}
-
-		Star star = new Star(
-			id: id, 
-			name: name, 
-			indexSystem: index,
-			starClass: starClass,
-			colorName: Data.starsArr[numInDataStarArr].colorName,
-			temperature: Rnd.Next(Data.starsArr[numInDataStarArr].temperature_min, Data.starsArr[numInDataStarArr].temperature_max),
-			mass: Rnd.Next(Data.starsArr[numInDataStarArr].mass_min, Data.starsArr[numInDataStarArr].mass_max),
-			radius: Rnd.Next(Data.starsArr[numInDataStarArr].radius_min, Data.starsArr[numInDataStarArr].radius_max),
-			luminosity: Rnd.Next(Data.starsArr[numInDataStarArr].luminosity_min, Data.starsArr[numInDataStarArr].luminosity_max)
-			);
-		return star;
-	}
+	}	
 
 	private static PlanetSystem[] CreatePlanetSystems(Star star)
 	{
