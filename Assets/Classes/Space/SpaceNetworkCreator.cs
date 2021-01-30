@@ -21,6 +21,22 @@ public static class SpaceNetworkCreator
 		return GetResultArray();
 	}
 
+	public static int[][] GetSectorIdsStar()
+	{
+		List<int[]> result = new List<int[]>();
+		for (int i = 1; i < sectorsArr.Length; i++)
+		{
+			if (sectorsArr[i].members == null) continue;
+			List<int> temp = new List<int>();
+			for (int m = 0; m < sectorsArr[i].members.Count; m++)
+			{
+				temp.Add(sectorsArr[i].members[m].idSystem);
+			}
+			result.Add(temp.ToArray());
+		}
+		return result.ToArray();
+	}
+
 	private static void CreateHypers()
 	{
 		List<double> list = new List<double>();

@@ -11,7 +11,7 @@ public static class PlanetCreator
 			id = Galaxy.GetNextId(),
 			motherStar = motherStar,
 			type = GetPlanetType(motherStar.starClass),
-			name = motherStar.name + " " + (char)(numberPlanet + 65),
+			name = $"{(char)(numberPlanet + 65)}",
 			rotateSpeed = 10,
 			orbitSpeed = 100,
 			mass = 1,

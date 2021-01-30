@@ -15,6 +15,7 @@ public partial struct Data
 		private static readonly string planetOfStarProbabilityTableName = "planet_of_star_probability";
 		private static readonly string planetaryResourcesProbabilityTableName = "planet_resources_probability";
 		private static readonly string moonProbability = "moon_of_planet_probability";
+		private static readonly string constellationsNameTableName = "constellations";
 		//Goods
 		private static readonly string goodsTableName = "goods";
 		private static readonly string recipeTableName = "product_recipe";
@@ -39,6 +40,7 @@ public partial struct Data
 			planetsOfStarProbabilityArr = ReadProbability(planetOfStarProbabilityTableName);
 			planetaryResourcesProbabilityArr = ReadPlanetaryResourcesProbability(planetaryResourcesProbabilityTableName);
 			moonOfPlanetProbabilityArr = ReadProbability(moonProbability);
+			constellationNames = ReadConstellationsNames(constellationsNameTableName);
 			//Goods
 			goodsArr = ReadGoods(goodsTableName);
 			productRecipeArr = ReadProductRecipes(recipeTableName);

@@ -77,5 +77,20 @@ public partial struct Data
 			reader.Close();
 			return result.ToArray();
 		}
+
+		private static string[] ReadConstellationsNames(string tableName)
+		{
+			List<string> list = new List<string>();
+			string sqlQuery = $"SELECT name FROM {tableName}";
+			dbcmd.CommandText = sqlQuery;
+			reader = dbcmd.ExecuteReader();
+			while (reader.Read())
+			{
+				string name = reader.GetString(0);
+				list.Add(name);
+			}
+			reader.Close();
+			return list.ToArray();
+		}
 	}
 }

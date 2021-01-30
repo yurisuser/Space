@@ -19,6 +19,11 @@ public static class Rnd
 		return (float)(rnd.NextDouble() * (maxValue - minValue) + minValue);
 	}
 
+	public static int Next()
+	{
+		return rnd.Next();
+	}
+
 	public static int NextTrue(int minValue, int maxValue)
 	{
 		return rndTrue.Next(minValue, maxValue);
@@ -27,5 +32,10 @@ public static class Rnd
 	public static float NextTrue(float minValue, float maxValue)
 	{
 		return (float)(rndTrue.NextDouble() * (maxValue - minValue) + minValue);
+	}
+
+	public static int NextTrue()
+	{
+		return rndTrue.Next();
 	}
 }

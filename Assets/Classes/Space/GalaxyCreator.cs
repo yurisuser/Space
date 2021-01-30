@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using settings = Settings.Galaxy;
 
@@ -15,6 +16,7 @@ public static class GalaxyCreator
 		Galaxy.Distances = CalculateStarsDistances();
 		Galaxy.DistancesSortedNear = SortDistanceArr();
 		Galaxy.HyperTunnels = SpaceNetworkCreator.Create();
+		AddNameSpaceObjects();
 		AddShips();
 	}
 
@@ -65,5 +67,28 @@ public static class GalaxyCreator
 		}
 
 		return list.ToArray();
+	}
+
+	private static void AddNameSpaceObjects()
+	{
+		string[] constellNameArr = Data.constellationNames.OrderBy(x => Rnd.NextTrue()).ToArray();
+		int[][] sectorIds = SpaceNetworkCreator.GetSectorIdsStar();
+		for (int s = 0; s < sectorIds.Length; s++)
+		{
+			for (int i = 0; i < sectorIds[s].Length; i++)
+			{
+				int indexStar = sectorIds[s][i];
+				Galaxy.StarSystemsArr[indexStar].star.name = $"{Data.greekLetters[i]} {constellNameArr[s]}";
+				for (int ps = 0; ps < Galaxy.StarSystemsArr[indexStar].planetSystemsArray.Length; ps++)
+				{
+					Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].planet.name = $"{Data.greekLetters[i]} {constellNameArr[s]} {Data.smallletters[ps + 1]}";
+					for (int m = 0; m < Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray.Length; m++)
+					{
+						Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray[m].name =
+							$"{Data.greekLetters[i]} {constellNameArr[s]}{Data.smallletters[ps + 1]}{Data.romeIntegers[m]}";
+					}
+				}
+			}
+		}
 	}
 }

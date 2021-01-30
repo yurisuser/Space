@@ -21,7 +21,7 @@ public static class MoonCreator
 			id = Galaxy.GetNextId(),
 			motherPlanet = planet,
 			angleOnOrbit = 15 * numberMoon,
-			name = planet.name + numberMoon,
+			name = $"{planet.name} {numberMoon}",
 			orbitNumber = numberMoon,
 			orbitSpeed = 50,
 			rotateSpeed = 5,
