@@ -13,13 +13,20 @@ public class Gmgr : MonoBehaviour
 		Data.Init();
 		PrefabService.Init();
 		GalaxyCreator.CreateGalaxy();
-		///
-		LoadSceneGalaxy();
-		//Glob.currentSystemIndex = 11;
-		//LoadSceneStarSystem();
-		///
+		LoadScene();
 		Turner.TimeTrigger += TurnUpdate;
 		Turner.GoStream();
+	}
+
+	private void LoadScene()
+	{
+		///
+		LoadSceneGalaxy();
+
+		//Glob.currentPlanetSystemIndex = 11;
+		//LoadSceneStarSystem();
+
+		///
 	}
 
 	private void LateUpdate()
