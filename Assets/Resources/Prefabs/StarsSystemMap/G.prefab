@@ -67,5 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: G
       objectReference: {fileID: 0}
+    - target: {fileID: 3151848743094944181, guid: 6b79feb55daccbd4bb5c6b08463f5f73,
+        type: 3}
+      propertyPath: starType
+      value: G
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b79feb55daccbd4bb5c6b08463f5f73, type: 3}

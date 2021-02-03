@@ -7,10 +7,12 @@ public static class PrefabService
 	private static readonly string pathStarsGalaxyMap = "Prefabs/StarsGalaxyMap/";
 	private static readonly string pathStarsSystemMap = "Prefabs/StarsSystemMap/";
 	private static readonly string pathPlanetsSystemMap = "Prefabs/PlanetsSystemMap/";
+	private static readonly string pathPlanetsView = "Prefabs/PlanetsView/";
 
 	public static Dictionary<string, GameObject> StarsGalaxyMap = new Dictionary<string, GameObject>();
 	public static Dictionary<string, GameObject> StarsSystemMap = new Dictionary<string, GameObject>();
 	public static Dictionary<int, GameObject> PlanetSystemMap = new Dictionary<int, GameObject>();
+	public static Dictionary<int, GameObject> PlanetsView = new Dictionary<int, GameObject>();
 	public static Dictionary<EMoonTypes, GameObject> MoonSystemMap = new Dictionary<EMoonTypes, GameObject>();
 	public static UIPrefab UI = new UIPrefab();
 	public static Sprite[] goodsImages;
@@ -51,6 +53,7 @@ public static class PrefabService
 		for (int i = 0; i < Data.planetsArr.Length; i++)
 		{
 			PlanetSystemMap.Add(i, Resources.Load<GameObject>(pathPlanetsSystemMap + Data.planetsArr[i].prefabSystemMap));
+			PlanetsView.Add(i, Resources.Load<GameObject>(pathPlanetsView + Data.planetsArr[i].prefabSystemMap));
 		}
 	}
 

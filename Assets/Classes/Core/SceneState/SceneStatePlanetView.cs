@@ -44,7 +44,7 @@ class SceneStatePlanetView : SceneState
 		folder = new GameObject("sys");
 		Planet planet = planetSystem.planet;
 		GameObject go = GameObject.Instantiate(
-			PrefabService.PlanetSystemMap[planet.type],
+			PrefabService.PlanetsView[planet.type],
 			Vector3.zero,
 			Quaternion.identity);
 		go.transform.localScale += new Vector3(
@@ -58,7 +58,7 @@ class SceneStatePlanetView : SceneState
 			Moon moon = planetSystem.moonsArray[i];
 			Vector3 moonposition = planet.position - planetSystem.moonsArray[i].position;
 			moonposition.z = 0;
-			GameObject obj = GameObject.Instantiate(PrefabService.PlanetSystemMap[moon.type], moonposition, Quaternion.identity);
+			GameObject obj = GameObject.Instantiate(PrefabService.PlanetsView[moon.type], moonposition, Quaternion.identity);
 			obj.name = planetSystem.planet.name + " " + (i + 1).ToString();
 			obj.transform.localScale += new Vector3(
 				moon.mass * Settings.StarSystem.MOON_SCALE,
