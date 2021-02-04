@@ -23,14 +23,18 @@ public class Gmgr : MonoBehaviour
 		///
 		//LoadSceneGalaxy();
 
-		//Glob.currentPlanetSystemIndex = 11;
+		//Location loc = new Location();
+		//loc.indexStarSystem = 11;
+		//loc.indexPlanetSystem = 0;
+		//loc.elocation = ELocation.space;
+		//Glob.sceneLocation = loc;
 		//LoadSceneStarSystem();
 
 		Location loc = new Location();
 		loc.indexStarSystem = 11;
 		loc.indexPlanetSystem = 0;
 		loc.elocation = ELocation.planet;
-		LoadScenePlanet(loc);
+		LoadSceneSystemViever(loc);
 
 		///
 	}
@@ -73,19 +77,18 @@ public class Gmgr : MonoBehaviour
 		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
 		SceneManager.LoadScene("StarSystem");
 		Glob.currentScene = EScene.starSystem;
-		sceneState = new SceneStateStarSystem(Galaxy.StarSystemsArr[Glob.currentStarSystemIndex]);
+		sceneState = new SceneStateStarSystem(Galaxy.StarSystemsArr[Glob.sceneLocation.indexStarSystem]);
 		UI.Escaper.Add(LoadSceneGalaxy);
 	}
 
-	public void LoadScenePlanet(Location location)
+	public void LoadSceneSystemViever(Location location)
 	{
-		Glob.currentPlanetSystemIndex = location.indexPlanetSystem;
+		Glob.sceneLocation = location;
 		SceneManager.sceneLoaded += OnDrawMapAfterLoadScene;
-		SceneManager.LoadScene("PlanetScene");
-		Glob.currentScene = EScene.planetScene;
-		sceneState = new SceneStatePlanetView(location);
+		SceneManager.LoadScene("SystemViewer");
+		Glob.currentScene = EScene.systemViewer;
+		sceneState = new SceneStateSystemViewer(location);
 		UI.Escaper.Add(LoadSceneStarSystem);
-
 	}
 
 	private void OnDrawMapAfterLoadScene(Scene arg0, LoadSceneMode arg1)

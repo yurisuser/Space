@@ -49,6 +49,7 @@ public class SceneStateStarSystem : SceneState
 			new Vector3(0, 0, Settings.StarSystem.SYSTEM_SHIPS_LAYER),
 			Quaternion.identity);
 		star.transform.SetParent(root.transform);
+		star.transform.localScale = new Vector3(Settings.StarSystem.STAR_SCALE, Settings.StarSystem.STAR_SCALE, Settings.StarSystem.STAR_SCALE);
 		star.name = "Star";
 	}
 
@@ -185,7 +186,7 @@ public class SceneStateStarSystem : SceneState
 	{
 		for (int i = 0; i < Docker.addingShipToSystemMapScene.Count; i++)
 		{
-			if (Docker.addingShipToSystemMapScene[i].location.indexStarSystem != Glob.currentStarSystemIndex) continue;
+			if (Docker.addingShipToSystemMapScene[i].location.indexStarSystem != Glob.sceneLocation.indexStarSystem) continue;
 			DrawShip(Docker.addingShipToSystemMapScene[i]);
 		}
 		Docker.addingShipToSystemMapScene.Clear();

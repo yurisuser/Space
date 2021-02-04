@@ -42,6 +42,7 @@ public static class Utilities
 
 	public static void ShowMe(int numstr, dynamic str)
 	{
+		if (Glob.isShowmePanel == false) return;
 		const int size = 21;
 		if (ShowMeArr == null) ShowMeArr = new string[size];
 		ShowMeArr[numstr] = Convert.ToString(str);

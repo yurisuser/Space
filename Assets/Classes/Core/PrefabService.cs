@@ -7,7 +7,7 @@ public static class PrefabService
 	private static readonly string pathStarsGalaxyMap = "Prefabs/StarsGalaxyMap/";
 	private static readonly string pathStarsSystemMap = "Prefabs/StarsSystemMap/";
 	private static readonly string pathPlanetsSystemMap = "Prefabs/PlanetsSystemMap/";
-	private static readonly string pathPlanetsView = "Prefabs/PlanetsView/";
+	private static readonly string pathPlanetsView = "Prefabs/SystemView/";
 
 	public static Dictionary<string, GameObject> StarsGalaxyMap = new Dictionary<string, GameObject>();
 	public static Dictionary<string, GameObject> StarsSystemMap = new Dictionary<string, GameObject>();

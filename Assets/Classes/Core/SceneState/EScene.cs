@@ -4,5 +4,6 @@
 	main,
 	galaxy,
 	starSystem,
+	systemViewer,
 	planetScene
 }
