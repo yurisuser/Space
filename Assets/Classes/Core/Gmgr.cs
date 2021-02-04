@@ -21,10 +21,16 @@ public class Gmgr : MonoBehaviour
 	private void LoadScene()
 	{
 		///
-		LoadSceneGalaxy();
+		//LoadSceneGalaxy();
 
 		//Glob.currentPlanetSystemIndex = 11;
 		//LoadSceneStarSystem();
+
+		Location loc = new Location();
+		loc.indexStarSystem = 11;
+		loc.indexPlanetSystem = 0;
+		loc.elocation = ELocation.planet;
+		LoadScenePlanet(loc);
 
 		///
 	}
