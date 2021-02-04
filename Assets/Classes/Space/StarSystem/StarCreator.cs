@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 public static class StarCreator
 {
+	private static int factor = 0;
+	private static int rangeFactor = 10;
 	public static Star CreateStar(int indexStarSystem)
 	{
+		factor = Rnd.Next(1, rangeFactor);
 		int[] probabilitysStarsArr = new int[Data.starsArr.Length];
 		probabilitysStarsArr[0] = Data.starsArr[0].probability;
 		for (int i = 1; i < Data.starsArr.Length; i++)
@@ -39,17 +39,34 @@ public static class StarCreator
 		star.indexSystem = indexStarSystem;
 		star.starClass = starClass;
 		star.colorName = Data.starsArr[numInDataStarArr].colorName;
-		star.temperature = Rnd.Next(Data.starsArr[numInDataStarArr].temperature_min, Data.starsArr[numInDataStarArr].temperature_max);
-		star.mass = Rnd.Next(Data.starsArr[numInDataStarArr].mass_min, Data.starsArr[numInDataStarArr].mass_max);
-		star.radius = Rnd.Next(Data.starsArr[numInDataStarArr].radius_min, Data.starsArr[numInDataStarArr].radius_max);
-		star.luminosity = Rnd.Next(Data.starsArr[numInDataStarArr].luminosity_min, Data.starsArr[numInDataStarArr].luminosity_max);
+		star.mass = ClarificationRnd(Data.starsArr[numInDataStarArr].mass_min, Data.starsArr[numInDataStarArr].mass_max);
+		star.temperature = Rounding(ClarificationRnd(Data.starsArr[numInDataStarArr].temperature_min, Data.starsArr[numInDataStarArr].temperature_max), 2);
+		star.radius = ClarificationRnd(Data.starsArr[numInDataStarArr].radius_min, Data.starsArr[numInDataStarArr].radius_max);
+		star.luminosity = ClarificationRnd(Data.starsArr[numInDataStarArr].luminosity_min, Data.starsArr[numInDataStarArr].luminosity_max);
 		star.name = GetName(star);
 
 		return star;
 	}
 
+	private static int Rounding(float value, int ranks)
+	{
+		var r = Math.Pow(10, ranks);
+		return (int)(((int)(value / r)) * r);
+	}
+
+	private static float ClarificationRnd(float min, float max)
+	{
+		//уточненное значение, исходя из поддиапазона основного диапазона значений
+		float range = max - min;
+		float subRange = range / rangeFactor;
+		float subRangeStart = (min + subRange * (factor - 1));
+		float subRangeEnd = (min + subRange * factor);
+		var result = Rnd.Next(subRangeStart, subRangeEnd);
+		return result;
+	}
+
 	private static string GetName(Star star)
 	{
-		return $"St {star.id}";
+		return $"Unknown star";
 	}
 }
