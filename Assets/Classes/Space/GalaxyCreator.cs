@@ -79,13 +79,14 @@ public static class GalaxyCreator
 			{
 				int indexStar = sectorIds[s][i];
 				Galaxy.StarSystemsArr[indexStar].star.name = $"{Data.greekLetters[i]} {constellNameArr[s]}";
+				if (Galaxy.StarSystemsArr[indexStar].planetSystemsArray == null) return;
 				for (int ps = 0; ps < Galaxy.StarSystemsArr[indexStar].planetSystemsArray.Length; ps++)
 				{
-					Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].planet.name = $"{Data.greekLetters[i]} {constellNameArr[s]} {Data.smallletters[ps + 1]}";
+					Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].planet.name = $"{Data.greekLetters[i]} {constellNameArr[s]} {Data.smallLetters[ps + 1]}";
+					if (Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray == null) return;
 					for (int m = 0; m < Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray.Length; m++)
 					{
-						Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray[m].name =
-							$"{Data.greekLetters[i]} {constellNameArr[s]} {Data.smallletters[ps + 1]} {Data.romeIntegers[m]}";
+						Galaxy.StarSystemsArr[indexStar].planetSystemsArray[ps].moonsArray[m].name = $"{Data.greekLetters[i]} {constellNameArr[s]} {Data.smallLetters[ps + 1]} {Data.romeIntegers[m]}";
 					}
 				}
 			}

@@ -26,13 +26,19 @@ public static class StarSystemCreator
 
 	private static PlanetSystem[] CreatePlanetSystems(Star star)
 	{
-		int planetCount = Rnd.Next(2, 10);
-		PlanetSystem[] arr = new PlanetSystem[10];
-		for (int i = 0; i < 10; i++)
+		int planetCount = GetPlanetsAmaunt(star);
+		if (planetCount == 0) return null;
+		PlanetSystem[] arr = new PlanetSystem[planetCount];
+		for (int i = 0; i < planetCount; i++)
 		{
 			arr[i] = PlanetSystemCreator.GetRandomPlanetSystem(i, star);
 		}
 		return arr;
+	}
+
+	private static int GetPlanetsAmaunt(Star star)
+	{
+		return star.subStarClass;
 	}
 
 	private static Vector3 GetStarSistemPosition(int indexStar)

@@ -2,11 +2,10 @@
 
 public static class StarCreator
 {
-	private static int factor = 0;
-	private static int rangeFactor = 10;
+	private static int subStarClass = 0; //подкласс
+	private static int ranges = 10; //количество подклассов
 	public static Star CreateStar(int indexStarSystem)
 	{
-		factor = Rnd.Next(1, rangeFactor);
 		int[] probabilitysStarsArr = new int[Data.starsArr.Length];
 		probabilitysStarsArr[0] = Data.starsArr[0].probability;
 		for (int i = 1; i < Data.starsArr.Length; i++)
@@ -33,14 +32,16 @@ public static class StarCreator
 			starClass = Array.Find(Data.starsArr, x => x.starClass == "BH").starClass;
 		}
 
-		Star star = new Star();
+		subStarClass = Rnd.Next(1, ranges);
 
+		Star star = new Star();
 		star.id = id;
 		star.indexSystem = indexStarSystem;
 		star.starClass = starClass;
+		star.subStarClass = subStarClass;
 		star.colorName = Data.starsArr[numInDataStarArr].colorName;
 		star.mass = ClarificationRnd(Data.starsArr[numInDataStarArr].mass_min, Data.starsArr[numInDataStarArr].mass_max);
-		star.temperature = Rounding(ClarificationRnd(Data.starsArr[numInDataStarArr].temperature_min, Data.starsArr[numInDataStarArr].temperature_max), 2);
+		star.temperature = RoundingTemperature(ClarificationRnd(Data.starsArr[numInDataStarArr].temperature_min, Data.starsArr[numInDataStarArr].temperature_max), 2);
 		star.radius = ClarificationRnd(Data.starsArr[numInDataStarArr].radius_min, Data.starsArr[numInDataStarArr].radius_max);
 		star.luminosity = ClarificationRnd(Data.starsArr[numInDataStarArr].luminosity_min, Data.starsArr[numInDataStarArr].luminosity_max);
 		star.name = GetName(star);
@@ -48,7 +49,7 @@ public static class StarCreator
 		return star;
 	}
 
-	private static int Rounding(float value, int ranks)
+	private static int RoundingTemperature(float value, int ranks)
 	{
 		var r = Math.Pow(10, ranks);
 		return (int)(((int)(value / r)) * r);
@@ -58,9 +59,9 @@ public static class StarCreator
 	{
 		//уточненное значение, исходя из поддиапазона основного диапазона значений
 		float range = max - min;
-		float subRange = range / rangeFactor;
-		float subRangeStart = (min + subRange * (factor - 1));
-		float subRangeEnd = (min + subRange * factor);
+		float subRange = range / (ranges + 1);
+		float subRangeStart = (min + subRange * (subStarClass));
+		float subRangeEnd = (min + subRange * subStarClass + 1);
 		var result = Rnd.Next(subRangeStart, subRangeEnd);
 		return result;
 	}
