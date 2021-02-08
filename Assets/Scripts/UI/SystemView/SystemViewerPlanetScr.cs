@@ -33,6 +33,7 @@ public class SystemViewerPlanetScr : MonoBehaviour
 	{
 		if (isToLarge) ToLarge();
 		if (isToNormal) ToNormal();
+		Rotate();
 	}
 
 	private void ToLarge()
@@ -51,6 +52,11 @@ public class SystemViewerPlanetScr : MonoBehaviour
 		{
 			isToNormal = false;
 		}
+	}
+
+	private void Rotate()
+	{
+		transform.Rotate(0, planet.rotateSpeed * Time.deltaTime, 0);
 	}
 
 
