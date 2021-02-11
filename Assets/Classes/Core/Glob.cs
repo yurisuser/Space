@@ -7,7 +7,4 @@
 
 	public static float CameraGalaxyZoom = Settings.CameraGalaxy.DEFAULT_ZOOM;
 	public static float CameraSystemZoom = Settings.CameraStarSystem.DEFAULT_ZOOM;
-
-	//DEBUG
-	public static bool isShowmePanel = false;
 }

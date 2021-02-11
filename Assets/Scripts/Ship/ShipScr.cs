@@ -18,6 +18,7 @@ public class ShipScr : MonoBehaviour
 
 	public void SetShip(Ship ship)
 	{
+		currentTurn = Turner.GetCurrentTime();
 		this.ship = ship;
 		shipId = ship.id;
 		order = ship.order.Clone();
@@ -38,7 +39,8 @@ public class ShipScr : MonoBehaviour
 	}
 	private void CheckNextTurn()
 	{
-		if (currentTurn != Turner.GetCurrentTime())
+		if (ship.state == EShipState.unHypering) return;
+		if (currentTurn < Turner.GetCurrentTime())
 		{
 			if (ship.state == EShipState.docked || ship.state == EShipState.inHyper) GameObject.Destroy(gameObject);
 			progress = 0;

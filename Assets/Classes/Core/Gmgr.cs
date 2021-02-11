@@ -6,6 +6,8 @@ public class Gmgr : MonoBehaviour
 	public static Gmgr gmgr;
 
 	private SceneState sceneState;
+	private static bool isEmptyTick = true; //пустой тик для отработки сцены перед запуском TaskManager
+	private static bool isDateChanged = false;
 
 	void Start()
 	{
@@ -31,26 +33,42 @@ public class Gmgr : MonoBehaviour
 		//LoadSceneStarSystem();
 
 		Location loc = new Location();
-		loc.indexStarSystem = 11;
+		loc.indexStarSystem = 66;
 		loc.indexPlanetSystem = 0;
 		loc.elocation = ELocation.planet;
 		LoadSceneSystemViever(loc);
 
 		///
 	}
-
 	private void LateUpdate()
 	{
 		//все дожно считаться после того, как отработала сцена
 		UI.Escaper.LateUpdate();
 		sceneState.LateUpdate();
 		Turner.LateUpdate();
+		UpdateAfterEmptyTick();
 	}
 
 	private void TurnUpdate()
 	{
+		isDateChanged = true;
+	}
+
+	private void UpdateAfterEmptyTick()
+	{
+		if (!isDateChanged) return;
+		if (isEmptyTick)
+		{
+			isEmptyTick = false;
+			return;
+		}
 		sceneState.Tick();
 		TaskManager.Tick();
+
+		isDateChanged = false;
+		isEmptyTick = true;
+
+
 	}
 
 	void Awake()
