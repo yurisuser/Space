@@ -12,7 +12,7 @@ public static class PlanetCreator
 			motherStar = motherStar,
 			type = GetPlanetType(motherStar.starClass),
 			name = $"{(char)(numberPlanet + 65)}",
-			rotateSpeed = 10,
+			rotateSpeed = Rnd.Next(5,10),
 			orbitSpeed = 100,
 			mass = 1,
 			orbitNumber = numberPlanet,

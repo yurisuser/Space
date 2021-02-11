@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SystemViewerPlanetScr : MonoBehaviour
 {
-    public Planet planet;
+    public SubStarBody subStarBody;
 	public Vector3 oldScale;
 	public List<GameObject> systemObjects;
 
@@ -13,6 +12,7 @@ public class SystemViewerPlanetScr : MonoBehaviour
 	private Vector3 largeScale;
 	private bool isToLarge = false;
 	private bool isToNormal = false;
+
 	private void OnMouseUp()
 	{
 		largeScale = oldScale * largeSize;
@@ -21,6 +21,8 @@ public class SystemViewerPlanetScr : MonoBehaviour
 			systemObjects[i].GetComponent<SystemViewerPlanetScr>().SetOldScale();
 		}
 		isToLarge = true;
+
+		GameObject.Find("PanelInfo").GetComponent<PanelInfoScr>().SetSubStarBody(subStarBody);
 	}
 
 	public void SetOldScale()
@@ -56,8 +58,6 @@ public class SystemViewerPlanetScr : MonoBehaviour
 
 	private void Rotate()
 	{
-		transform.Rotate(0, planet.rotateSpeed * Time.deltaTime, 0);
+		transform.Rotate(0, subStarBody.rotateSpeed * Time.deltaTime, 0);
 	}
-
-
 }

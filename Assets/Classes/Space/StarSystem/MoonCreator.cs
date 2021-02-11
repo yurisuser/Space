@@ -3,11 +3,10 @@ using UnityEngine;
 
 public static class MoonCreator
 {
-	private static readonly int moonsCount = 10;
 	public static Moon[] CreateMoonsArray(Planet planet)
 	{
-		Moon[] arr = new Moon[moonsCount];
-		for (int i = 0; i < moonsCount; i++)
+		Moon[] arr = new Moon[Rnd.Next(0, 5)];
+		for (int i = 0; i < arr.Length; i++)
 		{
 			arr[i] = CreateMoon(i, planet);
 		}
@@ -24,7 +23,7 @@ public static class MoonCreator
 			name = $"{planet.name} {numberMoon}",
 			orbitNumber = numberMoon,
 			orbitSpeed = 50,
-			rotateSpeed = 5,
+			rotateSpeed = Rnd.Next(0, 10),
 			mass = Rnd.Next(.05f, planet.mass / 2),
 			type = GetMoonType(planet.type),
 			parent = planet,

@@ -5,7 +5,7 @@ using System.Linq;
 public class Storage
 {
 	private SubStarBody parent;
-	private GoodsStack[] goodsArr = new GoodsStack[0];
+	public GoodsStack[] goodsArr = new GoodsStack[0];
 
 	public Storage(SubStarBody body)
 	{
