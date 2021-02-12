@@ -56,7 +56,7 @@ namespace AI.AIShip
 				{
 					e_order = EOrders.DockingTest,
 					currentPosition = getRNDPosition(),
-					dock = GetRandomDock(ship).controlCentre.dock,
+					dock = GetRandomDock(ship).hub.dock,
 				};
 				order.wayPoints = CalcWayPoints(ship, order);
 				order.destinationStep = order.wayPoints.Dequeue();
@@ -66,7 +66,7 @@ namespace AI.AIShip
 				order = ship.order.Clone();
 				order.e_order = EOrders.DockingTest;
 				order.currentPosition = ship.order.currentPosition == default ? getRNDPosition() : ship.order.currentPosition;
-				order.dock = GetRandomDock(ship).controlCentre.dock;
+				order.dock = GetRandomDock(ship).hub.dock;
 			}
 			order.destinationOrder = order.dock.parent.position;
 			order.wayPoints = CalcWayPoints(ship, order);
@@ -136,11 +136,11 @@ namespace AI.AIShip
 			List<SubStarBody> list = new List<SubStarBody>();
 			for (int i = 0; i < Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray.Length; i++)
 			{
-				if (Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].planet.controlCentre != null)
+				if (Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].planet.hub != null)
 					list.Add(Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].planet);
 				for (int u = 0; u < Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray.Length; u++)
 				{
-					if (Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray[u].controlCentre != null)
+					if (Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray[u].hub != null)
 						list.Add(Galaxy.StarSystemsArr[ship.location.indexStarSystem].planetSystemsArray[i].moonsArray[u]);
 				}
 			}

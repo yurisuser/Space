@@ -11,7 +11,7 @@ public static class StationCreator
 			{
 				position = GetRNDPosition()
 			};
-			st.controlCentre = new Hub(st);
+			st.hub = new Hub(st);
 		result[i] = st;
 		}
 		return result;

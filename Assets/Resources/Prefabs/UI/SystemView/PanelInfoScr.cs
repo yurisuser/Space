@@ -28,7 +28,7 @@ public class PanelInfoScr : MonoBehaviour
 		paramFrames.Add(Resources());
 		paramFrames.Add(Storage());
 
-		if (subStarBody.controlCentre == null) return;
+		if (subStarBody.hub == null) return;
 	}
 
 	private ParamFrame Astronomy()
@@ -106,13 +106,13 @@ public class PanelInfoScr : MonoBehaviour
 		List<string> field = new List<string>();
 		List<string> value = new List<string>();
 
-		if (subStarBody.controlCentre.storage == null || subStarBody.controlCentre.storage.goodsArr.Length == 0)
+		if (subStarBody.hub.storage == null || subStarBody.hub.storage.goodsArr.Length == 0)
 		{
 			field.Add("no");
 			value.Add("storage");
 			return new ParamFrame(head, field, value);
 		}
-		var goods = subStarBody.controlCentre.storage.goodsArr;
+		var goods = subStarBody.hub.storage.goodsArr;
 		for (int i = 0; i < goods.Length; i++)
 		{
 			field.Add(Data.GetGoodsById(goods[i].id).name);

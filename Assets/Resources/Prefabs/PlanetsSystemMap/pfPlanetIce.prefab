@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 135095982013028756}
   - component: {fileID: 23754904820867286}
   - component: {fileID: -5437137272425314076}
+  - component: {fileID: 4372728536465098945}
   m_Layer: 0
   m_Name: pfPlanetIce
   m_TagString: Untagged
@@ -104,5 +105,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a8bf477d6e95634198715ce5fb3dc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4372728536465098945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051411437219400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77ec36490168ec4798025ddb0031f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

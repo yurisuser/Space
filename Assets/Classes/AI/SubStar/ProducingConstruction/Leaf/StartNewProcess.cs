@@ -17,7 +17,7 @@ namespace AI.AISubStar.Manufacture
 		{
 			for (int i = 0; i < wrapper.module.recipe.resources.Length; i++)
 			{
-				wrapper.body.controlCentre.storage.Subtract(wrapper.module.recipe.resources[i]);
+				wrapper.body.hub.storage.Subtract(wrapper.module.recipe.resources[i]);
 			}
 		}
 	}

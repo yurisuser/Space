@@ -20,7 +20,7 @@ public static class PlanetCreator
 			parent = null
 		};
 		planet.resourcer = GetResourcer(planet);
-		planet.controlCentre = new Hub(planet);
+		planet.hub = new Hub(planet);
 		return planet;
 	}
 

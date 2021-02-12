@@ -25,18 +25,18 @@ public class Gmgr : MonoBehaviour
 		///
 		//LoadSceneGalaxy();
 
-		//Location loc = new Location();
-		//loc.indexStarSystem = 11;
-		//loc.indexPlanetSystem = 0;
-		//loc.elocation = ELocation.space;
-		//Glob.sceneLocation = loc;
-		//LoadSceneStarSystem();
-
 		Location loc = new Location();
-		loc.indexStarSystem = 66;
+		loc.indexStarSystem = 55;
 		loc.indexPlanetSystem = 0;
-		loc.elocation = ELocation.planet;
-		LoadSceneSystemViever(loc);
+		loc.elocation = ELocation.space;
+		Glob.sceneLocation = loc;
+		LoadSceneStarSystem();
+
+		//Location loc = new Location();
+		//loc.indexStarSystem = 66;
+		//loc.indexPlanetSystem = 0;
+		//loc.elocation = ELocation.planet;
+		//LoadSceneSystemViever(loc);
 
 		///
 	}

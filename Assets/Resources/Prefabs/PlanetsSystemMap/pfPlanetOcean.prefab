@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 135751773220943912}
   - component: {fileID: 23510200226516884}
   - component: {fileID: -1343674343071996654}
+  - component: {fileID: -1009493243224358476}
   m_Layer: 0
   m_Name: pfPlanetOcean
   m_TagString: Untagged
@@ -104,5 +105,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a8bf477d6e95634198715ce5fb3dc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1009493243224358476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796595078331858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77ec36490168ec4798025ddb0031f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 135482855353588350}
   - component: {fileID: 23343951126986580}
   - component: {fileID: 7640317238255984809}
+  - component: {fileID: -971246322228132668}
   m_Layer: 0
   m_Name: pfPlanetRock
   m_TagString: Untagged
@@ -104,5 +105,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a8bf477d6e95634198715ce5fb3dc5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-971246322228132668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234674513983284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b77ec36490168ec4798025ddb0031f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

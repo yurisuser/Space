@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using settings = Settings.CameraStarSystem;
 public class CameraStarSystem : MonoBehaviour
 {
@@ -25,8 +26,10 @@ public class CameraStarSystem : MonoBehaviour
         cam.orthographicSize = settings.DEFAULT_ZOOM;
         targetOrthographicSize = cam.orthographicSize;
     }
+
     void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         Cursor.visible = true;
         position = transform.position;
         mousePosition = Input.mousePosition;

@@ -13,7 +13,7 @@ public abstract class SubStarBody: ISystemPosition
 	public float angleOnOrbit;
 	public SubStarBody parent;
 	public Resourcer resourcer;
-	public Hub controlCentre;
+	public Hub hub;
 
 	public SubStarBody()
 	{

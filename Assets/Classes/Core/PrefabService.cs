@@ -22,12 +22,18 @@ public static class PrefabService
 		public GameObject ShowMePanel;
 		public GameObject PlanetPanel;
 		public GameObject PlanetResourcePreview;
+		public GameObject RightClickMenuSSB;
+		public GameObject StorageView;
+		public GameObject GoodsStack;
 
 		public UIPrefab()
 		{
 			ShowMePanel = Resources.Load<GameObject>(path + "ShowMePanel");
 			PlanetPanel = Resources.Load<GameObject>(path + "PlanetPanel/PlanetPanel");
 			PlanetResourcePreview = Resources.Load<GameObject>(path + "PlanetPanel/ResourcePreview");
+			RightClickMenuSSB = Resources.Load<GameObject>(path + "RightClickMenuSSB/RightClickMenuSSB");
+			StorageView = Resources.Load<GameObject>(path + "StorageView/StorageView");
+			GoodsStack = Resources.Load<GameObject>(path + "GoodsStack/GoodsStack");
 		}
 
 

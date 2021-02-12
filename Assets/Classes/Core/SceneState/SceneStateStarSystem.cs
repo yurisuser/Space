@@ -71,12 +71,14 @@ public class SceneStateStarSystem : SceneState
 				planet.position,
 				Quaternion.identity);
 			go.GetComponent<PlanetSysMapScr>().body = starSystem.planetSystemsArray[i].planet;
+			go.GetComponent<RightClickableObjectSSB>().SetSSB(starSystem.planetSystemsArray[i].planet);
 			go.transform.localScale += new Vector3(
 				planet.mass * Settings.StarSystem.PLANET_SCALE,
 				planet.mass * Settings.StarSystem.PLANET_SCALE,
 				planet.mass * Settings.StarSystem.PLANET_SCALE);
 			go.transform.SetParent(folder.transform);
 			folder.transform.SetParent(root.transform);
+
 			DrawMoons(starSystem.planetSystemsArray[i]);
 			DrawMoonsOrbit(starSystem.planetSystemsArray[i]);
 		}
@@ -128,6 +130,7 @@ public class SceneStateStarSystem : SceneState
 				moon.mass * Settings.StarSystem.MOON_SCALE);
 			obj.transform.SetParent(folder.transform);
 			obj.GetComponent<PlanetSysMapScr>().body = moon;
+			obj.GetComponent<RightClickableObjectSSB>().SetSSB(moon);
 			folder.transform.SetParent(root.transform);
 		}
 	}
@@ -205,6 +208,8 @@ public class SceneStateStarSystem : SceneState
 			go.transform.SetParent(folder.transform);
 			folder.transform.SetParent(root.transform);
 			go.GetComponent<StationSysMapScr>().SetIndexes(StarSystemIndexInArr, i);
+			go.GetComponent<RightClickableObjectSSB>().SetSSB(starSystem.StationArr[i]);
+			go.name = $"station {i}";
 		}
 	}
 }

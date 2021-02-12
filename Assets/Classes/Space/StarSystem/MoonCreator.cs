@@ -30,7 +30,7 @@ public static class MoonCreator
 			subStarType = ESubStarType.moon
 		};
 		moon.resourcer = GetResourcer(moon);
-		moon.controlCentre = new Hub(moon);
+		moon.hub = new Hub(moon);
 		return moon;
 	}
 

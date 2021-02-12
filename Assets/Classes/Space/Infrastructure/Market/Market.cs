@@ -12,9 +12,9 @@ public class Market
 
 	public GoodsOffer GetOffer(int goodsId)
 	{
-		var limit = Array.Find(parent.controlCentre.industry.stats.elements, x => x.goodsId == goodsId).limitAmount;
+		var limit = Array.Find(parent.hub.industry.stats.elements, x => x.goodsId == goodsId).limitAmount;
 		if (limit == 0) return null;
-		var amount = parent.controlCentre.storage.GetGoodsAmount(goodsId);
+		var amount = parent.hub.storage.GetGoodsAmount(goodsId);
 		return new GoodsOffer(
 			goodsId: goodsId,
 			limit: limit,
@@ -24,8 +24,8 @@ public class Market
 
 	public GoodsOffer[] GetAllOffers()
 	{
-		GoodsStack[] arr = parent.controlCentre.storage.GetStorage();
-		var limits = parent.controlCentre.industry.stats.elements;
+		GoodsStack[] arr = parent.hub.storage.GetStorage();
+		var limits = parent.hub.industry.stats.elements;
 		List<GoodsOffer> result = new List<GoodsOffer>();
 		for (int i = 0; i < limits.Length; i++)
 		{

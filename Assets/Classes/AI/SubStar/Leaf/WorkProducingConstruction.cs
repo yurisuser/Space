@@ -6,9 +6,9 @@ namespace AI.AISubStar
 	{
 		public override EStateNode Tick(SubStarBody body)
 		{
-			for (int i = 0; i < body.controlCentre.industry.construction.Length; i++)
+			for (int i = 0; i < body.hub.industry.construction.Length; i++)
 			{
-				ManufactureManager.Tick(body, body.controlCentre.industry.construction[i]);
+				ManufactureManager.Tick(body, body.hub.industry.construction[i]);
 			}
 			return EStateNode.SUCCESS;
 		}

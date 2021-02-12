@@ -15,7 +15,7 @@ namespace AI.AISubStar.Manufacture
 		{
 			foreach (var item in w.module.recipe.production)
 			{
-				w.body.controlCentre.storage.Add(item);
+				w.body.hub.storage.Add(item);
 			}
 		}
 	}
